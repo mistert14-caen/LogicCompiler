@@ -1,11 +1,76 @@
 # LogicCompiler
 
-Ce travail est une reprise du dépot de Drendog (https://github.com/drendog/Logic-Circuit-Simulator).
+Logic Circuit Simulator – Extended Version
+Présentation
 
-Il y ajoute un parseur logique basé sur des équations intégrant aussi bien les valeurs binaires que les valeurs décimales. Permettant de travailler aussi bien sur des valeurs booléennes que sur des bus. 
+Ce projet est une reprise et extension du dépôt original de Drendog :
+https://github.com/drendog/Logic-Circuit-Simulator
 
-L'ajout majeur de cette version est de permettre l'ajout de prototypes de fonctions encapsulées dans des fichiers texte. Il y crée automatiquement un lien avec le wiring de Drendog. La sauvegarde a été repensée pour permettre la sauvegarde des nouveaux blocs importés. 
+L’objectif est d’enrichir le simulateur initial en lui ajoutant des capacités de description logique avancée, de hiérarchisation et d’encapsulation, tout en conservant l’ergonomie du wiring et de l’interface graphique existante.
 
-L'objectif est d'étendre les capacités de la version de Drendog et se rapprocher d'un similateur type Verilog ou de LogiSim avec un niveau hiérachique permettant d'encapsuler la logique dans une boîte. La simulation d'un microprocesseur type SAP-1 devient alors envisageable.
+Nouveautés principales
+Parseur logique étendu
 
-MisterT
+Cette version intègre un parseur d’équations logiques capable de manipuler :
+
+des valeurs binaires (logique booléenne classique),
+
+des valeurs décimales, permettant de travailler sur des bus et des signaux multi-bits.
+
+Il devient ainsi possible de modéliser aussi bien des circuits combinatoires simples que des blocs plus complexes manipulant des mots binaires.
+
+Prototypes logiques encapsulés
+
+L’ajout majeur de cette version est la possibilité de définir des prototypes de fonctions logiques dans des fichiers texte.
+
+Chaque prototype :
+
+décrit ses entrées, sorties et équations internes,
+
+est automatiquement lié au système de wiring du simulateur,
+
+se comporte comme un bloc encapsulé (boîte noire ou grise selon le niveau de détail souhaité).
+
+Ce mécanisme introduit une hiérarchie logique, absente de la version initiale.
+
+Système de sauvegarde repensé
+
+Le système de sauvegarde a été modifié afin de :
+
+prendre en compte les nouveaux blocs importés,
+
+restaurer correctement les connexions (wires),
+
+préserver la cohérence entre l’interface graphique et le moteur logique.
+
+Objectifs du projet
+
+L’objectif de ce travail est d’étendre les capacités du simulateur de Drendog pour se rapprocher :
+
+d’un simulateur de type Logisim,
+
+voire d’une approche inspirée de Verilog, mais orientée pédagogie et visualisation.
+
+La présence de blocs hiérarchiques et encapsulés rend envisageable la simulation de systèmes plus complexes, comme par exemple un microprocesseur pédagogique de type SAP-1.
+
+État du projet
+
+Ce projet est en évolution active.
+Il sert à la fois :
+
+d’outil d’exploration technique,
+
+de support pédagogique,
+
+et de base expérimentale pour des architectures logiques hiérarchiques.
+
+Crédits
+
+Projet original : Drendog
+https://github.com/drendog/Logic-Circuit-Simulator
+
+Extensions et développements : MisterT
+
+Licence
+
+Conforme à la licence du projet original de Drendog.
