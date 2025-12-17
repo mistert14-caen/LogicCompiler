@@ -9,7 +9,8 @@ https://github.com/drendog/Logic-Circuit-Simulator
 L’objectif est d’enrichir le simulateur initial en lui ajoutant des capacités de description logique avancée, de hiérarchisation et d’encapsulation, tout en conservant l’ergonomie du wiring et de l’interface graphique existante.
 
 # Nouveautés principales
-Parseur logique étendu
+
+ **1. Parseur logique étendu**
 
 Cette version intègre un parseur d’équations logiques capable de manipuler :
 
@@ -19,7 +20,7 @@ Cette version intègre un parseur d’équations logiques capable de manipuler :
 
 Il devient ainsi possible de modéliser aussi bien des circuits combinatoires simples que des blocs plus complexes manipulant des mots binaires.
 
-Prototypes logiques encapsulés
+**2. Prototypes logiques encapsulés**
 
 L’ajout majeur de cette version est la possibilité de définir des prototypes de fonctions logiques dans des fichiers texte.
 
@@ -33,7 +34,7 @@ Chaque prototype :
 
 Ce mécanisme introduit une hiérarchie logique, absente de la version initiale.
 
-Système de sauvegarde repensé
+**3. Système de sauvegarde repensé**
 
 Le système de sauvegarde a été modifié afin de :
 
@@ -72,5 +73,28 @@ https://github.com/drendog/Logic-Circuit-Simulator
 Extensions et développements : MisterT
 
 # Licence
+
+MIT License
+
+Copyright (c) 2025 MisterT
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
 
 Conforme à la licence du projet original de Drendog.
