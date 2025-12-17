@@ -1,0 +1,15 @@
+[BLOCK IR8#]
+TYPE=IR8
+SYMBOL=IR
+CATEGORY=UC
+ORDER=0
+DESCRIPTION=Registre instruction 8 bits
+POS=200,200
+WIDTH=100
+HEIGHT=80
+
+INPUTS=DIN;LOAD;CLR
+OUTPUTS=D
+
+# D reste identique tant que LOAD=0
+EQUATIONS=D=/CLR*((@LOAD * @DIN)+((/@LOAD) * @D))

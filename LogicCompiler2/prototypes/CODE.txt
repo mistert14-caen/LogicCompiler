@@ -1,0 +1,15 @@
+# ------------------------------------------------------
+#  Bloc CODE — charge un prototype personnalisé au clic
+# ------------------------------------------------------
+[BLOCK CODE#]
+TYPE=CODE
+SYMBOL=CODE
+CATEGORY=UTILISATEUR
+DESCRIPTION=Bloc de code personnalisé chargé depuis un fichier texte
+ORDER=200
+POS=100,100
+WIDTH=80
+HEIGHT=60
+
+
+

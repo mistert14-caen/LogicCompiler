@@ -1,0 +1,26 @@
+[BLOCK MAR#]
+TYPE=MAR
+SYMBOL=MAR
+CATEGORY=UC
+ORDER=2
+DESCRIPTION=Memory Address Register 8 bits avec sélection PC/IMM
+POS=200,200
+HEIGHT=120
+
+INPUTS=PC; IMM; SEL; LOAD;CLR
+INTERNALS=S0;C0;C1;DIN
+OUTPUTS=A
+
+# Sélecteur
+# S=0 → PC
+# S=1 → IMM
+EQUATIONS=S0 = (@SEL & 1)
+EQUATIONS=C0 = /@S0
+EQUATIONS=C1 = @S0
+
+EQUATIONS=DIN = (@C0 * @PC) + (@C1 * @IMM)
+
+# Registre du MAR
+# Si LOAD=1 → A := DIN
+# Si LOAD=0 → A conserve sa valeur
+EQUATIONS=A = /CLR * (@LOAD * @DIN) + (/@LOAD * @A)

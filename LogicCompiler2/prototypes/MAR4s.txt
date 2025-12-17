@@ -1,0 +1,20 @@
+[BLOCK MAR4s#]
+TYPE=BLOCK
+SYMBOL=MAR4s
+CATEGORY=SAP
+DESCRIPTION=Memory Address Register 4 bits (ENTIER, SAP-1 compatible)
+POS=200,200
+WIDTH=120
+HEIGHT=100
+
+INPUTS=A;CLK;CLR;LM
+OUTPUTS=MAR
+INTERNALS=N;MAR
+
+# ----- Next state (LOAD actif bas) -----
+EQUATIONS=N = (/LM * A) + (LM * @MAR)
+
+# ----- Flip-flop 4 bits -----
+EQUATIONS=MAR = /CLR * ( (CLK * @N) + (/CLK * @MAR) )
+
+

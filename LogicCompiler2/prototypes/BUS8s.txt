@@ -1,0 +1,32 @@
+[BLOCK BUSs8#]
+TYPE=BLOCK
+SYMBOL=BUSs8
+CATEGORY=SAP
+DESCRIPTION=Bus de données 8 bits (tri-state simulé)
+POS=200,200
+WIDTH=140
+HEIGHT=120
+
+# Entrées : sources + signaux d’activation
+INPUTS=ACC;ALU;RAM;IMM;EA;EU;CEb;EIb
+# EA  = Enable ACC (actif haut)
+# EU  = Enable ALU (actif haut)
+# CEb = /CE  (actif bas pour la RAM)
+# EIb = /EI  (actif bas pour IMM)
+
+OUTPUTS=BUS
+
+INTERNALS=ACC_ON;ALU_ON;RAM_ON;IMM_ON;CE;EI
+
+# Remet CEb et EIb en actifs HAUT
+EQUATIONS=CE = /CEb
+EQUATIONS=EI = /EIb
+
+# Contributions individuelles
+EQUATIONS=ACC_ON = /EA * ACC
+EQUATIONS=ALU_ON = EU * ALU
+EQUATIONS=RAM_ON = CE * RAM
+EQUATIONS=IMM_ON = EI * IMM
+
+# Bus = somme des sources AUTORISÉES
+EQUATIONS=BUS = ACC_ON + ALU_ON + RAM_ON + IMM_ON

@@ -1,0 +1,24 @@
+[BLOCK HI4#]
+TYPE=HI4
+SYMBOL=HI4
+CATEGORY=BUS
+ORDER=0
+DESCRIPTION=Extraction des 4 bits hauts (bits 7..4)
+POS=200,200
+WIDTH=60
+HEIGHT=100
+
+INPUTS=VAL
+OUTPUTS=H3;H2;H1;H0
+
+# Bit 4 -> H0
+EQUATIONS=H0 = (@VAL >> 4) & 1
+
+# Bit 5 -> H1
+EQUATIONS=H1 = (@VAL >> 5) & 1
+
+# Bit 6 -> H2
+EQUATIONS=H2 = (@VAL >> 6) & 1
+
+# Bit 7 -> H3 (MSB)
+EQUATIONS=H3 = (@VAL >> 7) & 1

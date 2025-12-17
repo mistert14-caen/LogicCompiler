@@ -1,0 +1,24 @@
+[BLOCK LO4#]
+TYPE=LO4
+SYMBOL=LO4
+CATEGORY=BUS
+ORDER=2
+DESCRIPTION=Extraction des 4 bits bas (bits 3..0)
+POS=200,200
+WIDTH=60
+HEIGHT=100
+
+INPUTS=VAL
+OUTPUTS=L3;L2;L1;L0
+
+# Bit 0 (LSB)
+EQUATIONS=L0 = (@VAL >> 0) & 1
+
+# Bit 1
+EQUATIONS=L1 = (@VAL >> 1) & 1
+
+# Bit 2
+EQUATIONS=L2 = (@VAL >> 2) & 1
+
+# Bit 3
+EQUATIONS=L3 = (@VAL >> 3) & 1

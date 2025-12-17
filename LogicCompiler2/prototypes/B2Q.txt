@@ -1,0 +1,16 @@
+[BLOCK B2Q#]
+TYPE=BLOCK
+SYMBOL=B2Q
+CATEGORY=BUS
+ORDER=4
+DESCRIPTION=Regroupement de 4 bits en un quartet (0..15)
+POS=200,200
+WIDTH=60
+HEIGHT=140
+
+INPUTS=C3;C2;C1;C0
+OUTPUTS=VAL
+
+# --- Reconstruction de l’octet ---
+EQUATIONS=VAL=((C0*1)+(C1*2)+(C2*4)+(C3*8))
+

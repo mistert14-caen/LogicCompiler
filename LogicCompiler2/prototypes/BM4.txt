@@ -1,0 +1,25 @@
+[BLOCK BM4#]
+TYPE=BM4
+SYMBOL=BM4
+CATEGORY=UC
+ORDER=7
+DESCRIPTION=Sélecteur de bus (4 entrées 8 bits)
+POS=200,200
+WIDTH=160
+HEIGHT=120
+
+INPUTS=SEL;A0;A1;A2;A3
+OUTPUTS=OUT
+
+# bits du sélecteur
+EQUATIONS=S0 = (@SEL & 1)
+EQUATIONS=S1 = (@SEL >> 1) & 1
+
+# conditions (sans "=")
+EQUATIONS=C0 = (/@S1) & (/@S0)
+EQUATIONS=C1 = (/@S1) & ( @S0)
+EQUATIONS=C2 = ( @S1) & (/@S0)
+EQUATIONS=C3 = ( @S1) & (@S0)
+
+# multiplexage
+EQUATIONS=OUT= (@C0*@A0) + (@C1*@A1) + (@C2*@A2) + (@C3*@A3)

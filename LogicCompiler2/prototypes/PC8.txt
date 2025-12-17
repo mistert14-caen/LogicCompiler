@@ -1,0 +1,20 @@
+[BLOCK PC8#]
+TYPE=PC8
+SYMBOL=PC8
+CATEGORY=UC
+ORDER=1
+DESCRIPTION=Compteur programme 8 bits avec LOAD / EN / RST
+POS=200,200
+WIDTH=100
+HEIGHT=120
+
+INPUTS=DIN;LOAD;EN;RST
+OUTPUTS=A
+
+# Règle :
+# - si RST=1      → A := 0
+# - sinon si LOAD → A := DIN
+# - sinon si EN   → A := A+1 (mod 256)
+# - sinon         → A := A
+
+EQUATIONS=A=((/@RST) * @LOAD * @DIN)+((/@RST) * (/@LOAD) * @EN * ((@A + 1) & _hFF))+ ((/@RST) * (/@LOAD) * (/@EN) * @A)

@@ -1,0 +1,66 @@
+[BLOCK CTRL4#]
+TYPE=BLOCK
+SYMBOL=CTRL
+CATEGORY=UC
+ORDER=1
+HEIGHT=140
+DESCRIPTION=Unité de contrôle UC simple (FETCH/EXEC)
+
+# --- Entrées ---
+# OP3..OP0 : bits opcode (HI nibble de IR)
+# EXEC     : phase exécution (1=EXEC, 0=FETCH)
+INPUTS=OP3;OP2;OP1;OP0;EXEC
+
+# --- Sorties ---
+# LM  : Load MAR
+# LI  : Load IR
+# SM  : Select MAR (1=MAR, 0=PC)
+# LA  : Load ACC
+# ADD : ALU ADD
+# SUB : ALU SUB
+# PCL : PC Load (JMP)
+# HLT : Halt
+OUTPUTS=LM;LI;SM;LA;ADD;SUB;PCL;HLT
+
+# --- Décodage instructions ---
+INTERNALS=vNOP;vLDA;vADD;vSUB;vJMP;vHLT
+
+# --- Décodage opcode (binaire) ---
+
+# 0 : 0000
+EQUATIONS=vNOP=/OP3 * /OP2 * /OP1 * /OP0
+
+# 1 : 0001
+EQUATIONS=vLDA=/OP3 * /OP2 * /OP1 *  OP0
+
+# 2 : 0010
+EQUATIONS=vADD=/OP3 * /OP2 *  OP1 * /OP0
+
+# 3 : 0011
+EQUATIONS=vSUB=/OP3 * /OP2 *  OP1 *  OP0
+
+# 4 : 0100
+EQUATIONS=vJMP=/OP3 *  OP2 * /OP1 * /OP0
+
+# F : 1111
+EQUATIONS=vHLT= OP3 *  OP2 *  OP1 *  OP0
+
+# --- Signaux de contrôle (actifs uniquement en EXEC) ---
+
+# MAR
+EQUATIONS=LM = EXEC * (vLDA + vADD + vSUB)
+EQUATIONS=SM = EXEC * (vLDA + vADD + vSUB)
+
+# ACC
+EQUATIONS=LA = EXEC * (vLDA + vADD + vSUB)
+
+# ALU
+EQUATIONS=ADD = EXEC * vADD
+EQUATIONS=SUB = EXEC * vSUB
+
+# JMP
+EQUATIONS=PCL = EXEC * vJMP
+
+# HALT
+EQUATIONS=HLT = EXEC * vHLT
+EQUATIONS=LI = /EXEC * /vHLT * /LA

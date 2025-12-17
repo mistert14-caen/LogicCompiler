@@ -1,0 +1,22 @@
+[BLOCK OUTs#]
+TYPE=BLOCK
+SYMBOL=OUTs
+CATEGORY=SAP
+DESCRIPTION=Registre OUT 8 bits (SAP-1 compatible)
+POS=200,200
+WIDTH=120
+HEIGHT=100
+
+# Ordre : /LO  CLK  A  OUT
+INPUTS=LO;CLK;A
+OUTPUTS=OUT
+INTERNALS=N;Q
+
+# /LO actif bas : 0 = charge A → Q, 1 = hold
+EQUATIONS=N  = (/LO * A) + (LO * @Q)
+
+# Bascule 8 bits
+EQUATIONS=Q   = (CLK * @N) + (/CLK * @Q)
+
+# Sortie vers le monde extérieur (afficheur)
+EQUATIONS=OUT = Q

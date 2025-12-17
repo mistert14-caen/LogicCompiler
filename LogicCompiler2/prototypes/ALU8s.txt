@@ -1,0 +1,32 @@
+[BLOCK ALU8s#]
+TYPE=BLOCK
+SYMBOL=ALU8s
+CATEGORY=SAP
+DESCRIPTION=ALU SAP-1 (ADD / SUB) avec SU et /EU actif bas
+POS=200,200
+WIDTH=160
+HEIGHT=120
+
+# Ordre : A  B  SU  EU   (EU = actif bas)
+INPUTS=A;B;SU;EU
+OUTPUTS=OUT;ZERO
+INTERNALS=ADD;SUB;RES
+
+# ----- Addition -----
+EQUATIONS=ADD = A + B
+
+# ----- Soustraction -----
+EQUATIONS=SUB = A - B
+
+# ----- Sélection de l’opération -----
+# SU = 0 → A+B
+# SU = 1 → A-B
+EQUATIONS=RES = (/SU * ADD) + (SU * SUB)
+
+# ----- Enable ALU vers bus (actif bas) -----
+# EU = 0 → OUT = RES
+# EU = 1 → OUT = 0 (tri-state simulé)
+EQUATIONS=OUT = (/EU * RES)
+
+# ----- Zero flag -----
+EQUATIONS=ZERO = /(RES ^ 0)
