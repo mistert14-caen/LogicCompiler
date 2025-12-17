@@ -76,19 +76,23 @@ function loadLogicValues(ws) {
 async function loadProtosOnly(p) {
   console.log(p);
 
+  // p.type = "AND", "NOT", etc.
   const res = await fetch('/LogicCompiler/prototypes/' + p.type + '.txt');
-  const pro = await res.text();
+  const text = await res.text();
 
-  console.log("AVANT import", currentID);
-  engine.importPrototype(pro);
+  //console.log("AVANT import", currentID);
 
-  console.log("AVANT build", currentID);
-  engine.buildProtoNodes(p.posX, p.posY, engine.proto, logicProto);
+  // ?? import avec cache
+  const proto = engine.importPrototype(text);
 
-  console.log("APRES build", currentID);
-  console.log(logicProto);
+  //console.log("AVANT build", currentID);
+
+  // ?? création d'une INSTANCE UI à partir du proto logique
+  engine.buildProtoNodes(p.posX, p.posY, proto, logicProto);
+
+  //console.log("APRES build", currentID);
+  //console.log(logicProto);
 }
-
 async function loadAllProtos(ws) {
   for (const p of ws.logicProto) {
     await loadProtosOnly(p);   // ?? ATTENTE RÉELLE
@@ -202,9 +206,13 @@ async loadFile(e) {
         let jsonWorkspace = JSON.stringify(workspace,
             function (key, value) {
                 switch (key) {
+                    case "_pixelsState":
+                         return;
                     case "parent":
                          return undefined;
-
+                    case "protoCache":
+                    case "engine":
+    			 return undefined;
                     case "output":
                     case "input":
                     case "nodeSet":

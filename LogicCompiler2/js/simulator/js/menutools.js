@@ -16,15 +16,18 @@ async function loadProtosOnly(m) {
   console.log(m);
 
   const res = await fetch('/LogicCompiler/prototypes/' + m + '.txt');
-  const pro = await res.text();
+  const text = await res.text();
 
-  engine.importPrototype(pro);
+  // ?? récupération EXPLICITE du prototype logique
+  const proto = engine.importPrototype(text);
+
   const index = logicProto.length;
   const cx = 100 / 2 + index * 40;
   const cy = 100 / 2 + index * 40;
-  engine.buildProtoNodes(cx, cy, engine.proto, logicProto);
-}
 
+  // ?? on passe le proto explicitement
+  engine.buildProtoNodes(cx, cy, proto, logicProto);
+}
 
 export function activeTool(elTool) {
     resetElements();

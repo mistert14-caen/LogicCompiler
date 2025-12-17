@@ -10,6 +10,7 @@ import { INPUT_STATE } from "./circuit_components/Enums.js";
 class LogicPrototype {
   constructor(name) {
     // Nom du composant (ex: AND0, NOT1)
+    
     this.name = name;
     this.type=null;
 
@@ -46,8 +47,9 @@ class LogicCompiler {
   
 
 constructor() {
-    this.protos = [];        // prototypes instanciés (V2)
-    this.proto = null;      // proto VIRTUEL exposé à l’UI
+    //this.protos = [];        // prototypes instanciés (V2)
+    this.protoCache = {};
+    //this.proto = null;      // proto VIRTUEL exposé à l’UI
     this.signals = {};
     this.last = {};
     this.equations = [];
@@ -139,7 +141,7 @@ pullOutputsFromEngine(lP) {
   }
 }
 
-
+/*
 importPrototype(text, index=0) {
 
   const m = text.match(/\[BLOCK\s+([^\]]+)\]/);
@@ -154,10 +156,37 @@ importPrototype(text, index=0) {
   const patchedText = this.patchProtoText(text, compName);
   const proto = this.parsePrototype(patchedText, compName);
   //console.log(proto);
+
+
   this.protos.push(proto);
   this.proto = proto;
   this.integrateProto(proto);
 }
+*/
+importPrototype(text) {
+
+  // --- extraction du nom de bloc ---
+  const m = text.match(/\[BLOCK\s+([^\]]+)\]/);
+  const baseName = m ? m[1].replace("#", "") : "PROTO";
+
+  // --- CACHE : si déjà chargé, on retourne ---
+  if (this.protoCache[baseName]) {
+    return this.protoCache[baseName];
+  }
+
+  // --- parse UNE SEULE FOIS ---
+  const patchedText = this.patchProtoText(text, baseName);
+  const proto = this.parsePrototype(patchedText, baseName);
+
+  // --- mémorisation dans le cache ---
+  this.protoCache[baseName] = proto;
+
+  // --- intégration moteur ---
+  this.integrateProto(proto);
+
+  return proto;
+}
+
 
   set(name, v) { this.signals[name] = Number(v); }
   get(name) { return this.signals[name] ?? 0; }
