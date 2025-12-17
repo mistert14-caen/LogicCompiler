@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>LogicCompiler – Test</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+textarea {
+  width: 100%;
+  height: 220px;
+  font-family: monospace;
+}
+
+button {
+  margin: 5px;
+  padding: 6px 12px;
+}
+
+.panel {
+  border: 1px solid #aaa;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.led {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  margin: 5px;
+  border-radius: 50%;
+  background: #300;
+  color: white;
+  text-align: center;
+  line-height: 80px;
+  font-weight: bold;
+}
+
+.led.on {
+  background: red;
+}
+</style>
+</head>
+
+<body>
+
+<h2>LogicCompiler – Page de test</h2>
+
+<h3>Prototype texte</h3>
+<textarea id="protoText">
+[BLOCK RS1]
+INPUTS=R;S;CLK
+OUTPUTS=Q;nQ
+INTERNALS=D
+
+EQUATIONS=D  = ((S | (/R & @D)))
+EQUATIONS=Q = D&CLK | (/CLK&@Q) 
+EQUATIONS=nQ = /Q
+</textarea>
+
+<button onclick="loadPrototype()">Charger prototype</button>
+
+<div class="panel">
+  <h3>Entrées</h3>
+  <div id="inputs"></div>
+</div>
+
+<div class="panel">
+  <h3>Simulation</h3>
+  <button onclick="step()">STEP</button>
+</div>
+
+<div class="panel">
+  <h3>Sorties / Internes</h3>
+  <div id="leds"></div>
+</div>
+<script src="js/simulator/js/parser.js"></script>
+<script type="module" src="js/simulator/js/engine2.js"></script>
+<script src="js/simulator/js/ui.js"></script>
+
+</body>
+</html>
