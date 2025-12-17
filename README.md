@@ -13,9 +13,9 @@ Parseur logique étendu
 
 Cette version intègre un parseur d’équations logiques capable de manipuler :
 
-  des valeurs binaires (logique booléenne classique),
+  * des valeurs binaires (logique booléenne classique),
 
-  des valeurs décimales, permettant de travailler sur des bus et des signaux multi-bits.
+  * des valeurs décimales, permettant de travailler sur des bus et des signaux multi-bits.
 
 Il devient ainsi possible de modéliser aussi bien des circuits combinatoires simples que des blocs plus complexes manipulant des mots binaires.
 
@@ -25,11 +25,11 @@ L’ajout majeur de cette version est la possibilité de définir des prototypes
 
 Chaque prototype :
 
-  décrit ses entrées, sorties et équations internes,
+  * décrit ses entrées, sorties et équations internes,
 
-  est automatiquement lié au système de wiring du simulateur,
+  * est automatiquement lié au système de wiring du simulateur,
 
-  se comporte comme un bloc encapsulé (boîte noire ou grise selon le niveau de détail souhaité).
+  * se comporte comme un bloc encapsulé (boîte noire ou grise selon le niveau de détail souhaité).
 
 Ce mécanisme introduit une hiérarchie logique, absente de la version initiale.
 
@@ -37,19 +37,19 @@ Système de sauvegarde repensé
 
 Le système de sauvegarde a été modifié afin de :
 
-  prendre en compte les nouveaux blocs importés,
+  * prendre en compte les nouveaux blocs importés,
 
-  restaurer correctement les connexions (wires),
+  * restaurer correctement les connexions (wires),
 
-  préserver la cohérence entre l’interface graphique et le moteur logique.
+  * préserver la cohérence entre l’interface graphique et le moteur logique.
 
 # Objectifs du projet
 
 L’objectif de ce travail est d’étendre les capacités du simulateur de Drendog pour se rapprocher :
 
-d’un simulateur de type Logisim,
+* d’un simulateur de type Logisim,
 
-voire d’une approche inspirée de Verilog, mais orientée pédagogie et visualisation.
+* voire d’une approche inspirée de Verilog, mais orientée pédagogie et visualisation.
 
 La présence de blocs hiérarchiques et encapsulés rend envisageable la simulation de systèmes plus complexes, comme par exemple un microprocesseur pédagogique de type SAP-1.
 
@@ -58,11 +58,11 @@ La présence de blocs hiérarchiques et encapsulés rend envisageable la simulat
 Ce projet est en évolution active.
 Il sert à la fois :
 
-d’outil d’exploration technique,
+  * d’outil d’exploration technique,
 
-de support pédagogique,
+  * de support pédagogique,
 
-et de base expérimentale pour des architectures logiques hiérarchiques.
+  * et de base expérimentale pour des architectures logiques hiérarchiques.
 
 # Crédits
 
