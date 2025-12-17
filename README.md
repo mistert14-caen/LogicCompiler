@@ -9,7 +9,8 @@ https://github.com/drendog/Logic-Circuit-Simulator
 L’objectif est d’enrichir le simulateur initial en lui ajoutant des capacités de description logique avancée, de hiérarchisation et d’encapsulation, tout en conservant l’ergonomie du wiring et de l’interface graphique existante.
 
 # Nouveautés principales
-Parseur logique étendu
+
+1. Parseur logique étendu
 
 Cette version intègre un parseur d’équations logiques capable de manipuler :
 
@@ -19,7 +20,7 @@ Cette version intègre un parseur d’équations logiques capable de manipuler :
 
 Il devient ainsi possible de modéliser aussi bien des circuits combinatoires simples que des blocs plus complexes manipulant des mots binaires.
 
-Prototypes logiques encapsulés
+2. Prototypes logiques encapsulés
 
 L’ajout majeur de cette version est la possibilité de définir des prototypes de fonctions logiques dans des fichiers texte.
 
@@ -33,7 +34,7 @@ Chaque prototype :
 
 Ce mécanisme introduit une hiérarchie logique, absente de la version initiale.
 
-Système de sauvegarde repensé
+3. Système de sauvegarde repensé
 
 Le système de sauvegarde a été modifié afin de :
 
