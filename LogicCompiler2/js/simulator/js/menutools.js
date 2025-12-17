@@ -1,15 +1,10 @@
 import { Clock } from "./circuit_components/Clock.js";
-import { FF_D_Single, FF_D_MasterSlave } from "./circuit_components/FF_D.js";
-import { FF_JK } from "./circuit_components/FF_JK.js";
-import { FF_T } from "./circuit_components/FF_T.js";
-import { flipflop, logicInput, logicOutput, logicClock, logicValue, gate, srLatch } from "./simulator.js";
-import { Gate } from "./circuit_components/Gate.js";
+import { logicInput, logicOutput, logicClock, logicValue, logicProto } from "./simulator.js";
 import { LogicInput } from "./circuit_components/LogicInput.js";
 import { LogicOutput } from "./circuit_components/LogicOutput.js";
 import { LogicValue } from "./circuit_components/LogicValue.js";
-
 import { MouseAction, syncType } from "./circuit_components/Enums.js"
-import { SR_LatchSync, SR_LatchAsync, SR_Latch } from "./circuit_components/SR_Latch.js"
+
 
 export let currMouseAction = MouseAction.EDIT;
 
@@ -17,20 +12,32 @@ export let currMouseAction = MouseAction.EDIT;
  * @todo TODO
  */
 
+async function loadProtosOnly(m) {
+  console.log(m);
+
+  const res = await fetch('/LogicCompiler/prototypes/' + m + '.txt');
+  const pro = await res.text();
+
+  engine.importPrototype(pro);
+  const index = logicProto.length;
+  const cx = 100 / 2 + index * 40;
+  const cy = 100 / 2 + index * 40;
+  engine.buildProtoNodes(cx, cy, engine.proto, logicProto);
+}
+
 
 export function activeTool(elTool) {
     resetElements();
 
-    // --- IMPORT PROTO (ponctuel) ---
     if (elTool.getAttribute("tool") === "PROTO") {
-      document.getElementById("protoFile").click();
-      return;
+         const t = elTool.getAttribute("model");
+         loadProtosOnly(t).catch(err => {
+         console.error("Erreur chargement proto", t, err);
+       });
+       return;
     }
 
-    if (elTool.getAttribute("isGate") != null) {
-        gate.push(new Gate(elTool.getAttribute("tool")));
-        return;
-    }
+    
 
     switch (elTool.getAttribute("tool")) {
         case "Edit":
@@ -65,55 +72,7 @@ export function activeTool(elTool) {
             logicClock.push(new Clock(period, dutycycle));
             break;
 
-        case "SR_Latch":
-            {
-                let el = document.getElementsByClassName("SR_Latch-gate")[0];
-                const gateType = el.options[el.selectedIndex].text;
-                el = document.getElementsByClassName("SR_Latch-sync")[0];
-                const _syncType = el.selectedIndex;
-                const stabilize = document.getElementsByClassName("SR_stabilize")[0].checked;
-                if (_syncType == syncType.ASYNC)
-                    srLatch.push(new SR_LatchAsync(SR_Latch.convertToType(gateType), stabilize));
-                else
-                    srLatch.push(new SR_LatchSync(SR_Latch.convertToType(gateType), stabilize));
-            }
-            break;
-
-        case "FF_D":
-            {
-                let el = document.getElementsByClassName("FF_D-Setting")[0];
-                const isMasterSlave = el.selectedIndex; // because is 0 or 1
-                if (isMasterSlave)
-                    flipflop.push(new FF_D_MasterSlave());
-                else
-                    flipflop.push(new FF_D_Single());
-            }
-            break;
-
-        case "FF_T":
-            {
-                let el = document.getElementsByClassName("FF_T-Setting")[0];
-                const isNegativeEdgeTrig = el.selectedIndex; // because is 0 or 1
-                if (isNegativeEdgeTrig)
-                    flipflop.push(new FF_T(true));
-                else
-                    flipflop.push(new FF_T(false));
-            }
-            break;
-
-
-        case "FF_JK":
-            {
-                let el = document.getElementsByClassName("FF_JK-Setting")[0];
-                const isNegativeEdgeTrig = el.selectedIndex; // because is 0 or 1
-                if (isNegativeEdgeTrig)
-                    flipflop.push(new FF_JK(true));
-                else
-                    flipflop.push(new FF_JK(false));
-            }
-            break;
-
-    }
+       }
 
     elTool.classList.add('active');
 

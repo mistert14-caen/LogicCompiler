@@ -10,16 +10,14 @@ import { Node as LogicNode } from "./circuit_components/Node.js";
 import { INPUT_STATE } from "./circuit_components/Enums.js";
 
 
-export let gateIMG = []; // gates images
-export let IC_IMG = []; // integrated circuits images
-export let gate = [];
+export let protoIMG = []; // gates images
+
+
 export let logicInput = [];
 export let logicOutput = [];
 export let logicValue = [];
 
 export let logicClock = [];
-export let srLatch = [];
-export let flipflop = [];
 export let wireMng;
 export let colorMouseOver = [0 ,0x7B, 0xFF];
 export let fileManager = new FileManager();
@@ -51,24 +49,41 @@ document.getElementById("protoFile").onchange = (e) => {
 };
 
 
+export const PROTO_IMG = {};
+
 export function preload() {
-    gateIMG.push(loadImage('js/simulator/img/LogicInput.svg'));// For testing usage
-    gateIMG.push(loadImage('js/simulator/img/NOT.svg'));
-    gateIMG.push(loadImage('js/simulator/img/AND.svg'));
-    gateIMG.push(loadImage('js/simulator/img/NAND.svg'));
-    gateIMG.push(loadImage('js/simulator/img/OR.svg'));
-    gateIMG.push(loadImage('js/simulator/img/NOR.svg'));
-    gateIMG.push(loadImage('js/simulator/img/XOR.svg'));
-    gateIMG.push(loadImage('js/simulator/img/XNOR.svg'));
+  protoIMG.push(loadImage('js/simulator/img/LogicInput.svg'));
+  protoIMG.push(loadImage('js/simulator/img/NOT.svg'));
+  protoIMG.push(loadImage('js/simulator/img/AND.svg'));
+  protoIMG.push(loadImage('js/simulator/img/NAND.svg'));
+  protoIMG.push(loadImage('js/simulator/img/OR.svg'));
+  protoIMG.push(loadImage('js/simulator/img/NOR.svg'));
+  protoIMG.push(loadImage('js/simulator/img/XOR.svg'));
+  protoIMG.push(loadImage('js/simulator/img/NXOR.svg'));
+  protoIMG.push(loadImage('js/simulator/img/SR_Latch.svg'));
+  protoIMG.push(loadImage('js/simulator/img/SR_Latch.svg'));
+  protoIMG.push(loadImage('js/simulator/img/SR_Latch_Sync.svg'));
+  protoIMG.push(loadImage('js/simulator/img/FF_D.svg'));
+  protoIMG.push(loadImage('js/simulator/img/FF_D_MS.svg'));
+  protoIMG.push(loadImage('js/simulator/img/FF_T.svg'));
+  protoIMG.push(loadImage('js/simulator/img/FF_JK.svg'));
 
-    IC_IMG.push(loadImage('js/simulator/img/SR_Latch.svg')); // For testing usage
-    IC_IMG.push(loadImage('js/simulator/img/SR_Latch.svg'));
-    IC_IMG.push(loadImage('js/simulator/img/SR_Latch_Sync.svg'));
-    IC_IMG.push(loadImage('js/simulator/img/FF_D.svg'));
-    IC_IMG.push(loadImage('js/simulator/img/FF_D_MS.svg'));
-    IC_IMG.push(loadImage('js/simulator/img/FF_T.svg'));
-    IC_IMG.push(loadImage('js/simulator/img/FF_JK.svg'));
+  // ?? mapping APRÈS chargement
+  PROTO_IMG.NOT   = protoIMG[1];
+  PROTO_IMG.AND   = protoIMG[2];
+  PROTO_IMG.NAND  = protoIMG[3];
+  PROTO_IMG.OR    = protoIMG[4];
+  PROTO_IMG.NOR   = protoIMG[5];
+  PROTO_IMG.XOR   = protoIMG[6];
+  PROTO_IMG.NXOR  = protoIMG[7];
 
+  PROTO_IMG.RS       = protoIMG[8];
+  PROTO_IMG.RS_LATCH = protoIMG[9];
+  PROTO_IMG.RS_SYNC  = protoIMG[10];
+  PROTO_IMG.D        = protoIMG[11];
+  PROTO_IMG.D_MS     = protoIMG[12];
+  PROTO_IMG.T        = protoIMG[13];
+  PROTO_IMG.JK       = protoIMG[14];
 }
 
 /**
@@ -111,13 +126,11 @@ export function draw() {
   wireMng.draw();
   //console.log("WIRE OBJ:", wireMng);
 
-  for (let g of gate) g.draw();
+  
   for (let li of logicInput) li.draw();
   for (let lo of logicOutput) lo.draw();
   for (let lv of logicValue) lv.draw();
   for (let c of logicClock) c.draw();
-  for (let s of srLatch) s.draw();
-  for (let f of flipflop) f.draw();
   for (const comp of logicProto) comp.draw();
 }
 
@@ -130,8 +143,7 @@ export function draw() {
 
 export function mousePressed() {
     /** Check gate[] mousePressed funtion*/
-    for (let i = 0; i < gate.length; i++)
-        gate[i].mousePressed();
+   
 
     for (let i = 0; i < logicInput.length; i++)
         logicInput[i].mousePressed();
@@ -139,23 +151,15 @@ export function mousePressed() {
     for (let i = 0; i < logicOutput.length; i++)
         logicOutput[i].mousePressed();
 
-   for (let i = 0; i < logicValue.length; i++)
+    for (let i = 0; i < logicValue.length; i++)
         logicValue[i].mousePressed();
-
 
     for (let i = 0; i < logicClock.length; i++)
         logicClock[i].mousePressed();
 
-    for (let i = 0; i < srLatch.length; i++)
-        srLatch[i].mousePressed();
-
-    for (let i = 0; i < flipflop.length; i++)
-        flipflop[i].mousePressed();
-
     for (const comp of logicProto)
         comp.mousePressed();
-
-   
+  
 
 }
 
@@ -163,27 +167,16 @@ export function mousePressed() {
  * @todo TODO
  */
 export function mouseReleased() {
-    for (let i = 0; i < gate.length; i++)
-        gate[i].mouseReleased();
-
-    for (let i = 0; i < logicInput.length; i++)
+   for (let i = 0; i < logicInput.length; i++)
         logicInput[i].mouseReleased();
 
-    for (let i = 0; i < logicOutput.length; i++)
+   for (let i = 0; i < logicOutput.length; i++)
         logicOutput[i].mouseReleased();
    for (let i = 0; i < logicValue.length; i++)
         logicValue[i].mouseReleased();
-
-
-    for (let i = 0; i < logicClock.length; i++)
+   for (let i = 0; i < logicClock.length; i++)
         logicClock[i].mouseReleased();
-
-    for (let i = 0; i < srLatch.length; i++)
-        srLatch[i].mouseReleased();
-
-    for (let i = 0; i < flipflop.length; i++)
-        flipflop[i].mouseReleased();
-     for (const comp of logicProto)
+   for (const comp of logicProto)
         comp.mouseReleased();
 }
 
@@ -212,40 +205,21 @@ export function mouseClicked() {
     //Check current selected option
     if (currMouseAction == MouseAction.EDIT) {
         //If action is EDIT, check every class. 
-        for (let i = 0; i < gate.length; i++)
-            gate[i].mouseClicked();
-
         for (let i = 0; i < logicInput.length; i++)
             logicInput[i].mouseClicked();
 
         for (let i = 0; i < logicOutput.length; i++)
             logicOutput[i].mouseClicked();
-         for (let i = 0; i < logicValue.length; i++)
+        for (let i = 0; i < logicValue.length; i++)
             logicValue[i].mouseClicked();
-
-
         for (let i = 0; i < logicClock.length; i++)
             logicClock[i].mouseClicked();
-
-        for (let i = 0; i < srLatch.length; i++)
-            srLatch[i].mouseClicked();
-
-        for (let i = 0; i < flipflop.length; i++)
-            flipflop[i].mouseClicked();
-
         for (const comp of logicProto)
             comp.mouseClicked();
 
     } else if (currMouseAction == MouseAction.DELETE) {
         //
-        for (let i = 0; i < gate.length; i++) {
-            if (gate[i].mouseClicked()) {
-                gate[i].destroy();
-                delete gate[i];
-                gate.splice(i, 1);
-            }
-        }
-
+        
 
         for (let i = 0; i < logicInput.length; i++) {
             if (logicInput[i].mouseClicked()) {
@@ -279,22 +253,7 @@ export function mouseClicked() {
                 logicClock.splice(i, 1);
             }
         }
-
-        for (let i = 0; i < srLatch.length; i++) {
-            if (srLatch[i].mouseClicked()) {
-                srLatch[i].destroy();
-                delete srLatch[i];
-                srLatch.splice(i, 1);
-            }
-        }
-
-        for (let i = 0; i < flipflop.length; i++) {
-            if (flipflop[i].mouseClicked()) {
-                flipflop[i].destroy();
-                delete flipflop[i];
-                flipflop.splice(i, 1);
-            }
-        }
+        
     }
     wireMng.mouseClicked();
 }

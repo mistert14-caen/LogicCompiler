@@ -19,6 +19,7 @@
         <script src="js/simulator/js/parser.js"></script>
 	<script type="module" src="js/simulator/js/engine2.js"></script>
 	<script type="module" src="js/simulator/js/simulator.js"></script>
+        
 	<title>Logic Circuit Simulator</title>
 </head>
 
@@ -73,7 +74,7 @@
 					</div>
 					<div class="githubSection">
 						<button type="button" class="btn btn-outline-light"
-							onclick="window.location.href='https://git.io/fjHIF'">
+							onclick="window.location.href='https://github.com/mistert14-caen/LogicCompiler'">
 							<i class="fa fa-github"></i>
 						</button>
 					</div>
@@ -97,28 +98,90 @@
 						<img src="js/simulator/img/LogicOutput.svg" class="ml-2" width="32">
 					</button>
 
-					<button type="button" tool="LogicValue" title="Logic Output" onclick="activeTool(this)"
+					<button type="button" tool="LogicValue" title="Logic Value" onclick="activeTool(this)"
 						class="list-group-item list-group-item-action pl-1">
 						<img src="js/simulator/img/LogicValue.svg" class="ml-2" width="32">
 					</button>
 
-					<button type="button"
-        					tool="PROTO"
-        					isGate="false"
-        					onclick="activeTool(this)"
-        					class="list-group-item list-group-item-action pl-1">
-    						<img src="js/simulator/img/mark-github.svg" width="50">
-					</button>
-					<input type="file" id="protoFile" accept=".txt" hidden>
 					<button type="button" data-target="#ClockSettings" data-toggle="modal" title="Clock"
 						class="list-group-item list-group-item-action pl-1">
 						<img src="js/simulator/img/Clock.svg" width="50">
 					</button>
+					<button type="button"
+        					tool="PROTO"
+						title="NOT GATE"
+                                                model="NOT"
+        					isGate="false"
+        					onclick="activeTool(this)"
+        					class="list-group-item list-group-item-action pl-1">
+    						<img src="js/simulator/img/NOT.svg" width="50">
+					</button>
+
+					<button type="button"
+        					tool="PROTO"
+						title="AND GATE"
+                                                model="AND"
+        					isGate="false"
+        					onclick="activeTool(this)"
+        					class="list-group-item list-group-item-action pl-1">
+    						<img src="js/simulator/img/AND.svg" width="50">
+					</button>
+					<button type="button"
+        					tool="PROTO"
+						title="NAND GATE"
+                                                model="NAND"
+        					isGate="false"
+        					onclick="activeTool(this)"
+        					class="list-group-item list-group-item-action pl-1">
+    						<img src="js/simulator/img/NAND.svg" width="50">
+					</button>
+
+					<button type="button"
+        					tool="PROTO"
+						title="OR GATE"
+                                                model="OR"
+        					isGate="false"
+        					onclick="activeTool(this)"
+        					class="list-group-item list-group-item-action pl-1">
+    						<img src="js/simulator/img/OR.svg" width="50">
+					</button>
+					<button type="button"
+        					tool="PROTO"
+						title="NOR GATE"
+                                                model="NOR"
+        					isGate="false"
+        					onclick="activeTool(this)"
+        					class="list-group-item list-group-item-action pl-1">
+    						<img src="js/simulator/img/NOR.svg" width="50">
+					</button>
+					<button type="button"
+        					tool="PROTO"
+						title="XOR GATE"
+                                                model="XOR"
+        					isGate="false"
+        					onclick="activeTool(this)"
+        					class="list-group-item list-group-item-action pl-1">
+    						<img src="js/simulator/img/XOR.svg" width="50">
+					</button>
+					<button type="button"
+        					tool="PROTO"
+						title="NOT XOR GATE"
+                                                model="NXOR"
+        					isGate="false"
+        					onclick="activeTool(this)"
+        					class="list-group-item list-group-item-action pl-1">
+    						<img src="js/simulator/img/NXOR.svg" width="50">
+					</button>
+
+
+
+					<input type="file" id="protoFile" accept=".txt" hidden>
+					<!--
 					<button type="button" tool="NOT" isGate="true" onclick="activeTool(this)"
 						class="list-group-item list-group-item-action pl-1">
 						<img src="js/simulator/img/NOT.svg" width="50">
 					</button>
-					<button type="button" tool="AND" isGate="true" onclick="activeTool(this)"
+					<button type="button" tool="PROTO.AND" isGate="true" onclick="activeTool(this)"
 						class="list-group-item list-group-item-action pl-1">
 						<img src="js/simulator/img/AND.svg" width="50">
 					</button>
@@ -160,6 +223,7 @@
 						class="list-group-item list-group-item-action pl-1">
 						<img src="js/simulator/img/FF_JK.svg" width="50">
 					</button>
+                                        -->
 				</div>
 			</div>
 			<div class="col-10 pl-0">

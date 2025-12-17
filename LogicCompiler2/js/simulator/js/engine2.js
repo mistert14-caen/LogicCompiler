@@ -7,7 +7,6 @@ import { Node as LogicNode } from "./circuit_components/Node.js";
 import { INPUT_STATE } from "./circuit_components/Enums.js";
 
 
-
 class LogicPrototype {
   constructor(name) {
     // Nom du composant (ex: AND0, NOT1)
@@ -247,5 +246,4 @@ parseEquation(line) {
 }
   
 }
-
 window.engine = new LogicCompiler();

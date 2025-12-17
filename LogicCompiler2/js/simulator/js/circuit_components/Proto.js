@@ -7,10 +7,35 @@ import { colorMouseOver } from "../simulator.js";
  * Prototype generic component
  * Parent of several nodes
  */
+
+const protoSvgCache = {};
+
+function loadProtoIcon(type, cb) {
+  if (protoSvgCache[type] !== undefined) {
+    cb(protoSvgCache[type]);
+    return;
+  }
+
+  const path = `js/simulator/img/${type}.svg`;
+
+  loadImage(
+    path,
+    img => {
+      protoSvgCache[type] = img;
+      cb(img);
+    },
+    () => {
+      protoSvgCache[type] = null;
+      cb(null);
+    }
+  );
+}
+
 export class LogicProto {
 
     constructor(x, y, type="UNDEFINED", label = "PROTO") {
-
+  
+        this.icon = null;
         this.posX = x;
         this.posY = y;
 
@@ -28,12 +53,19 @@ export class LogicProto {
         this.width = 60;
         this.height = 40;
         this.nodeStartID = null;
+
+        loadProtoIcon(this.type, img => {
+     		this.icon = img;
+  	});
+
+
     }
+
 
     /* ============================================================
        NODE MANAGEMENT
        ============================================================ */
-
+   
  fixNodeIDs() {
     if (this.nodeStartID == null) return;
 
@@ -131,25 +163,37 @@ draw() {
         this.updateNodes();
     }
 
-    push(); // ?? sauvegarde état graphique
+    push();
 
-    if (this.isMouseOver())
-        stroke(colorMouseOver[0], colorMouseOver[1], colorMouseOver[2]);
-    else
-        stroke(0);
+if (this.isMouseOver())
+  stroke(colorMouseOver[0], colorMouseOver[1], colorMouseOver[2]);
+else
+  stroke(0);
 
-    strokeWeight(3);
-    fill(240);
-    rectMode(CENTER);
-    rect(this.posX, this.posY, this.width, this.height, 6);
+strokeWeight(3);
+fill(240);
+rectMode(CENTER);
+rect(this.posX, this.posY, this.width, this.height, 6);
 
-    noStroke();
-    fill(0);
-    textAlign(CENTER, CENTER);
-    textSize(12);
-    text(this.label, this.posX, this.posY);
+// SVG PAR-DESSUS le fond
+if (this.icon) {
+  image(
+    this.icon,
+    this.posX - this.width/2 + 6,
+    this.posY - this.height/2 + 6,
+    this.width - 12,
+    this.height - 12
+  );
+}
 
-    pop(); // ?? restauration état
+// label optionnel
+noStroke();
+fill(0);
+textAlign(CENTER, CENTER);
+textSize(12);
+if (this.icon === null) text(this.label, this.posX, this.posY);
+
+pop();
 
     // nodes dessinés avec l'état "normal"
     for (const n of this.nodes) {
