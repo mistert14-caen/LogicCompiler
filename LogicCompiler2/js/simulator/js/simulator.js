@@ -50,44 +50,6 @@ document.getElementById("protoFile").onchange = (e) => {
 
 export const PROTO_IMG = {};
 
-/*
-
-
-export function preload() {
-  protoIMG.push(loadImage('js/simulator/img/LogicInput.svg'));
-  protoIMG.push(loadImage('js/simulator/img/NOT.svg'));
-  protoIMG.push(loadImage('js/simulator/img/AND.svg'));
-  protoIMG.push(loadImage('js/simulator/img/NAND.svg'));
-  protoIMG.push(loadImage('js/simulator/img/OR.svg'));
-  protoIMG.push(loadImage('js/simulator/img/NOR.svg'));
-  protoIMG.push(loadImage('js/simulator/img/XOR.svg'));
-  protoIMG.push(loadImage('js/simulator/img/NXOR.svg'));
-  protoIMG.push(loadImage('js/simulator/img/SR_Latch.svg'));
-  protoIMG.push(loadImage('js/simulator/img/SR_Latch.svg'));
-  protoIMG.push(loadImage('js/simulator/img/SR_Latch_Sync.svg'));
-  protoIMG.push(loadImage('js/simulator/img/FF_D.svg'));
-  protoIMG.push(loadImage('js/simulator/img/FF_D_MS.svg'));
-  protoIMG.push(loadImage('js/simulator/img/FF_T.svg'));
-  protoIMG.push(loadImage('js/simulator/img/FF_JK.svg'));
-
-  // ?? mapping APRÈS chargement
-  PROTO_IMG.NOT   = protoIMG[1];
-  PROTO_IMG.AND   = protoIMG[2];
-  PROTO_IMG.NAND  = protoIMG[3];
-  PROTO_IMG.OR    = protoIMG[4];
-  PROTO_IMG.NOR   = protoIMG[5];
-  PROTO_IMG.XOR   = protoIMG[6];
-  PROTO_IMG.NXOR  = protoIMG[7];
-
-  PROTO_IMG.RS       = protoIMG[8];
-  PROTO_IMG.RS_LATCH = protoIMG[9];
-  PROTO_IMG.RS_SYNC  = protoIMG[10];
-  PROTO_IMG.D        = protoIMG[11];
-  PROTO_IMG.D_MS     = protoIMG[12];
-  PROTO_IMG.T        = protoIMG[13];
-  PROTO_IMG.JK       = protoIMG[14];
-}
-*/
 
 /**
  * @todo TODO
@@ -198,11 +160,10 @@ export function doubleClicked() {
  * Override mouseClicked Function
  * 
  */
-export function mouseDragged() {
-    for (const comp of logicProto)
-            comp.mouseDragged();
-
-}
+//export function mouseDragged() {
+//    for (const comp of logicProto)
+//            comp.mouseDragged();
+//}
 
 export function mouseClicked() {
     //Check current selected option
@@ -269,7 +230,7 @@ window.mousePressed = mousePressed;
 window.mouseReleased = mouseReleased;
 window.doubleClicked = doubleClicked;
 window.mouseClicked = mouseClicked;
-window.mouseDragged = mouseDragged;
+//window.mouseDragged = mouseDragged;
 
 window.activeTool = activeTool;
 

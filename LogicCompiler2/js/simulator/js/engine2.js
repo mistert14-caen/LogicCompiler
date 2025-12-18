@@ -23,6 +23,7 @@ class LogicPrototype {
     this.equations = [];
     this.width  = 60;
     this.height = 40;
+    this.dy=15;
   }
 }
 
@@ -83,14 +84,15 @@ constructor() {
  
 buildProtoNodes(cx,cy,proto, lP) {
 
-  const DY = 25;
+  
 
 
   // proto.name est DÉJÀ PATCHÉ
   const comp = new LogicProto(cx, cy, proto.type, proto.name);
   comp.width = proto.width;
   comp.height = proto.height;
-
+  comp.dy = proto.dy;
+  const DY = comp.dy;
   // --- INPUTS ---
   let y0 = -((proto.inputs.length - 1) * DY) / 2;
   proto.inputs.forEach((name, i) => {
@@ -260,6 +262,8 @@ importPrototype(text) {
       else if (l.startsWith('EQUATIONS='))p.equations.push(this.parseEquation(l.slice(10)));
       else if (l.startsWith("WIDTH=")) p.width = parseInt(l.split("=")[1], 10);
       else if (l.startsWith("HEIGHT=")) p.height = parseInt(l.split("=")[1], 10);
+      else if (l.startsWith("DY=")) p.dy = parseInt(l.split("=")[1], 10);
+
 
     }
     //console.log(p);
