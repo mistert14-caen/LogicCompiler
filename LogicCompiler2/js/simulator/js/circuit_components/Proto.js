@@ -170,28 +170,30 @@ if (this.isMouseOver())
 else
   stroke(0);
 
-strokeWeight(3);
-fill(240);
-rectMode(CENTER);
-rect(this.posX, this.posY, this.width, this.height, 6);
 
 // SVG PAR-DESSUS le fond
 if (this.icon) {
   image(
     this.icon,
-    this.posX - this.width/2 + 6,
-    this.posY - this.height/2 + 6,
-    this.width - 12,
-    this.height - 12
+    this.posX - this.width/2 ,
+    this.posY - this.height/2,
+    this.width,
+    this.height
   );
 }
+else {
+   strokeWeight(3);
+   fill(240);
+   rectMode(CENTER);
+   rect(this.posX, this.posY, this.width, this.height, 6);
 
-// label optionnel
-noStroke();
-fill(0);
-textAlign(CENTER, CENTER);
-textSize(12);
-if (this.icon === null) text(this.label, this.posX, this.posY);
+  // label optionnel
+  noStroke();
+  fill(0);
+  textAlign(CENTER, CENTER);
+  textSize(12);
+  text(this.label, this.posX, this.posY);
+}
 
 pop();
 

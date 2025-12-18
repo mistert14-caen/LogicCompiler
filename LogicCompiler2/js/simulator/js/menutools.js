@@ -13,9 +13,9 @@ export let currMouseAction = MouseAction.EDIT;
  */
 
 async function loadProtosOnly(m) {
-  console.log(m);
+  console.trace("LOAD:",m);
 
-  const res = await fetch('/LogicCompiler/prototypes/' + m + '.txt');
+  const res = await fetch('/LogicCompiler2/prototypes/' + m + '.txt');
   const text = await res.text();
 
   // ?? récupération EXPLICITE du prototype logique

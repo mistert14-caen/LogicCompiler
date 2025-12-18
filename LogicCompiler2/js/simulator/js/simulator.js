@@ -48,8 +48,10 @@ document.getElementById("protoFile").onchange = (e) => {
   reader.readAsText(file);
 };
 
-
 export const PROTO_IMG = {};
+
+/*
+
 
 export function preload() {
   protoIMG.push(loadImage('js/simulator/img/LogicInput.svg'));
@@ -85,6 +87,7 @@ export function preload() {
   PROTO_IMG.T        = protoIMG[13];
   PROTO_IMG.JK       = protoIMG[14];
 }
+*/
 
 /**
  * @todo TODO
@@ -258,7 +261,7 @@ export function mouseClicked() {
     wireMng.mouseClicked();
 }
 
-window.preload = preload;
+//window.preload = preload;
 window.setup = setup;
 window.draw = draw;
 window.windowResized = windowResized;

@@ -21,6 +21,8 @@ class LogicPrototype {
 
     // Équations associées au composant
     this.equations = [];
+    this.width  = 60;
+    this.height = 40;
   }
 }
 
@@ -47,14 +49,14 @@ class LogicCompiler {
   
 
 constructor() {
-    //this.protos = [];        // prototypes instanciés (V2)
+    this.protos = [];        // prototypes instanciés (V2)
     this.protoCache = {};
-    //this.proto = null;      // proto VIRTUEL exposé à l’UI
+    this.proto = null;      // proto VIRTUEL exposé à l’UI
     this.signals = {};
     this.last = {};
     this.equations = [];
     this._instanceCounter = {}; // ?? clé = baseName, valeur = compteur
-  }
+}
 
   /* =======================
      API PUBLIQUE (inchangée)
@@ -86,6 +88,8 @@ buildProtoNodes(cx,cy,proto, lP) {
 
   // proto.name est DÉJÀ PATCHÉ
   const comp = new LogicProto(cx, cy, proto.type, proto.name);
+  comp.width = proto.width;
+  comp.height = proto.height;
 
   // --- INPUTS ---
   let y0 = -((proto.inputs.length - 1) * DY) / 2;
@@ -155,7 +159,7 @@ importPrototype(text, index=0) {
 
   const patchedText = this.patchProtoText(text, compName);
   const proto = this.parsePrototype(patchedText, compName);
-  //console.log(proto);
+  console.log(proto);
 
 
   this.protos.push(proto);
@@ -167,26 +171,31 @@ importPrototype(text) {
 
   // --- extraction du nom de bloc ---
   const m = text.match(/\[BLOCK\s+([^\]]+)\]/);
-  const baseName = m ? m[1].replace("#", "") : "PROTO";
+  console.trace("MODULE:",m);
+  const baseName = m ? m[1] : "PROTO";
 
-  // --- CACHE : si déjà chargé, on retourne ---
-  if (this.protoCache[baseName]) {
-    return this.protoCache[baseName];
+  // --- compteur par type ---
+  const n = (this._instanceCounter[baseName] ?? 0) + 1;
+  this._instanceCounter[baseName] = n;
+
+  const compName = baseName.replace("#", n);
+
+  // --- CACHE : mémoriser le TEXTE BRUT ---
+  if (!this.protoCache[baseName]) {
+    this.protoCache[baseName] = text;   // ?? texte avec AND#
   }
 
-  // --- parse UNE SEULE FOIS ---
-  const patchedText = this.patchProtoText(text, baseName);
-  const proto = this.parsePrototype(patchedText, baseName);
+  // --- PATCH TOUJOURS AVANT PARSE ---
+  const patchedText = this.patchProtoText(this.protoCache[baseName], compName);
 
-  // --- mémorisation dans le cache ---
-  this.protoCache[baseName] = proto;
+  // --- parse instance ---
+  const proto = this.parsePrototype(patchedText, compName);
 
   // --- intégration moteur ---
   this.integrateProto(proto);
-
+  this.proto = proto;
   return proto;
 }
-
 
   set(name, v) { this.signals[name] = Number(v); }
   get(name) { return this.signals[name] ?? 0; }
@@ -249,6 +258,9 @@ importPrototype(text) {
       else if (l.startsWith('OUTPUTS='))  p.outputs   = l.slice(8).split(';');
       else if (l.startsWith('INTERNALS='))p.internals = l.slice(10).split(';');
       else if (l.startsWith('EQUATIONS='))p.equations.push(this.parseEquation(l.slice(10)));
+      else if (l.startsWith("WIDTH=")) p.width = parseInt(l.split("=")[1], 10);
+      else if (l.startsWith("HEIGHT=")) p.height = parseInt(l.split("=")[1], 10);
+
     }
     //console.log(p);
     return p;

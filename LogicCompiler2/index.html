@@ -6,7 +6,7 @@
 	<meta charset="utf-8">
 	<meta name="description"
 		content="A logic circuit simulator made with p5.js library, useful for educational use. It can be used to simulate combinational and sequential circuits.">
-	<meta name="author" content="drendog">
+	<meta name="author" content="MisterT">
 	<link rel="stylesheet" href="js/vendor/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="js/simulator/css/simstyle.css">
@@ -28,8 +28,8 @@
 	<!-- Fixed navbar -->
 	<nav class="navbar navbar-expand-md navbar-dark bg-dark">
 		<a class="navbar-brand text-center" href="#">
-			Logic Circuit
-			<br>Simulator
+			Logic 
+			<br>Compiler
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
 			aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -172,58 +172,18 @@
         					class="list-group-item list-group-item-action pl-1">
     						<img src="js/simulator/img/NXOR.svg" width="50">
 					</button>
-
-
+					<button type="button"
+        					tool="PROTO"
+						title="RS FF"
+                                                model="RS"
+        					isGate="false"
+        					onclick="activeTool(this)"
+        					class="list-group-item list-group-item-action pl-1">
+    						<img src="js/simulator/img/RS.svg" width="50">
+					</button>
 
 					<input type="file" id="protoFile" accept=".txt" hidden>
-					<!--
-					<button type="button" tool="NOT" isGate="true" onclick="activeTool(this)"
-						class="list-group-item list-group-item-action pl-1">
-						<img src="js/simulator/img/NOT.svg" width="50">
-					</button>
-					<button type="button" tool="PROTO.AND" isGate="true" onclick="activeTool(this)"
-						class="list-group-item list-group-item-action pl-1">
-						<img src="js/simulator/img/AND.svg" width="50">
-					</button>
-					<button type="button" tool="NAND" isGate="true" onclick="activeTool(this)"
-						class="list-group-item list-group-item-action pl-1">
-						<img src="js/simulator/img/NAND.svg" width="50">
-					</button>
-					<button type="button" tool="OR" isGate="true" onclick="activeTool(this)"
-						class="list-group-item list-group-item-action pl-1">
-						<img src="js/simulator/img/OR.svg" width="50">
-					</button>
-					<button type="button" tool="NOR" isGate="true" onclick="activeTool(this)"
-						class="list-group-item list-group-item-action pl-1">
-						<img src="js/simulator/img/NOR.svg" width="50">
-					</button>
-					<button type="button" tool="XOR" isGate="true" onclick="activeTool(this)"
-						class="list-group-item list-group-item-action pl-1">
-						<img src="js/simulator/img/XOR.svg" width="50">
-					</button>
-					<button type="button" tool="XNOR" isGate="true" onclick="activeTool(this)"
-						class="list-group-item list-group-item-action pl-1">
-						<img src="js/simulator/img/XNOR.svg" width="50">
-					</button>
-					<button type="button" data-target="#SR_LatchSettings" title="Latch SR NOR-NAND Sync-Async"
-						data-toggle="modal" class="list-group-item list-group-item-action pl-1">
-						<img src="js/simulator/img/SR_Latch.svg" width="50">
-					</button>
-					<button type="button" data-target="#FF_D-TypeSettings" title="Flip Flop D Single or Master-Slave"
-						data-toggle="modal" class="list-group-item list-group-item-action pl-1">
-						<img src="js/simulator/img/FF_D_MS.svg" width="50">
-					</button>
-					<button type="button" data-target="#FF_T-TypeSettings"
-						title="Flip Flop T Positive-Negative Edge Triggered" data-toggle="modal"
-						class="list-group-item list-group-item-action pl-1">
-						<img src="js/simulator/img/FF_T.svg" width="50">
-					</button>
-					<button type="button" data-target="#FF_JK-TypeSettings"
-						title="Flip Flop JK Positive-Negative Edge Triggered" data-toggle="modal"
-						class="list-group-item list-group-item-action pl-1">
-						<img src="js/simulator/img/FF_JK.svg" width="50">
-					</button>
-                                        -->
+					
 				</div>
 			</div>
 			<div class="col-10 pl-0">

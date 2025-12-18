@@ -15,7 +15,7 @@ export function resetNodeIDs() {
  */
 export class Node {
     constructor(posX, posY, isOutput = false, value = false) {
-        console.trace("NEW NODE", currentID);
+        //console.trace("NEW NODE", currentID);
         this.diameter = 10;
         this.value = value;
         this.posX = posX;
@@ -79,7 +79,7 @@ export class Node {
      */
     setID(newID)
     {
-        console.trace("SET currentID =", newID);
+        //console.trace("SET currentID =", newID);
         delete nodeList[this.id];
         this.id = newID;
         nodeList[this.id] = this;
