@@ -83,7 +83,7 @@ constructor() {
  
 buildProtoNodes(cx,cy,proto, lP) {
 
-  const DY = 15;
+  const DY = 25;
 
 
   // proto.name est DÉJÀ PATCHÉ
@@ -100,7 +100,7 @@ buildProtoNodes(cx,cy,proto, lP) {
     // ?? name est déjà du type AND0_A
     n.signal = name;
 
-    comp.addNode(n, -comp.width / 2 - 10, y0 + i * DY);
+    comp.addNode(n, -comp.width / 2 , y0 + i * DY);
   });
 
   // --- OUTPUTS ---
@@ -112,7 +112,7 @@ buildProtoNodes(cx,cy,proto, lP) {
     // ?? name est déjà du type AND0_Y
     n.signal = name;
 
-    comp.addNode(n, comp.width / 2 + 10, y0 + i * DY);
+    comp.addNode(n, comp.width / 2 , y0 + i * DY);
   });
 
   lP.push(comp);

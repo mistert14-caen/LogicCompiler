@@ -165,7 +165,7 @@ draw() {
 
     push();
 
-if (this.isMouseOver())
+  if (this.isMouseOver())
   stroke(colorMouseOver[0], colorMouseOver[1], colorMouseOver[2]);
 else
   stroke(0);
