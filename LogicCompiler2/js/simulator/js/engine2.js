@@ -13,6 +13,7 @@ class LogicPrototype {
     
     this.name = name;
     this.type=null;
+    this.label='LBL';
 
     // Signaux
     this.inputs = [];
@@ -155,28 +156,6 @@ pullOutputsFromEngine(lP,lB) {
 
 }
 
-/*
-importPrototype(text, index=0) {
-
-  const m = text.match(/\[BLOCK\s+([^\]]+)\]/);
-  const baseName = m ? m[1] : "PROTO#";
-
-  // compteur par type
-  const n = this._instanceCounter[baseName] ?? 0;
-  this._instanceCounter[baseName] = n + 1;
-
-  const compName = baseName.replace("#", n);
-
-  const patchedText = this.patchProtoText(text, compName);
-  const proto = this.parsePrototype(patchedText, compName);
-  console.log(proto);
-
-
-  this.protos.push(proto);
-  this.proto = proto;
-  this.integrateProto(proto);
-}
-*/
 importPrototype(text) {
 
   // --- extraction du nom de bloc ---
@@ -204,6 +183,7 @@ importPrototype(text) {
   // --- intégration moteur ---
   this.integrateProto(proto);
   this.proto = proto;
+  this.protos.push(proto);
   return proto;
 }
 
