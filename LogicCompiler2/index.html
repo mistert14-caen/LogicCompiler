@@ -102,6 +102,11 @@
 						class="list-group-item list-group-item-action pl-1">
 						<img src="js/simulator/img/LogicValue.svg" class="ml-2" width="32">
 					</button>
+					<button type="button" tool="LogicLabel" title="Logic Label" onclick="activeTool(this)"
+						class="list-group-item list-group-item-action pl-1">
+						<img src="js/simulator/img/LogicInput.svg" class="ml-2" width="32">
+					</button>
+
 
 					<button type="button" data-target="#ClockSettings" data-toggle="modal" title="Clock"
 						class="list-group-item list-group-item-action pl-1">
@@ -208,6 +213,17 @@
         					class="list-group-item list-group-item-action pl-1">
     						<img src="js/simulator/img/T.svg" width="50">
 					</button>
+                                        <button type="button"
+        					tool="PROTO"
+						title="cB"
+                                                caption="cB"
+                                                model="cB"
+        					isGate="false"
+        					onclick="activeTool(this)"
+        					class="list-group-item list-group-item-action pl-1">
+    						<!--<img src="js/simulator/img/T.svg" width="50">-->
+					</button>
+
 
 
 
@@ -255,104 +271,5 @@
 	</div>
 </div>
 <!-- End Modal for Clock Settings-->
-<!-- Modal for SR Latch Settings -->
-<div class="modal fade" id="SR_LatchSettings" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title">SR Latch Settings</h5>
-			</div>
-			<div class="modal-body">
-				<h6>Choose SR Latch type</h6>
-				<select class="custom-select SR_Latch-gate">
-					<option selected>NOR</option>
-					<option>NAND</option>
-				</select>
-				<br>
-				<select class="custom-select SR_Latch-sync">
-					<option selected>Asynchronous</option>
-					<option>Synchronous</option>
-				</select>
-				<input type="checkbox" class="SR_stabilize" checked>
-				<label>Stabilize - Without this, the outputs may pulsate.</label>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-				<button type="button" class="btn btn-primary" tool="SR_Latch" onclick="activeTool(this)"
-					data-dismiss="modal">Create</button>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- End Modal for SR Latch Settings-->
-<!-- Modal for D-Type FF Settings -->
-<div class="modal fade" id="FF_D-TypeSettings" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title">D-Type Flip-Flop Settings</h5>
-			</div>
-			<div class="modal-body">
-				<h6>Choose the type</h6>
-				<select class="custom-select FF_D-Setting">
-					<option selected>SINGLE</option>
-					<option>MASTER-SLAVE</option>
-				</select>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-				<button type="button" class="btn btn-primary" tool="FF_D" onclick="activeTool(this)"
-					data-dismiss="modal">Create</button>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- End Modal for Clock Settings-->
-<!-- Modal for T-Type FF Settings -->
-<div class="modal fade" id="FF_T-TypeSettings" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title">T-Type Flip-Flop Settings</h5>
-			</div>
-			<div class="modal-body">
-				<h6>Choose the type</h6>
-				<select class="custom-select FF_T-Setting">
-					<option selected>Positive Edge-Triggered</option>
-					<option>Negative Edge-Triggered</option>
-				</select>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-				<button type="button" class="btn btn-primary" tool="FF_T" onclick="activeTool(this)"
-					data-dismiss="modal">Create</button>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- End Modal for T-Type FF Settings-->
-<!-- Modal for JK-Type FF Settings -->
-<div class="modal fade" id="FF_JK-TypeSettings" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title">JK-Type Flip-Flop Settings</h5>
-			</div>
-			<div class="modal-body">
-				<h6>Choose the type</h6>
-				<select class="custom-select FF_JK-Setting">
-					<option selected>Positive Edge-Triggered</option>
-					<option>Negative Edge-Triggered</option>
-				</select>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-				<button type="button" class="btn btn-primary" tool="FF_JK" onclick="activeTool(this)"
-					data-dismiss="modal">Create</button>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- End Modal for JK-Type FF Settings-->
 
 </html>

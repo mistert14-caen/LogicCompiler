@@ -2,9 +2,10 @@ import { activeTool, currMouseAction } from "./menutools.js"
 import { MouseAction } from "./circuit_components/Enums.js"
 import { WireManager } from "./circuit_components/Wire.js";
 import { FileManager } from "./FileManager.js"
-import { LogicInput } from "./circuit_components/LogicInput.js";
+import { LogicInput, LogicLabel } from "./circuit_components/LogicInput.js";
 import { LogicOutput } from "./circuit_components/LogicOutput.js";
 import { LogicValue } from "./circuit_components/LogicValue.js";
+
 import { LogicProto } from "./circuit_components/Proto.js";
 import { Node as LogicNode } from "./circuit_components/Node.js";
 import { INPUT_STATE } from "./circuit_components/Enums.js";
@@ -16,7 +17,7 @@ export let protoIMG = []; // gates images
 export let logicInput = [];
 export let logicOutput = [];
 export let logicValue = [];
-
+export let logicLabel = [];
 export let logicClock = [];
 export let wireMng;
 export let colorMouseOver = [0 ,0x7B, 0xFF];
@@ -28,26 +29,26 @@ export const logicProto = [];
  * @todo TODO
  */
 
-document.getElementById("protoFile").onchange = (e) => {
-  const file = e.target.files[0];
-  if (!file) return;
+const protoFile = document.getElementById("protoFile");
 
-  
+if (protoFile) {
+    document.getElementById("protoFile").onchange = (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        engine.importPrototype(reader.result);
+        const index = logicProto.length;
+        const cx = 100 / 2 + index * 40;
+        const cy = 100 / 2 + index * 40;
+        engine.buildProtoNodes(cx,cy,engine.proto, logicProto);
 
-  const reader = new FileReader();
-  reader.onload = () => {
-    engine.importPrototype(reader.result);
-    const index = logicProto.length;
-    const cx = 100 / 2 + index * 40;
-    const cy = 100 / 2 + index * 40;
-    engine.buildProtoNodes(cx,cy,engine.proto, logicProto);
-
-    // ? CRUCIAL : reset pour autoriser re-import du même fichier
-    e.target.value = "";
-  };
-  reader.readAsText(file);
-};
-
+        // ? CRUCIAL : reset pour autoriser re-import du même fichier
+        e.target.value = "";
+        };
+       reader.readAsText(file);
+    };
+}
 export const PROTO_IMG = {};
 
 
@@ -97,6 +98,8 @@ export function draw() {
   for (let lv of logicValue) lv.draw();
   for (let c of logicClock) c.draw();
   for (const comp of logicProto) comp.draw();
+  for (const lbl of logicLabel) lbl.draw();
+
 }
 
 
@@ -109,6 +112,8 @@ export function draw() {
 export function mousePressed() {
     /** Check gate[] mousePressed funtion*/
    
+    for (let i = 0; i < logicLabel.length; i++)
+        logicLabel[i].mousePressed();
 
     for (let i = 0; i < logicInput.length; i++)
         logicInput[i].mousePressed();
@@ -132,6 +137,9 @@ export function mousePressed() {
  * @todo TODO
  */
 export function mouseReleased() {
+  for (let i = 0; i < logicLabel.length; i++)
+        logicLabel[i].mouseReleased();
+
    for (let i = 0; i < logicInput.length; i++)
         logicInput[i].mouseReleased();
 
@@ -153,6 +161,9 @@ export function doubleClicked() {
         logicInput[i].doubleClicked();
     for (let i = 0; i < logicValue.length; i++)
         logicValue[i].doubleClicked();
+    for (let i = 0; i < logicLabel.length; i++)
+        logicLabel[i].doubleClicked();
+
 
 }
 
@@ -171,6 +182,9 @@ export function mouseClicked() {
         //If action is EDIT, check every class. 
         for (let i = 0; i < logicInput.length; i++)
             logicInput[i].mouseClicked();
+        for (let i = 0; i < logicLabel.length; i++)
+            logicLabel[i].mouseClicked();
+
 
         for (let i = 0; i < logicOutput.length; i++)
             logicOutput[i].mouseClicked();
@@ -201,6 +215,14 @@ export function mouseClicked() {
             }
         }
 
+        for (let i = 0; i < logicLabel.length; i++) {
+            if (logicLabel[i].mouseClicked()) {
+                logicValue[i].destroy();
+                delete logicLabel[i];
+                logicLabel.splice(i, 1);
+            }
+        }
+
 
         for (let i = 0; i < logicOutput.length; i++) {
             if (logicOutput[i].mouseClicked()) {
@@ -217,6 +239,14 @@ export function mouseClicked() {
                 logicClock.splice(i, 1);
             }
         }
+        for (let i = 0; i < logicProto.length; i++) {
+            if (logicProto[i].mouseClicked()) {
+                logicProto[i].destroy();
+                delete logicProto[i];
+                logicProto.splice(i, 1);
+            }
+        }
+
         
     }
     wireMng.mouseClicked();
@@ -234,8 +264,11 @@ window.mouseClicked = mouseClicked;
 
 window.activeTool = activeTool;
 
-document.getElementById("projectFile").addEventListener("change", fileManager.loadFile, false);
-document.getElementById("saveProjectFile").addEventListener("click", fileManager.saveFile, false);
+const projectFile = document.getElementById("projectFile");
+const saveLink = document.getElementById("saveProjectFile");
+
+if (projectFile) projectFile.addEventListener("change", fileManager.loadFile, false);
+if (saveLink) saveLink.addEventListener("click", fileManager.saveFile, false);
 
 /**
  * Call FileManager.saveFile

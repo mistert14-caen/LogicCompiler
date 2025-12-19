@@ -217,7 +217,8 @@ importPrototype(text) {
       }
       iter++;
     } while (changed && iter < 10);
-  }
+   //console.trace("SIGNAL",this.signals); 
+ }
  
 
   /* =======================

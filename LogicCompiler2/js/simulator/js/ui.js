@@ -1,47 +1,60 @@
+// ui.js (MODULE)
 
-/* =======================
-   UI glue
-   ======================= */
+let engine = null;
+let proto = null;
 
-//let engine = null;
-//let proto = null;
+const protoText = document.getElementById("protoText");
+const inputs    = document.getElementById("inputs");
+const leds      = document.getElementById("leds");
 
-function loadPrototype() {
-  
-  engine.loadPrototype(protoText.value);
+// attendre que engine soit prêt
+function getEngine() {
+  if (!engine) engine = window.engine;
+  return engine;
+}
 
-  proto = engine.proto;
+export function loadPrototype() {
+  const eng = getEngine();
+  if (!eng) return;
+
+  eng.loadPrototype(protoText.value);
+  proto = eng.proto;
   drawInputs();
   render();
 }
 
-
-
 function drawInputs() {
   inputs.innerHTML = "";
   for (let i of proto.inputs) {
-    inputs.innerHTML += `<button onclick="toggle('${i}')">${i}</button>`;
+    const b = document.createElement("button");
+    b.textContent = i;
+    b.onclick = () => toggle(i);
+    inputs.appendChild(b);
   }
 }
 
 function toggle(name) {
-  engine.set(name, engine.get(name)^1);
+  const eng = getEngine();
+  eng.set(name, eng.get(name) ^ 1);
   render();
 }
 
-function step() {
-  engine.step();
+export function step() {
+  const eng = getEngine();
+  eng.step();
   render();
 }
 
 function render() {
+  const eng = getEngine();
   leds.innerHTML = "";
-  for (let k in engine.signals) {
-    const on = engine.get(k);
-    leds.innerHTML += `<div class="led ${on?'on':''}">${k}</div>`;
+
+  for (let k in eng.signals) {
+    const on = eng.get(k);
+    leds.innerHTML += `<div class="led ${on ? "on" : ""}">${k}</div>`;
   }
 }
 
-//window.engine = new LogicCompiler();
-
-
+// exposer seulement ce qui est appelé depuis HTML
+window.loadPrototype = loadPrototype;
+window.step = step;

@@ -188,3 +188,59 @@ export class LogicInput {
 
 }
 
+//import { LogicInput } from "./LogicInput.js";
+//import { Node } from "./Node.js";
+
+export class LogicLabel extends LogicInput {
+
+  constructor(options = {}) {
+    super(options);
+
+    this.label = options.label ?? "LABEL";
+
+    // entrée + sortie
+    this.input  = new Node(this.posX, this.posY, false, 0);
+    this.output = new Node(this.posX + 30, this.posY, true, 0);
+
+    // signal moteur associé
+    this.signal = this.label;
+
+    // init moteur UNE FOIS
+    if (window.engine) {
+      window.engine.set(this.signal, 0);
+    }
+  }
+
+  update() {
+    // la valeur vient du wiring
+    this.output.value = this.input.value;
+
+    // pousser vers le moteur
+    if (this.signal && window.engine) {
+      window.engine.set(this.signal, this.output.value);
+    }
+  }
+
+  draw() {
+    super.draw();
+    text(this.label, this.posX + 4, this.posY - 4);
+  }
+
+onDoubleClick() {
+  const newName = prompt("Nom du label :", this.label);
+  if (!newName || newName === this.label) return;
+
+  // retirer l’ancien signal
+  if (window.engine) {
+    delete window.engine.signals[this.label];
+  }
+
+  this.label = newName;
+  this.signal = newName;
+
+  // réinitialiser à 0
+  if (window.engine) {
+    window.engine.set(this.signal, 0);
+  }
+}
+}

@@ -1,6 +1,7 @@
 import { Clock } from "./circuit_components/Clock.js";
-import { logicInput, logicOutput, logicClock, logicValue, logicProto } from "./simulator.js";
-import { LogicInput } from "./circuit_components/LogicInput.js";
+import { logicInput, logicOutput, logicClock, logicValue, logicProto, logicLabel } from "./simulator.js";
+import { LogicInput, LogicLabel } from "./circuit_components/LogicInput.js";
+
 import { LogicOutput } from "./circuit_components/LogicOutput.js";
 import { LogicValue } from "./circuit_components/LogicValue.js";
 import { MouseAction, syncType } from "./circuit_components/Enums.js"
@@ -68,6 +69,10 @@ export function activeTool(elTool) {
         case "LogicValue":
             logicValue.push(new LogicValue());
             break;
+        case "LogicLabel":
+            logicLabel.push(new LogicLabel());
+            break;
+
 
         case "Clock":
             let period = document.getElementsByClassName("period")[0].value;
