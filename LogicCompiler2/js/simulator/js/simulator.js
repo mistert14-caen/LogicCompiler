@@ -2,10 +2,9 @@ import { activeTool, currMouseAction } from "./menutools.js"
 import { MouseAction } from "./circuit_components/Enums.js"
 import { WireManager } from "./circuit_components/Wire.js";
 import { FileManager } from "./FileManager.js"
-import { LogicInput, LogicLabel } from "./circuit_components/LogicInput.js";
+import { LogicInput } from "./circuit_components/LogicInput.js";
 import { LogicOutput } from "./circuit_components/LogicOutput.js";
 import { LogicValue } from "./circuit_components/LogicValue.js";
-
 import { LogicProto } from "./circuit_components/Proto.js";
 import { Node as LogicNode } from "./circuit_components/Node.js";
 import { INPUT_STATE } from "./circuit_components/Enums.js";
@@ -98,7 +97,7 @@ export function draw() {
   for (let lv of logicValue) lv.draw();
   for (let c of logicClock) c.draw();
   for (const comp of logicProto) comp.draw();
-  for (const lbl of logicLabel) lbl.draw();
+
 
 }
 
@@ -112,9 +111,7 @@ export function draw() {
 export function mousePressed() {
     /** Check gate[] mousePressed funtion*/
    
-    for (let i = 0; i < logicLabel.length; i++)
-        logicLabel[i].mousePressed();
-
+   
     for (let i = 0; i < logicInput.length; i++)
         logicInput[i].mousePressed();
 
@@ -137,8 +134,6 @@ export function mousePressed() {
  * @todo TODO
  */
 export function mouseReleased() {
-  for (let i = 0; i < logicLabel.length; i++)
-        logicLabel[i].mouseReleased();
 
    for (let i = 0; i < logicInput.length; i++)
         logicInput[i].mouseReleased();
@@ -161,8 +156,9 @@ export function doubleClicked() {
         logicInput[i].doubleClicked();
     for (let i = 0; i < logicValue.length; i++)
         logicValue[i].doubleClicked();
-    for (let i = 0; i < logicLabel.length; i++)
-        logicLabel[i].doubleClicked();
+     for (let i = 0; i < logicProto.length; i++)
+        logicProto[i].doubleClicked();
+
 
 
 }
@@ -182,8 +178,6 @@ export function mouseClicked() {
         //If action is EDIT, check every class. 
         for (let i = 0; i < logicInput.length; i++)
             logicInput[i].mouseClicked();
-        for (let i = 0; i < logicLabel.length; i++)
-            logicLabel[i].mouseClicked();
 
 
         for (let i = 0; i < logicOutput.length; i++)
@@ -215,13 +209,7 @@ export function mouseClicked() {
             }
         }
 
-        for (let i = 0; i < logicLabel.length; i++) {
-            if (logicLabel[i].mouseClicked()) {
-                logicValue[i].destroy();
-                delete logicLabel[i];
-                logicLabel.splice(i, 1);
-            }
-        }
+       
 
 
         for (let i = 0; i < logicOutput.length; i++) {

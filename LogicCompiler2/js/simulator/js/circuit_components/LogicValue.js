@@ -32,7 +32,7 @@ export class LogicValue {
         if (!this.isSpawned) {
             this.posX = mouseX;
             this.posY = mouseY;
-        }else if(!this.isSaved)
+        } else if(!this.isSaved)
         {
             fileManager.saveState();
             this.isSaved = true;
@@ -51,11 +51,11 @@ export class LogicValue {
             stroke(0);
         
         strokeWeight(4);
-        line(this.posX, this.posY, this.posX + 30, this.posY);
+        line(this.posX+30, this.posY, this.posX + 50, this.posY);
         circle(this.posX, this.posY, this.diameter);
 
 
-        this.output.updatePosition(this.posX + 30, this.posY);
+        this.output.updatePosition(this.posX + 50, this.posY);
         this.output.setValue(this.value);
         this.output.draw();
 

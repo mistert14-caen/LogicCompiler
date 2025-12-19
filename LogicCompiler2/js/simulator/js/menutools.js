@@ -1,7 +1,6 @@
 import { Clock } from "./circuit_components/Clock.js";
 import { logicInput, logicOutput, logicClock, logicValue, logicProto, logicLabel } from "./simulator.js";
-import { LogicInput, LogicLabel } from "./circuit_components/LogicInput.js";
-
+import { LogicInput } from "./circuit_components/LogicInput.js";
 import { LogicOutput } from "./circuit_components/LogicOutput.js";
 import { LogicValue } from "./circuit_components/LogicValue.js";
 import { MouseAction, syncType } from "./circuit_components/Enums.js"
@@ -27,6 +26,7 @@ async function loadProtosOnly(m) {
   const cy = 100 / 2 + index * 40;
 
   // ?? on passe le proto explicitement
+ 
   engine.buildProtoNodes(cx, cy, proto, logicProto);
 }
 
@@ -41,7 +41,11 @@ export function activeTool(elTool) {
        return;
     }
 
-    
+     if (elTool.getAttribute("tool") === "LOAD") {
+        document.getElementById("protoFile").click();  
+       return;
+    }
+
 
     switch (elTool.getAttribute("tool")) {
         case "Edit":

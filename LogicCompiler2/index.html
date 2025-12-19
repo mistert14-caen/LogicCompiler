@@ -89,6 +89,16 @@
 		<div class="row">
 			<div class="tools col-0 ml-3 pr-0 overflow-scroll" style="overflow-y: scroll;height: calc(100vh - 5rem);">
 				<div class="list-group float-right" style="min-width: 50px; max-width: 60px">
+					<button type="button"
+        					tool="LOAD"
+						title="CHARGER UN PROTOTYPE"
+                                                isGate="false"
+        					onclick="activeTool(this)"
+        					class="list-group-item list-group-item-action pl-1">
+    						<img src="js/simulator/img/mark-github.svg" width="50">
+
+					</button>
+
 					<button type="button" tool="LogicInput" title="Logic Input" onclick="activeTool(this)"
 						class="list-group-item list-group-item-action pl-1">
 						<img src="js/simulator/img/LogicInput.svg" class="ml-2" width="32">
@@ -102,16 +112,17 @@
 						class="list-group-item list-group-item-action pl-1">
 						<img src="js/simulator/img/LogicValue.svg" class="ml-2" width="32">
 					</button>
-					<button type="button" tool="LogicLabel" title="Logic Label" onclick="activeTool(this)"
-						class="list-group-item list-group-item-action pl-1">
-						<img src="js/simulator/img/LogicInput.svg" class="ml-2" width="32">
-					</button>
-
-
+					
 					<button type="button" data-target="#ClockSettings" data-toggle="modal" title="Clock"
 						class="list-group-item list-group-item-action pl-1">
 						<img src="js/simulator/img/Clock.svg" width="50">
 					</button>
+					<button type="button" tool="PROTO" title="Label" model="LBL" onclick="activeTool(this)"
+						class="list-group-item list-group-item-action pl-1">
+						<!--<img src="js/simulator/img/LogicValue.svg" class="ml-2" width="32">-->
+					LABEL
+					</button>
+
 					<button type="button"
         					tool="PROTO"
 						title="NOT GATE"
@@ -222,6 +233,7 @@
         					onclick="activeTool(this)"
         					class="list-group-item list-group-item-action pl-1">
     						<!--<img src="js/simulator/img/T.svg" width="50">-->
+					COMPT. <br />BINAIRE
 					</button>
 
 

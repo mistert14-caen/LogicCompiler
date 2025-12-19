@@ -77,7 +77,7 @@ async function loadProtosOnly(p) {
   console.log(p);
 
   // p.type = "AND", "NOT", etc.
-  const res = await fetch('/LogicCompiler/prototypes/' + p.type + '.txt');
+  const res = await fetch('/LogicCompiler2/prototypes/' + p.type + '.txt');
   const text = await res.text();
 
   //console.log("AVANT import", currentID);
@@ -89,6 +89,21 @@ async function loadProtosOnly(p) {
 
   // ?? création d'une INSTANCE UI à partir du proto logique
   engine.buildProtoNodes(p.posX, p.posY, proto, logicProto);
+  // ?? CAS SPÉCIAL : LBL
+  if (p.type === "LBL") {
+
+    const signalName = p.label;
+
+    // 1. forcer le signal sur tous les nodes du LBL
+    for (const n of ui.nodes) {
+      n.signal = signalName;
+    }
+
+    // 2. recréer la variable moteur si absente
+    if (engine.signals && !(signalName in engine.signals)) {
+      engine.set(signalName, 0);
+    }
+  }
 
   //console.log("APRES build", currentID);
   //console.log(logicProto);

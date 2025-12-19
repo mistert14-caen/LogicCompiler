@@ -33,6 +33,8 @@ function loadProtoIcon(type, cb) {
 
 export class LogicProto {
 
+   
+
     constructor(x, y, type="UNDEFINED", label = "PROTO") {
   
         this.icon = null;
@@ -60,6 +62,7 @@ export class LogicProto {
 
 
     }
+
 
 
     /* ============================================================
@@ -216,6 +219,37 @@ pop();
             mouseY < this.posY + this.height / 2
         );
     }
+
+  renameLabelSignal(newName) {
+
+    this.label = newName;
+
+    for (const n of this.nodes) {
+      n.signal = newName;
+      if (engine && engine.signals) {
+         if (!(newName in engine.signals)) {
+            engine.set(name, 0);   // création paresseuse
+         }
+      }
+   }
+
+    // optionnel : forcer un redraw / recalcul
+    // le recalcul se fera de toute façon au draw
+  }
+
+
+  doubleClicked() {
+    if (!this.isMouseOver()) return false;
+    if (this.type !== "LBL") return false;
+
+    const oldName = this.label;
+    const newName = prompt("Nom du signal :", oldName);
+
+    if (!newName || newName === oldName) return true;
+
+    this.renameLabelSignal(newName);
+    return true;
+  }
 
     /* ============================================================
        MOUSE EVENTS

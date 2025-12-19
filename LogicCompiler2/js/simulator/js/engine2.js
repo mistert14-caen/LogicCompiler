@@ -88,9 +88,12 @@ buildProtoNodes(cx,cy,proto, lP) {
 
 
   // proto.name est DÉJÀ PATCHÉ
+  //console.log(proto);
   const comp = new LogicProto(cx, cy, proto.type, proto.name);
+  comp.type = proto.type;
   comp.width = proto.width;
   comp.height = proto.height;
+  if (proto.label) comp.label = proto.label;
   comp.dy = proto.dy;
   const DY = comp.dy;
   // --- INPUTS ---
@@ -122,9 +125,9 @@ buildProtoNodes(cx,cy,proto, lP) {
 
 
 
-pushInputsToEngine(lP) {
+pushInputsToEngine(lP,lB) {
     
-  // 2. Proto components (NOUVEAU)
+  
   for (const comp of lP) {
     for (const n of comp.nodes) {
 
@@ -134,9 +137,12 @@ pushInputsToEngine(lP) {
       }
    }
   }
+ 
+
+  
 }
 
-pullOutputsFromEngine(lP) {
+pullOutputsFromEngine(lP,lB) {
     // Proto components outputs
   for (const comp of lP) {
     for (const n of comp.nodes) {
@@ -145,6 +151,8 @@ pullOutputsFromEngine(lP) {
       }
     }
   }
+ 
+
 }
 
 /*
