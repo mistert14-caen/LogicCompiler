@@ -4,6 +4,7 @@ import { LogicInput } from "./circuit_components/LogicInput.js";
 import { LogicOutput } from "./circuit_components/LogicOutput.js";
 import { LogicValue } from "./circuit_components/LogicValue.js";
 import { MouseAction, syncType } from "./circuit_components/Enums.js"
+import { LogicProto } from "./circuit_components/proto/index.js";
 
 
 export let currMouseAction = MouseAction.EDIT;
@@ -11,6 +12,8 @@ export let currMouseAction = MouseAction.EDIT;
 /**
  * @todo TODO
  */
+
+
 
 async function loadProtosOnly(m) {
   console.trace("LOAD:",m);

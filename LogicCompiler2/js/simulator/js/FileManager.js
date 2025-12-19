@@ -1,7 +1,9 @@
 import { logicInput, logicOutput, logicValue, logicProto, logicClock, wireMng } from "./simulator.js"
 import { LogicInput } from "./circuit_components/LogicInput.js"
 import { LogicOutput } from "./circuit_components/LogicOutput.js";
-import { LogicProto } from "./circuit_components/Proto.js";
+//import { LogicProto } from "./circuit_components/proto/Proto.core.js";
+import "./circuit_components/proto/index.js";
+
 import { LogicValue } from "./circuit_components/LogicValue.js";
 import { Clock } from "./circuit_components/Clock.js";
 import { IC_type } from "./circuit_components/Enums.js";

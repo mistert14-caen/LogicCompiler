@@ -1,99 +1,14 @@
-import { currMouseAction } from "../menutools.js";
-import { MouseAction } from "./Enums.js";
-import { Node } from "./Node.js";
-import { colorMouseOver } from "../simulator.js";
+import { colorMouseOver } from "../../simulator.js";
 
-/**
- * Prototype generic component
- */
+import { LogicProto } from "./Proto.core.js";
 
-const protoSvgCache = {};
-
-function loadProtoIcon(type, cb) {
-  if (protoSvgCache[type] !== undefined) {
-    cb(protoSvgCache[type]);
-    return;
-  }
-
-  const path = `js/simulator/img/${type}.svg`;
-
-  loadImage(
-    path,
-    img => {
-      protoSvgCache[type] = img;
-      cb(img);
-    },
-    () => {
-      protoSvgCache[type] = null;
-      cb(null);
-    }
-  );
-}
-
-export class LogicProto {
-
-  constructor(x, y, type = "UNDEFINED", name = "PROTO") {
-
-    this.posX = x;
-    this.posY = y;
-
-    this.type  = type;
-    this.name  = name;   // nom du proto
-    this.label = name;   // nom logique / signal (LBL)
-
-    this.icon = null;
-
-    this.width  = 60;
-    this.height = 40;
-
-    this.nodes = [];
-    this.nodeStartID = null;
-
-    this.isSpawned = true;
-    this.isMoving  = false;
-    this.offsetMouseX = 0;
-    this.offsetMouseY = 0;
-
-    if (this.type === "ROM") {
-       this.mem = new Uint8Array(16); // 16 mots de 8 bits
-    }
-
-    loadProtoIcon(this.type, img => {
-      this.icon = img;
-    });
-  }
-
-  /* ============================================================
-     NODE MANAGEMENT
-     ============================================================ */
-
-  addNode(node, dx, dy) {
-    node.parent = this;
-    node.localX = dx;
-    node.localY = dy;
-    this.nodes.push(node);
-    this.updateNodes();
-  }
-
-  updateNodes() {
-    for (const n of this.nodes) {
-      n.updatePosition(
-        this.posX + n.localX,
-        this.posY + n.localY
-      );
-    }
-  }
-
-  destroy() {
-    for (const n of this.nodes) n.destroy();
-    this.nodes.length = 0;
-  }
-
-  /* ============================================================
+ /* ============================================================
      DRAW
      ============================================================ */
 
-  draw() {
+  
+LogicProto.prototype.draw = function () {
+    
 
     if (this.isMoving) {
       this.posX = mouseX + this.offsetMouseX;
@@ -127,7 +42,7 @@ export class LogicProto {
   }
 
 
-  drawDefaultProto() {
+  LogicProto.prototype.drawDefaultProto = function () {
 
     if (this.icon) {
       image(
@@ -156,7 +71,7 @@ export class LogicProto {
 
   }
 
-drawROM() {
+LogicProto.prototype.drawROM = function () {
 
   const x = this.posX;
   const y = this.posY;
@@ -207,7 +122,7 @@ drawROM() {
 }
 
 
-drawDICE() {
+LogicProto.prototype.drawDICE = function () {
 
   const x = this.posX;
   const y = this.posY;
@@ -280,7 +195,7 @@ drawDICE() {
      DRAW : 7 SEGMENTS
      ============================================================ */
 
-drawSEG() {
+LogicProto.prototype.drawSEG = function (){
 
   const x = this.posX;
   const y = this.posY;
@@ -324,136 +239,4 @@ drawSEG() {
   textAlign(CENTER, TOP);
   textSize(12);
   text(this.name, x, y + h/2 + 4);
-}
-
-/* ============================================================
-  ROM
-============================================================ */
-
-
-
-updateROM() {
-
-  if (!window.engine) return;
-
-  let ce = engine.get(`${this.name}_CE`);
-  //ce = 0;
-  // ROM désactivée
-  if (ce > 0) {
-    engine.set(`${this.name}_D`, 0);
-    this.activeAddr = null;
-    return;
-  }
-
-  const addr = engine.get(`${this.name}_A`) & 0x0F;
-  const value = this.mem[addr];
-
-  engine.set(`${this.name}_D`, value);
-  this.activeAddr = addr;
-}
-
-
-  /* ============================================================
-     HIT TEST / EVENTS
-     ============================================================ */
-
-  isMouseOver() {
-    return (
-      mouseX > this.posX - this.width / 2 &&
-      mouseX < this.posX + this.width / 2 &&
-      mouseY > this.posY - this.height / 2 &&
-      mouseY < this.posY + this.height / 2
-    );
-  }
-
-  renameLabelSignal(newName) {
-
-    this.label = newName;
-
-    for (const n of this.nodes) {
-      n.signal = newName;
-    }
-
-    if (window.engine && engine.signals) {
-      if (!(newName in engine.signals)) {
-        engine.set(newName, 0);
-      }
-    }
-  }
-
-onDblClickROM() {
-
-  const txt = prompt(
-    "Programme HEXA (16 octets)",
-    this.mem.map(v => v.toString(16).padStart(2,"0")).join(" ")
-  );
-
-  if (!txt) return true;
-
-  const bytes = txt
-    .replace(/[^0-9A-Fa-f]/g, " ")
-    .trim()
-    .split(/\s+/)
-    .map(v => parseInt(v, 16));
-
-  for (let i = 0; i < 16; i++) {
-    this.mem[i] = bytes[i] ?? 0;
-  }
-
-  return true;
-}
-
-
-onDblClickLBL() {
-
-  const newName = prompt("Nom du signal :", this.label);
-  if (!newName || newName === this.label) return true;
-
-  this.renameLabelSignal(newName);
-  return true;
-}
-
-getDoubleClickHandler() {
-  switch (this.type) {
-    case "LBL":  return this.onDblClickLBL;
-    case "ROM":  return this.onDblClickROM;
-    //case "DICE": return this.onDblClickDICE; // optionnel
-    default:     return null;
-  }
-}
-
-doubleClicked() {
-  if (!this.isMouseOver()) return false;
-
-  const handler = this.getDoubleClickHandler();
-  if (!handler) return false;
-
-  return handler.call(this);
-}
-
-  mousePressed() {
-    if (this.isMouseOver()) {
-      this.isMoving = true;
-      this.offsetMouseX = this.posX - mouseX;
-      this.offsetMouseY = this.posY - mouseY;
-    }
-  }
-
-  mouseReleased() {
-    this.isMoving = false;
-  }
-
-  mouseDragged() {
-    return true;
-  }
-
-  mouseClicked() {
-    for (const n of this.nodes) {
-      if (n.isMouseOver()) {
-        n.mouseClicked();
-        return true;
-      }
-    }
-    return false;
-  }
 }
