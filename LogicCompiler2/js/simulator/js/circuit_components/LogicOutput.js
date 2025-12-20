@@ -38,7 +38,7 @@ export class LogicOutput {
         if (!this.isSpawned) {
             this.posX = mouseX;
             this.posY = mouseY;
-        }else if(!this.isSaved)
+        } else if(!this.isSaved)
         {
             fileManager.saveState();
             this.isSaved = true;
@@ -54,40 +54,41 @@ export class LogicOutput {
         //this.value = this.input.getValue();
         const v = this.input.value;
 
-        fillValue(v);
+       
         
         if(this.isMouseOver())
             stroke(colorMouseOver[0], colorMouseOver[1], colorMouseOver[2]);
         else
             stroke(0);
     
-
+        
         strokeWeight(4);
         line(this.posX, this.posY, this.posX - 30, this.posY);
+        //fill(0);
+        fillValue(v);
         circle(this.posX, this.posY, this.diameter);
 
         this.input.draw();
 
         noStroke();
         fill(0);
-        textSize(8);
-        textStyle(NORMAL);
-        text('LOG. OUTPUT', this.posX - 20, this.posY + 25);
-
-        textSize(12);
+        let txt=0;
 
         if (v) {
-            textStyle(BOLD);
-           const textVal = String(v);
-           textSize(18);               // ou adapte si besoin
-           textStyle(NORMAL);
+           
+           textStyle(BOLD);
 
-           const tw = textWidth(textVal);
-           const textX = this.posX - tw / 2;
-           const textY = this.posY + textAscent() / 2;
-
-           fill(v ? 0 : 255);
-           text(textVal, textX, textY);
+           txt = String(v);
+           let sz = 14;
+           textSize(sz);
+           while (textWidth(txt) > this.diameter - 6 && sz > 8) {
+             sz--;
+             textSize(sz);
+         }
+         fill(v ? 0 : 255);
+         text(txt, this.posX-(textWidth(txt) / 2), this.posY + 5);
+           
+           //text(textVal, textX, textY);
 	   
         }
     }

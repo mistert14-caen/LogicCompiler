@@ -38,7 +38,7 @@ export class LogicValue {
             this.isSaved = true;
         }
 
-        fill(255);
+        fill(30);
 
         if (this.isMoving) {
             this.posX = mouseX + this.offsetMouseX;
@@ -48,7 +48,7 @@ export class LogicValue {
         if(this.isMouseOver())
             stroke(colorMouseOver[0], colorMouseOver[1], colorMouseOver[2]);
         else
-            stroke(0);
+            stroke(255);
         
         strokeWeight(4);
         line(this.posX+30, this.posY, this.posX + 50, this.posY);
@@ -69,7 +69,7 @@ export class LogicValue {
         }
         else {
             textStyle(NORMAL);
-            fill(255);
+            fill(30);
             text('0', this.posX - this.diameter / 4, this.posY + this.diameter / 4);
         }
     }
@@ -81,12 +81,12 @@ export class LogicValue {
         delete this.output;
     }
 
-doubleClicked() {
-    if (this.isMouseOver()) {
+    doubleClicked() {
+      if (this.isMouseOver()) {
         this.setValue(0);
         return true;
-    }
-    return false;
+      }
+      return false;
 }
 
 
@@ -118,11 +118,11 @@ draw() {
         stroke(0);
 
     strokeWeight(4);
-    fill(240);
+    fill(30);
     circle(this.posX, this.posY, diameter);
 
     // valeur centrée
-    fill(0);
+    fill(255);
     textAlign(CENTER, CENTER);
     textStyle(BOLD);
     textSize(14);
@@ -141,7 +141,7 @@ draw() {
 
     // liaison + node
     strokeWeight(4);
-    line(this.posX, this.posY, this.posX + 30, this.posY);
+    line(this.posX+20, this.posY, this.posX + 30, this.posY);
 
     this.output.draw();
 }

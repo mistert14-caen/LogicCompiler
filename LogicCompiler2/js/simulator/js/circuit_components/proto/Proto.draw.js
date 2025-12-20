@@ -54,12 +54,12 @@ LogicProto.prototype.draw = function () {
       );
     } else {
       strokeWeight(3);
-      fill(240);
+      fill(30);
       rectMode(CENTER);
       rect(this.posX, this.posY, this.width, this.height, 6);
 
       noStroke();
-      fill(0);
+      fill(255);
       textAlign(CENTER, CENTER);
       textSize(12);
 
