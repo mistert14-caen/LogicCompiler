@@ -21,6 +21,16 @@ import { LogicProto } from "./Proto.core.js";
     }
   }
 
+LogicProto.prototype.onDblClickBTN = function () {
+
+    if (!window.engine) return;
+
+    const sig = this.name+'_S';
+    const curr = engine.get(sig) ?? 0;
+    const next = curr ? 0 : 1;
+    engine.set(sig, next);
+};
+
  LogicProto.prototype.onDblClickROM = function () {
 
   const txt = prompt(
@@ -57,6 +67,8 @@ LogicProto.prototype.getDoubleClickHandler = function () {
   switch (this.type) {
     case "LBL":  return this.onDblClickLBL;
     case "ROM":  return this.onDblClickROM;
+    case "BTN":  return this.onDblClickBTN;
+
     //case "DICE": return this.onDblClickDICE; // optionnel
     default:     return null;
   }

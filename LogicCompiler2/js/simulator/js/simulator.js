@@ -40,8 +40,8 @@ if (protoFile) {
       reader.onload = () => {
         engine.importPrototype(reader.result);
         const index = logicProto.length;
-        const cx = 100 / 2 + index * 40;
-        const cy = 100 / 2 + index * 40;
+        const cx = 50;
+        const cy = 50;
         engine.buildProtoNodes(cx,cy,engine.proto, logicProto);
 
         // ? CRUCIAL : reset pour autoriser re-import du même fichier

@@ -73,6 +73,7 @@ constructor() {
   const internals = Array.isArray(proto.internals) ? proto.internals : [];
 
   for (const s of [...inputs, ...outputs, ...internals]) {
+    if (!s || s.endsWith("_")) continue;
     if (!(s in this.signals)) {
       this.signals[s] = 0;
     }
@@ -102,6 +103,7 @@ buildProtoNodes(cx,cy,proto, lP) {
   // --- INPUTS ---
   let y0 = -((proto.inputs.length - 1) * DY) / 2;
   proto.inputs.forEach((name, i) => {
+    if (!name || name.endsWith("_")) return;
     const n = new LogicNode(0, 0, false, 0);
     n.inputState = INPUT_STATE.FREE;
 
@@ -114,6 +116,7 @@ buildProtoNodes(cx,cy,proto, lP) {
   // --- OUTPUTS ---
   y0 = -((proto.outputs.length - 1) * DY) / 2;
   proto.outputs.forEach((name, i) => {
+    if (!name || name.endsWith("_")) return;
     const n = new LogicNode(0, 0, true, 0);
     n.inputState = INPUT_STATE.FREE;
 

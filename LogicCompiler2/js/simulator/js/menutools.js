@@ -25,8 +25,8 @@ async function loadProtosOnly(m) {
   const proto = engine.importPrototype(text);
 
   const index = logicProto.length;
-  const cx = 100 / 2 + index * 40;
-  const cy = 100 / 2 + index * 40;
+  const cx = 50;
+  const cy = 50;
 
   // ?? on passe le proto explicitement
  
