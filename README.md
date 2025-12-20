@@ -65,6 +65,18 @@ Il sert à la fois :
 
   * et de base expérimentale pour des architectures logiques hiérarchiques.
 
+
+# Exemples
+
+  * https://mistert.freeboxos.fr/LogicCompiler2/?id=demo
+
+  * https://mistert.freeboxos.fr/LogicCompiler2/?id=base
+
+  * https://mistert.freeboxos.fr/LogicCompiler2/?id=sequentiel
+
+  * https://mistert.freeboxos.fr/LogicCompiler2/?id=bcd_test
+
+
 # Crédits
 
 Projet original : Drendog
