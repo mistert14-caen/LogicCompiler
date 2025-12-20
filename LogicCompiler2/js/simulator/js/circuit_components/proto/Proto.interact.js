@@ -30,22 +30,12 @@ LogicProto.prototype.isMouseOver = function () {
 
 LogicProto.prototype.onDblClickVAL = function () {
    
-
     if (!window.engine) return;
-
     const sig = this.name+'_VAL';
-    
-    //const curr = engine.get(sig) ?? 0;
-    //const next = (curr + 1) % 255;
-    //alert(sig+'='+next);
     engine.set(sig, 0);
 };
 
 
-LogicProto.prototype.onDblClickBTN = function () {
-//
-    
-};
 
  LogicProto.prototype.onDblClickROM = function () {
 
@@ -83,10 +73,8 @@ LogicProto.prototype.getDoubleClickHandler = function () {
   switch (this.type) {
     case "LBL":  return this.onDblClickLBL;
     case "ROM":  return this.onDblClickROM;
-    case "BTN":  return this.onDblClickBTN;
     case "VAL":  return this.onDblClickVAL;
 
-    //case "DICE": return this.onDblClickDICE; // optionnel
     default:     return null;
   }
 }

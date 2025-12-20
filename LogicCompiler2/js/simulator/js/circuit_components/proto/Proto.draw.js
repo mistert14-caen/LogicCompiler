@@ -29,6 +29,8 @@ LogicProto.prototype.draw = function () {
       this.drawDICE();
     }  else if (this.type === "VAL") {
       this.drawVAL();
+    }  else if (this.type === "LED") {
+      this.drawLED();
     } else if (this.type === "ROM") {
         this.updateROM();
         this.drawROM();
@@ -42,6 +44,38 @@ LogicProto.prototype.draw = function () {
       n.draw();
     }
   }
+
+LogicProto.prototype.drawLED = function () {
+
+  const w = this.width  ?? 30;
+  const h = this.height ?? 30;
+
+  const x = this.posX;
+  const y = this.posY;
+
+  // --- lecture moteur ---
+  let v = 0;
+  if (window.engine && this.nodes?.length) {
+    const n = this.nodes.find(n => !n.isOutput && n.signal);
+    if (n) v = engine.get(n.signal) ?? 0;
+  }
+
+  // --- boîtier ---
+  push();
+  rectMode(CENTER);
+  noStroke();
+  fill(30);
+  rect(x, y, w, h, 6);
+
+  // --- LED ---
+  const r = Math.min(w, h) * 0.33;
+  fill(v ? color(0, 220, 0) : color(0, 80, 0));
+  stroke(0);
+  ellipse(x, y, r * 2, r * 2);
+  pop();
+
+
+};
 
 
   LogicProto.prototype.drawDefaultProto = function () {
