@@ -1,10 +1,5 @@
-import { logicInput, logicOutput, logicValue, logicProto, logicClock, wireMng } from "./simulator.js"
-import { LogicInput } from "./circuit_components/LogicInput.js"
-import { LogicOutput } from "./circuit_components/LogicOutput.js";
-//import { LogicProto } from "./circuit_components/proto/Proto.core.js";
+import { logicProto, logicClock, wireMng } from "./simulator.js"
 import "./circuit_components/proto/index.js";
-
-import { LogicValue } from "./circuit_components/LogicValue.js";
 import { Clock } from "./circuit_components/Clock.js";
 import { IC_type } from "./circuit_components/Enums.js";
 import { currentID, nodeList, resetNodeIDs } from "./circuit_components/Node.js";
@@ -44,37 +39,6 @@ function restoreWires(ws) {
 }
 
 
-function loadLogicInputs(ws) {
-    if (!ws.logicInput) return;
-
-    for (const obj of ws.logicInput) {
-      const inp = new LogicInput({ deserialize: true });
-      Object.assign(inp, obj);
-      logicInput.push(inp);
-    }
-}
-
-function loadLogicOutputs(ws) {
-    if (!ws.logicOutput) return;
-
-    for (const obj of ws.logicOutput) {
-      const inp = new LogicOutput({ deserialize: true });
-      Object.assign(inp, obj);
-      logicOutput.push(inp);
-    }
-}
-
-function loadLogicValues(ws) {
-    if (!ws.logicValue) return;
-
-    for (const obj of ws.logicValue) {
-      const inp = new LogicValue({ deserialize: true });
-      Object.assign(inp, obj);
-      logicValue.push(inp);
-    }
-}
-
-
 async function loadProtosOnly(p) {
   //console.log(p);
 
@@ -100,6 +64,7 @@ async function loadProtosOnly(p) {
     }
   }
 }
+
 async function loadAllProtos(ws) {
   for (const p of ws.logicProto) {
     await loadProtosOnly(p);   // ?? ATTENTE RÉELLE
@@ -151,9 +116,6 @@ async loadFile(e) {
 
       wireMng.wire.length = 0;
       logicClock.length = 0;
-      logicInput.length = 0;
-      logicOutput.length = 0;
-      logicValue.length = 0;
       logicProto.length = 0;
       nodeList.length = 0;
 
@@ -170,9 +132,7 @@ async loadFile(e) {
       await loadAllProtos(ws);
 
       // 2?? ENSUITE SEULEMENT
-      loadLogicInputs(ws);
-      loadLogicValues(ws);
-      loadLogicOutputs(ws);
+    
       loadLogicClocks?.(ws);
 
       // 3?? FIN DU LOAD
@@ -204,9 +164,6 @@ async loadFile(e) {
         let workspace = new Object();
 
         workspace["logicProto"] = logicProto;
-        workspace["logicInput"] = logicInput;
-        workspace["logicOutput"] = logicOutput;
-        workspace["logicValue"] = logicValue;
         workspace["logicClock"] = logicClock;
         workspace["wire"] = wireMng.wire;
 

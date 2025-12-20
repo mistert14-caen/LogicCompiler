@@ -27,6 +27,8 @@ LogicProto.prototype.draw = function () {
       this.drawSEG();
     } else if (this.type === "DICE") {
       this.drawDICE();
+    }  else if (this.type === "VAL") {
+      this.drawVAL();
     } else if (this.type === "ROM") {
         this.updateROM();
         this.drawROM();
@@ -70,6 +72,28 @@ LogicProto.prototype.draw = function () {
     }
 
   }
+
+LogicProto.prototype.drawVAL = function () {
+if (!window.engine) return;
+
+    const sig = this.name+'_VAL';
+    const curr = engine.get(sig) ?? 0;
+     {
+      strokeWeight(3);
+      fill(30);
+      rectMode(CENTER);
+      rect(this.posX, this.posY, this.width, this.height, 6);
+
+      noStroke();
+      fill(255);
+      textAlign(CENTER, CENTER);
+      textSize(12);
+
+      text(curr, this.posX, this.posY);
+     }
+
+    
+}
 
 LogicProto.prototype.drawROM = function () {
 

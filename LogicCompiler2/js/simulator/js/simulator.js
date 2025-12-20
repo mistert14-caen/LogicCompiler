@@ -2,9 +2,6 @@ import { activeTool, currMouseAction } from "./menutools.js"
 import { MouseAction } from "./circuit_components/Enums.js"
 import { WireManager } from "./circuit_components/Wire.js";
 import { FileManager } from "./FileManager.js"
-import { LogicInput } from "./circuit_components/LogicInput.js";
-import { LogicOutput } from "./circuit_components/LogicOutput.js";
-import { LogicValue } from "./circuit_components/LogicValue.js";
 //import { LogicProto } from "./circuit_components/proto/Proto.core.js";
 import "./circuit_components/proto/index.js";
 
@@ -15,9 +12,6 @@ import { INPUT_STATE } from "./circuit_components/Enums.js";
 export let protoIMG = []; // gates images
 
 
-export let logicInput = [];
-export let logicOutput = [];
-export let logicValue = [];
 export let logicLabel = [];
 export let logicClock = [];
 export let wireMng;
@@ -76,8 +70,6 @@ export function windowResized() {
 }
 
 
-
-
 /**
  * @todo TODO
  */
@@ -92,14 +84,10 @@ export function draw() {
 
   wireMng.draw();
   //console.log("WIRE OBJ:", wireMng);
-
-  
-  for (let li of logicInput) li.draw();
-  for (let lo of logicOutput) lo.draw();
-  for (let lv of logicValue) lv.draw();
+ 
+ 
   for (let c of logicClock) c.draw();
   for (const comp of logicProto) comp.draw();
-
 
 }
 
@@ -114,15 +102,6 @@ export function mousePressed() {
     /** Check gate[] mousePressed funtion*/
    
    
-    for (let i = 0; i < logicInput.length; i++)
-        logicInput[i].mousePressed();
-
-    for (let i = 0; i < logicOutput.length; i++)
-        logicOutput[i].mousePressed();
-
-    for (let i = 0; i < logicValue.length; i++)
-        logicValue[i].mousePressed();
-
     for (let i = 0; i < logicClock.length; i++)
         logicClock[i].mousePressed();
 
@@ -137,13 +116,6 @@ export function mousePressed() {
  */
 export function mouseReleased() {
 
-   for (let i = 0; i < logicInput.length; i++)
-        logicInput[i].mouseReleased();
-
-   for (let i = 0; i < logicOutput.length; i++)
-        logicOutput[i].mouseReleased();
-   for (let i = 0; i < logicValue.length; i++)
-        logicValue[i].mouseReleased();
    for (let i = 0; i < logicClock.length; i++)
         logicClock[i].mouseReleased();
    for (const comp of logicProto)
@@ -154,14 +126,9 @@ export function mouseReleased() {
  * @todo TODO
  */
 export function doubleClicked() {
-    for (let i = 0; i < logicInput.length; i++)
-        logicInput[i].doubleClicked();
-    for (let i = 0; i < logicValue.length; i++)
-        logicValue[i].doubleClicked();
+    
      for (let i = 0; i < logicProto.length; i++)
         logicProto[i].doubleClicked();
-
-
 
 }
 
@@ -169,23 +136,12 @@ export function doubleClicked() {
  * Override mouseClicked Function
  * 
  */
-//export function mouseDragged() {
-//    for (const comp of logicProto)
-//            comp.mouseDragged();
-//}
 
 export function mouseClicked() {
     //Check current selected option
     if (currMouseAction == MouseAction.EDIT) {
         //If action is EDIT, check every class. 
-        for (let i = 0; i < logicInput.length; i++)
-            logicInput[i].mouseClicked();
-
-
-        for (let i = 0; i < logicOutput.length; i++)
-            logicOutput[i].mouseClicked();
-        for (let i = 0; i < logicValue.length; i++)
-            logicValue[i].mouseClicked();
+        
         for (let i = 0; i < logicClock.length; i++)
             logicClock[i].mouseClicked();
         for (const comp of logicProto)
@@ -195,34 +151,7 @@ export function mouseClicked() {
         //
         
 
-        for (let i = 0; i < logicInput.length; i++) {
-            if (logicInput[i].mouseClicked()) {
-                logicInput[i].destroy();
-                delete logicInput[i];
-                logicInput.splice(i, 1);
-            }
-        }
-
-        for (let i = 0; i < logicValue.length; i++) {
-            if (logicValue[i].mouseClicked()) {
-                logicValue[i].destroy();
-                delete logicValue[i];
-                logicValue.splice(i, 1);
-            }
-        }
-
-       
-
-
-        for (let i = 0; i < logicOutput.length; i++) {
-            if (logicOutput[i].mouseClicked()) {
-                logicOutput[i].destroy();
-                delete logicOutput[i];
-                logicOutput.splice(i, 1);
-            }
-        }
-
-        for (let i = 0; i < logicClock.length; i++) {
+      for (let i = 0; i < logicClock.length; i++) {
             if (logicClock[i].mouseClicked()) {
                 logicClock[i].destroy();
                 delete logicClock[i];

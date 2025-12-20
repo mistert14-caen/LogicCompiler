@@ -3,8 +3,6 @@
    ======================= */
 
 import { LogicProto } from "./circuit_components/proto/index.js";
-//import "./circuit_components/proto/index.js";
-
 import { Node as LogicNode } from "./circuit_components/Node.js";
 import { INPUT_STATE } from "./circuit_components/Enums.js";
 

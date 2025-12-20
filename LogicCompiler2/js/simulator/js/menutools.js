@@ -1,11 +1,7 @@
 import { Clock } from "./circuit_components/Clock.js";
-import { logicInput, logicOutput, logicClock, logicValue, logicProto, logicLabel } from "./simulator.js";
-import { LogicInput } from "./circuit_components/LogicInput.js";
-import { LogicOutput } from "./circuit_components/LogicOutput.js";
-import { LogicValue } from "./circuit_components/LogicValue.js";
+import { logicClock, logicProto } from "./simulator.js";
 import { MouseAction, syncType } from "./circuit_components/Enums.js"
 import { LogicProto } from "./circuit_components/proto/index.js";
-
 
 export let currMouseAction = MouseAction.EDIT;
 
@@ -64,22 +60,7 @@ export function activeTool(elTool) {
             currMouseAction = MouseAction.DELETE;
             break;
 
-        case "LogicInput":
-            logicInput.push(new LogicInput());
-            console.log(JSON.stringify({ logicInput }, ['logicInput', 'posX', 'posY', 'value']));
-            break;
-
-        case "LogicOutput":
-            logicOutput.push(new LogicOutput());
-            break;
-
-        case "LogicValue":
-            logicValue.push(new LogicValue());
-            break;
-        case "LogicLabel":
-            logicLabel.push(new LogicLabel());
-            break;
-
+            
 
         case "Clock":
             let period = document.getElementsByClassName("period")[0].value;
@@ -121,8 +102,5 @@ export function backToEdit() {
  * Export All logic input and output on console
  */
 export function save() {
-
-    for (let i = 0; i < logicInput.length; i++) {
-        console.log(logicInput[i].export());
-    }
+    //
 }

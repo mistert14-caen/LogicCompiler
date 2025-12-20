@@ -72,6 +72,17 @@
 							</button>
 						</a>
 					</div>
+					<div class="navGroupTools">
+					<button type="button"
+        					tool="LOAD"
+						title="CHARGER UN PROTOTYPE"
+                                                
+        					onclick="activeTool(this)"
+        					class="btn btn-outline-light">
+    						<i class="fa fa-github"></i>
+                                                Import
+					</button>
+					</div>
 					<div class="githubSection">
 						<button type="button" class="btn btn-outline-light"
 							onclick="window.location.href='https://github.com/mistert14-caen/LogicCompiler'">
@@ -89,16 +100,8 @@
 		<div class="row">
 			<div class="tools col-0 ml-3 pr-0 overflow-scroll" style="overflow-y: scroll;height: calc(100vh - 5rem);">
 				<div class="list-group float-right" style="min-width: 50px; max-width: 60px">
-					<button type="button"
-        					tool="LOAD"
-						title="CHARGER UN PROTOTYPE"
-                                                isGate="false"
-        					onclick="activeTool(this)"
-        					class="list-group-item list-group-item-action pl-1">
-    						<img src="js/simulator/img/mark-github.svg" width="50">
-
-					</button>
-
+					
+					<!--
 					<button type="button" tool="LogicInput" title="Logic Input" onclick="activeTool(this)"
 						class="list-group-item list-group-item-action pl-1">
 						<img src="js/simulator/img/LogicInput.svg" class="ml-2" width="32">
@@ -112,7 +115,23 @@
 						class="list-group-item list-group-item-action pl-1">
 						<img src="js/simulator/img/LogicValue.svg" class="ml-2" width="32">
 					</button>
-					
+					-->
+
+                                        <button type="button" tool="PROTO" model="BTN" title="Logic Input" onclick="activeTool(this)"
+						class="list-group-item list-group-item-action pl-1">
+						<img src="js/simulator/img/LogicInput.svg" class="ml-2" width="32">
+					</button>
+					<button type="button" tool="PROTO" model="LED" title="LED" onclick="activeTool(this)"
+						class="list-group-item list-group-item-action pl-1">
+						<img src="js/simulator/img/LogicOutput.svg" class="ml-2" width="32">
+					</button>
+
+					<button type="button" tool="PROTO" model="VAL" title="Logic Value" onclick="activeTool(this)"
+						class="list-group-item list-group-item-action pl-1">
+						<img src="js/simulator/img/LogicValue.svg" class="ml-2" width="32">
+					</button>
+
+
 					<button type="button" data-target="#ClockSettings" data-toggle="modal" title="Clock"
 						class="list-group-item list-group-item-action pl-1">
 						<img src="js/simulator/img/Clock.svg" width="50">

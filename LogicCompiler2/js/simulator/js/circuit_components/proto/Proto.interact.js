@@ -4,7 +4,14 @@ import { LogicProto } from "./Proto.core.js";
      HIT TEST / EVENTS
      ============================================================ */
 
-  
+LogicProto.prototype.isMouseOver = function () {
+    return (
+      mouseX > this.posX - this.width / 2  - 20 &&
+      mouseX < this.posX + this.width / 2 &&
+      mouseY > this.posY - this.height / 2 &&
+      mouseY < this.posY + this.height / 2
+    );
+  }  
 
    LogicProto.prototype.renameLabelSignal = function (newName) {
 
@@ -21,14 +28,23 @@ import { LogicProto } from "./Proto.core.js";
     }
   }
 
-LogicProto.prototype.onDblClickBTN = function () {
+LogicProto.prototype.onDblClickVAL = function () {
+   
 
     if (!window.engine) return;
 
-    const sig = this.name+'_S';
-    const curr = engine.get(sig) ?? 0;
-    const next = curr ? 0 : 1;
-    engine.set(sig, next);
+    const sig = this.name+'_VAL';
+    
+    //const curr = engine.get(sig) ?? 0;
+    //const next = (curr + 1) % 255;
+    //alert(sig+'='+next);
+    engine.set(sig, 0);
+};
+
+
+LogicProto.prototype.onDblClickBTN = function () {
+//
+    
 };
 
  LogicProto.prototype.onDblClickROM = function () {
@@ -68,6 +84,7 @@ LogicProto.prototype.getDoubleClickHandler = function () {
     case "LBL":  return this.onDblClickLBL;
     case "ROM":  return this.onDblClickROM;
     case "BTN":  return this.onDblClickBTN;
+    case "VAL":  return this.onDblClickVAL;
 
     //case "DICE": return this.onDblClickDICE; // optionnel
     default:     return null;
@@ -99,7 +116,36 @@ LogicProto.prototype.doubleClicked = function () {
     return true;
   }
 
+LogicProto.prototype.onClickBTN = function () {
+   if (!window.engine) return;
+
+    const sig = this.name+'_S';
+    const curr = engine.get(sig) ?? 0;
+    const next = curr ? 0 : 1;
+    engine.set(sig, next);
+
+    
+};
+
+
+LogicProto.prototype.onClickVAL = function () {
+   
+
+    if (!window.engine) return;
+
+    const sig = this.name+'_VAL';
+    const curr = engine.get(sig) ?? 0;
+    const next = (curr + 1) % 255;
+    engine.set(sig, next);
+};
+
+
   LogicProto.prototype.mouseClicked = function () {
+    
+   if (!this.isMouseOver()) return;
+    if (this.type=="VAL") this.onClickVAL();
+    if (this.type=="BTN") this.onClickBTN();
+
     for (const n of this.nodes) {
       if (n.isMouseOver()) {
         n.mouseClicked();

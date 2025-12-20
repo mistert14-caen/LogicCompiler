@@ -89,14 +89,7 @@ export class LogicProto {
   }
 
 
- isMouseOver = function () {
-    return (
-      mouseX > this.posX - this.width / 2 &&
-      mouseX < this.posX + this.width / 2 &&
-      mouseY > this.posY - this.height / 2 &&
-      mouseY < this.posY + this.height / 2
-    );
-  }
+ 
 
 
  }
