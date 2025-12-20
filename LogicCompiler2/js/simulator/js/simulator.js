@@ -191,8 +191,14 @@ window.activeTool = activeTool;
 const projectFile = document.getElementById("projectFile");
 const saveLink = document.getElementById("saveProjectFile");
 
-if (projectFile) projectFile.addEventListener("change", fileManager.loadFile, false);
-if (saveLink) saveLink.addEventListener("click", fileManager.saveFile, false);
+
+if (projectFile) {
+  projectFile.addEventListener("change", (e) => fileManager.loadFile(e), false);
+}
+
+if (saveLink) {
+  saveLink.addEventListener("click", (e) => fileManager.saveFile(e), false);
+}
 
 /**
  * Call FileManager.saveFile

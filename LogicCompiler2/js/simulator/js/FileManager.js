@@ -40,26 +40,26 @@ function restoreWires(ws) {
 
 
 async function loadProtosOnly(p) {
-  //console.log(p);
 
-  // p.type = "AND", "NOT", etc.
   const res = await fetch('/LogicCompiler2/prototypes/' + p.type + '.txt');
   const text = await res.text();
 
   const proto = engine.importPrototype(text);
   engine.buildProtoNodes(p.posX, p.posY, proto, logicProto);
+
+  // ?? instance UI réellement créée
+  const ui = logicProto[logicProto.length - 1];
+
   if (p.type === "LBL") {
 
-    const signalName = p.name;
+    // le signal doit être le label sauvegardé
+    const signalName = p.label;
 
-    // 1. forcer le signal sur tous les nodes du LBL
-    console.log(ui);
-    for (const n of ui.nodes) {
-      n.signal = signalName;
-    }
+    // applique la logique proprement
+    ui.renameLabelSignal(signalName);
 
-    // 2. recréer la variable moteur si absente
-    if (engine.signals && !(signalName in engine.signals)) {
+    // sécurité moteur
+    if (window.engine && engine.signals && !(signalName in engine.signals)) {
       engine.set(signalName, 0);
     }
   }
@@ -70,6 +70,7 @@ async function loadAllProtos(ws) {
     await loadProtosOnly(p);   // ?? ATTENTE RÉELLE
   }
 }
+
 
 
 
@@ -89,6 +90,24 @@ export class FileManager {
     /**
      * @todo TODO
      */
+    async loadWorkspace(ws) {
+
+    this.isLoadingState = true;
+
+    wireMng.wire.length = 0;
+    logicClock.length = 0;
+    logicProto.length = 0;
+    nodeList.length = 0;
+
+    resetNodeIDs();
+
+    await loadAllProtos(ws);
+    loadLogicClocks?.(ws);
+
+    this.isLoadingState = false;
+    restoreWires?.(ws);
+  }
+
     saveState() {
         /* TODO
         if(this.isLoadingState)
@@ -109,7 +128,6 @@ export class FileManager {
  
 
 
-
 async loadFile(e) {
 
   const file = e.target.files.item(0);
@@ -119,35 +137,12 @@ async loadFile(e) {
 
   reader.onload = async () => {
     const ws = JSON.parse(reader.result);
-    await this.loadWorkspace(ws);
+    await this.loadWorkspace(ws);   // ? MAINTENANT EXISTE
   };
 
   reader.readAsText(file);
 }
-
- async loadWorkspace(ws) {
-
-    this.isLoadingState = true;
-
-    // --- reset UI ---
-    wireMng.wire.length = 0;
-    logicClock.length = 0;
-    logicProto.length = 0;
-    nodeList.length = 0;
-
-    resetNodeIDs();
-
-    // --- 1?? PROTOS EN PREMIER (BLOQUANT) ---
-    await loadAllProtos(ws);
-
-    // --- 2?? AUTRES COMPOSANTS ---
-    loadLogicClocks?.(ws);
-
-    // --- 3?? FIN ---
-    this.isLoadingState = false;
-
-    restoreWires?.(ws);
-}
+ 
      
 async loadFromServer(id) {
 
@@ -203,6 +198,9 @@ async loadFromServer(id) {
                          return;
                     case "parent":
                          return undefined;
+                    case "icon":
+                         return undefined;
+
                     case "protoCache":
                     case "engine":
     			 return undefined;

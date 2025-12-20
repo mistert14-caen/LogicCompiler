@@ -13,7 +13,7 @@ LogicProto.prototype.isMouseOver = function () {
     );
   }  
 
-   LogicProto.prototype.renameLabelSignal = function (newName) {
+ LogicProto.prototype.renameLabelSignal = function (newName) {
 
     this.label = newName;
 
