@@ -9,15 +9,11 @@ import { Node as LogicNode } from "./circuit_components/Node.js";
 import { INPUT_STATE } from "./circuit_components/Enums.js";
 
 
-export let protoIMG = []; // gates images
-
-
-export let logicLabel = [];
-export let logicClock = [];
 export let wireMng;
 export let colorMouseOver = [0 ,0x7B, 0xFF];
 export let fileManager = new FileManager();
 
+export let logicTimer = null;
 export const logicProto = [];
 
 /**
@@ -45,21 +41,42 @@ if (protoFile) {
     };
 }
 
+function engineTick() {
+  engine.pushInputsToEngine(logicProto);
+  engine.tickSequential();
+  engine.pullOutputsFromEngine(logicProto);
+}
+
+function startLogicClock(hz) {
+  stopLogicClock();
+  logicTimer = setInterval(engineTick, 1000 / hz);
+}
+
+function stopLogicClock() {
+  if (logicTimer) {
+    clearInterval(logicTimer);
+    logicTimer = null;
+  }
+}
 
 /**
  * @todo TODO
  */
+
+
 export function setup() {
+    
+
     const canvHeight = windowHeight - 90;
     let canvas = createCanvas(windowWidth - 115, canvHeight, P2D);
-
+   
     canvas.parent('canvas-sim');
     document.getElementsByClassName("tools")[0].style.height = canvHeight;
 
     wireMng = new WireManager();
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
-
+    startLogicClock(2); // 2 Hz par exemple
     if (id) {
       fileManager.loadFromServer(id);
     }
@@ -90,8 +107,6 @@ export function draw() {
   wireMng.draw();
   //console.log("WIRE OBJ:", wireMng);
  
- 
-  for (let c of logicClock) c.draw();
   for (const comp of logicProto) comp.draw();
 
 }
@@ -107,10 +122,7 @@ export function mousePressed() {
     /** Check gate[] mousePressed funtion*/
    
    
-    for (let i = 0; i < logicClock.length; i++)
-        logicClock[i].mousePressed();
-
-    for (const comp of logicProto)
+   for (const comp of logicProto)
         comp.mousePressed();
   
 
@@ -121,8 +133,6 @@ export function mousePressed() {
  */
 export function mouseReleased() {
 
-   for (let i = 0; i < logicClock.length; i++)
-        logicClock[i].mouseReleased();
    for (const comp of logicProto)
         comp.mouseReleased();
 }
@@ -146,24 +156,15 @@ export function mouseClicked() {
     //Check current selected option
     if (currMouseAction == MouseAction.EDIT) {
         //If action is EDIT, check every class. 
-        
-        for (let i = 0; i < logicClock.length; i++)
-            logicClock[i].mouseClicked();
-        for (const comp of logicProto)
+       
+       for (const comp of logicProto)
             comp.mouseClicked();
 
     } else if (currMouseAction == MouseAction.DELETE) {
         //
         
-
-      for (let i = 0; i < logicClock.length; i++) {
-            if (logicClock[i].mouseClicked()) {
-                logicClock[i].destroy();
-                delete logicClock[i];
-                logicClock.splice(i, 1);
-            }
-        }
-        for (let i = 0; i < logicProto.length; i++) {
+ 
+       for (let i = 0; i < logicProto.length; i++) {
             if (logicProto[i].mouseClicked()) {
                 logicProto[i].destroy();
                 delete logicProto[i];

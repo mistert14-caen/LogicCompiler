@@ -698,24 +698,7 @@
 			"dy": 15
 		}
 	],
-	"logicClock": [
-		{
-			"value": 0,
-			"posX": 141.36932373046875,
-			"posY": 329.01705169677734,
-			"diameter": 25,
-			"isSpawned": true,
-			"isMoving": false,
-			"offsetMouseX": 0,
-			"offsetMouseY": -5,
-			"nodeStartID": 30,
-			"isSaved": true,
-			"truePeriod": 10,
-			"falsePeriod": 990,
-			"lastTick": 1766255868017,
-			"strInfo": "CLOCK \nT = 1000 ms\nD% = 1"
-		}
-	],
+	
 	"wire": [
 		{
 			"startID": 8,

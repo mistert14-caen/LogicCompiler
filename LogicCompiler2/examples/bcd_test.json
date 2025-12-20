@@ -2,7 +2,7 @@
 	"logicProto": [
 		{
 			"posX": 280,
-			"posY": 135,
+			"posY": 134,
 			"type": "cB",
 			"name": "cB1",
 			"label": "LBL",
@@ -13,7 +13,7 @@
 					"diameter": 10,
 					"value": 0,
 					"posX": 220,
-					"posY": 127.5,
+					"posY": 126.5,
 					"isOutput": false,
 					"hitRange": 20,
 					"signal": "cB1_RST",
@@ -28,7 +28,7 @@
 					"diameter": 10,
 					"value": 0,
 					"posX": 220,
-					"posY": 142.5,
+					"posY": 141.5,
 					"isOutput": false,
 					"hitRange": 20,
 					"signal": "cB1_CLK",
@@ -43,11 +43,11 @@
 					"diameter": 10,
 					"value": 0,
 					"posX": 340,
-					"posY": 112.5,
+					"posY": 111.5,
 					"isOutput": true,
 					"hitRange": 20,
 					"signal": "cB1_Q3",
-					"inputState": 0,
+					"inputState": 1,
 					"isAlive": true,
 					"brotherNode": null,
 					"id": 2,
@@ -56,13 +56,13 @@
 				},
 				{
 					"diameter": 10,
-					"value": 0,
+					"value": 1,
 					"posX": 340,
-					"posY": 127.5,
+					"posY": 126.5,
 					"isOutput": true,
 					"hitRange": 20,
 					"signal": "cB1_Q2",
-					"inputState": 0,
+					"inputState": 1,
 					"isAlive": true,
 					"brotherNode": null,
 					"id": 3,
@@ -71,13 +71,13 @@
 				},
 				{
 					"diameter": 10,
-					"value": 1,
+					"value": 0,
 					"posX": 340,
-					"posY": 142.5,
+					"posY": 141.5,
 					"isOutput": true,
 					"hitRange": 20,
 					"signal": "cB1_Q1",
-					"inputState": 0,
+					"inputState": 1,
 					"isAlive": true,
 					"brotherNode": null,
 					"id": 4,
@@ -86,13 +86,13 @@
 				},
 				{
 					"diameter": 10,
-					"value": 0,
+					"value": 1,
 					"posX": 340,
-					"posY": 157.5,
+					"posY": 156.5,
 					"isOutput": true,
 					"hitRange": 20,
 					"signal": "cB1_Q0",
-					"inputState": 0,
+					"inputState": 1,
 					"isAlive": true,
 					"brotherNode": null,
 					"id": 5,
@@ -103,7 +103,7 @@
 			"nodeStartID": null,
 			"isSpawned": true,
 			"isMoving": false,
-			"offsetMouseX": 60.63067626953125,
+			"offsetMouseX": 61.63067626953125,
 			"offsetMouseY": -8.017051696777344,
 			"dy": 15
 		},
@@ -133,7 +133,7 @@
 				},
 				{
 					"diameter": 10,
-					"value": 0,
+					"value": 1,
 					"posX": 407,
 					"posY": 127.5,
 					"isOutput": false,
@@ -148,7 +148,7 @@
 				},
 				{
 					"diameter": 10,
-					"value": 1,
+					"value": 0,
 					"posX": 407,
 					"posY": 142.5,
 					"isOutput": false,
@@ -163,7 +163,7 @@
 				},
 				{
 					"diameter": 10,
-					"value": 0,
+					"value": 1,
 					"posX": 407,
 					"posY": 157.5,
 					"isOutput": false,
@@ -193,7 +193,7 @@
 				},
 				{
 					"diameter": 10,
-					"value": 1,
+					"value": 0,
 					"posX": 507,
 					"posY": 105,
 					"isOutput": true,
@@ -208,7 +208,7 @@
 				},
 				{
 					"diameter": 10,
-					"value": 0,
+					"value": 1,
 					"posX": 507,
 					"posY": 120,
 					"isOutput": true,
@@ -238,7 +238,7 @@
 				},
 				{
 					"diameter": 10,
-					"value": 1,
+					"value": 0,
 					"posX": 507,
 					"posY": 150,
 					"isOutput": true,
@@ -253,7 +253,7 @@
 				},
 				{
 					"diameter": 10,
-					"value": 0,
+					"value": 1,
 					"posX": 507,
 					"posY": 165,
 					"isOutput": true,
@@ -285,8 +285,8 @@
 			"nodeStartID": null,
 			"isSpawned": true,
 			"isMoving": false,
-			"offsetMouseX": 11.63067626953125,
-			"offsetMouseY": -2.0170516967773438,
+			"offsetMouseX": 0,
+			"offsetMouseY": 0,
 			"dy": 15
 		},
 		{
@@ -315,7 +315,7 @@
 				},
 				{
 					"diameter": 10,
-					"value": 1,
+					"value": 0,
 					"posX": 123,
 					"posY": 111.5,
 					"isOutput": false,
@@ -336,7 +336,7 @@
 					"isOutput": true,
 					"hitRange": 20,
 					"signal": "AND1_S",
-					"inputState": 0,
+					"inputState": 1,
 					"isAlive": true,
 					"brotherNode": null,
 					"id": 19,
@@ -347,8 +347,8 @@
 			"nodeStartID": null,
 			"isSpawned": true,
 			"isMoving": false,
-			"offsetMouseX": 26.63067626953125,
-			"offsetMouseY": -6.017051696777344,
+			"offsetMouseX": 0,
+			"offsetMouseY": 0,
 			"dy": 15
 		},
 		{
@@ -383,7 +383,7 @@
 					"isOutput": true,
 					"hitRange": 20,
 					"signal": "Q3",
-					"inputState": 0,
+					"inputState": 1,
 					"isAlive": true,
 					"brotherNode": null,
 					"id": 21,
@@ -394,8 +394,8 @@
 			"nodeStartID": null,
 			"isSpawned": true,
 			"isMoving": false,
-			"offsetMouseX": -23.36932373046875,
-			"offsetMouseY": 2.9829483032226562,
+			"offsetMouseX": 0,
+			"offsetMouseY": 0,
 			"dy": 15
 		},
 		{
@@ -424,7 +424,7 @@
 				},
 				{
 					"diameter": 10,
-					"value": 1,
+					"value": 0,
 					"posX": 105,
 					"posY": 115,
 					"isOutput": true,
@@ -441,8 +441,8 @@
 			"nodeStartID": null,
 			"isSpawned": true,
 			"isMoving": false,
-			"offsetMouseX": -22.36932373046875,
-			"offsetMouseY": 2.9829483032226562,
+			"offsetMouseX": 0,
+			"offsetMouseY": 0,
 			"dy": 15
 		},
 		{
@@ -488,8 +488,8 @@
 			"nodeStartID": null,
 			"isSpawned": true,
 			"isMoving": false,
-			"offsetMouseX": -5.36932373046875,
-			"offsetMouseY": 2.9829483032226562,
+			"offsetMouseX": 0,
+			"offsetMouseY": 0,
 			"dy": 15
 		},
 		{
@@ -503,7 +503,7 @@
 			"nodes": [
 				{
 					"diameter": 10,
-					"value": 1,
+					"value": 0,
 					"posX": 359,
 					"posY": 221,
 					"isOutput": false,
@@ -518,7 +518,7 @@
 				},
 				{
 					"diameter": 10,
-					"value": 1,
+					"value": 0,
 					"posX": 409,
 					"posY": 221,
 					"isOutput": true,
@@ -535,27 +535,41 @@
 			"nodeStartID": null,
 			"isSpawned": true,
 			"isMoving": false,
-			"offsetMouseX": 25.63067626953125,
-			"offsetMouseY": 0.9829483032226562,
-			"dy": 15
-		}
-	],
-	"logicClock": [
-		{
-			"value": 0,
-			"posX": 121.36932373046875,
-			"posY": 197.01705169677734,
-			"diameter": 25,
-			"isSpawned": true,
-			"isMoving": false,
 			"offsetMouseX": 0,
 			"offsetMouseY": 0,
-			"nodeStartID": 28,
-			"isSaved": true,
-			"truePeriod": 10,
-			"falsePeriod": 990,
-			"lastTick": 1766260615236,
-			"strInfo": "CLOCK \nT = 1000 ms\nD% = 1"
+			"dy": 15
+		},
+		{
+			"posX": 132,
+			"posY": 170,
+			"type": "CLK",
+			"name": "CLK1",
+			"label": "LBL",
+			"width": 40,
+			"height": 40,
+			"nodes": [
+				{
+					"diameter": 10,
+					"value": 0,
+					"posX": 152,
+					"posY": 170,
+					"isOutput": true,
+					"hitRange": 20,
+					"signal": "CLK1_S",
+					"inputState": 1,
+					"isAlive": true,
+					"brotherNode": null,
+					"id": 28,
+					"localX": 20,
+					"localY": 0
+				}
+			],
+			"nodeStartID": null,
+			"isSpawned": true,
+			"isMoving": false,
+			"offsetMouseX": 1.63067626953125,
+			"offsetMouseY": -15.017051696777344,
+			"dy": 15
 		}
 	],
 	"wire": [
@@ -563,71 +577,71 @@
 			"startID": 2,
 			"endID": 6,
 			"width": 8,
-			"endX": 394.36932373046875,
-			"endY": 111.01705169677734
+			"endX": 0,
+			"endY": 0
 		},
 		{
 			"startID": 3,
 			"endID": 7,
 			"width": 8,
-			"endX": 392.36932373046875,
-			"endY": 125.01705169677734
+			"endX": 0,
+			"endY": 0
 		},
 		{
 			"startID": 4,
 			"endID": 8,
 			"width": 8,
-			"endX": 397.36932373046875,
-			"endY": 142.01705169677734
+			"endX": 0,
+			"endY": 0
 		},
 		{
 			"startID": 5,
 			"endID": 9,
 			"width": 8,
-			"endX": 396.36932373046875,
-			"endY": 157.01705169677734
+			"endX": 0,
+			"endY": 0
 		},
 		{
 			"startID": 19,
 			"endID": 0,
 			"width": 8,
-			"endX": 218.36932373046875,
-			"endY": 121.01705169677734
+			"endX": 0,
+			"endY": 0
 		},
 		{
 			"startID": 21,
 			"endID": 17,
 			"width": 8,
-			"endX": 126.36932373046875,
-			"endY": 92.01705169677734
+			"endX": 0,
+			"endY": 0
 		},
 		{
 			"startID": 23,
 			"endID": 18,
 			"width": 8,
-			"endX": 102.36932373046875,
-			"endY": 112.01705169677734
+			"endX": 0,
+			"endY": 0
 		},
 		{
 			"startID": 2,
 			"endID": 24,
 			"width": 8,
-			"endX": 359.36932373046875,
-			"endY": 50.017051696777344
+			"endX": 0,
+			"endY": 0
 		},
 		{
 			"startID": 4,
 			"endID": 26,
 			"width": 8,
-			"endX": 358.36932373046875,
-			"endY": 220.01705169677734
+			"endX": 0,
+			"endY": 0
 		},
 		{
 			"startID": 28,
 			"endID": 1,
 			"width": 8,
-			"endX": 149.36932373046875,
-			"endY": 196.01705169677734
+			"endX": 143.36932373046875,
+			"endY": 182.01705169677734
 		}
 	]
 }

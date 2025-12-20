@@ -1,5 +1,4 @@
-import { Clock } from "./circuit_components/Clock.js";
-import { logicClock, logicProto } from "./simulator.js";
+import { logicProto } from "./simulator.js";
 import { MouseAction, syncType } from "./circuit_components/Enums.js"
 import { LogicProto } from "./circuit_components/proto/index.js";
 
@@ -44,6 +43,8 @@ export function activeTool(elTool) {
         document.getElementById("protoFile").click();  
        return;
     }
+    
+
 
 
     switch (elTool.getAttribute("tool")) {
@@ -60,23 +61,11 @@ export function activeTool(elTool) {
             currMouseAction = MouseAction.DELETE;
             break;
 
-            
-
-        case "Clock":
-            let period = document.getElementsByClassName("period")[0].value;
-            let dutycycle = document.getElementsByClassName("duty-cycle")[0].value;
-            logicClock.push(new Clock(period, dutycycle));
-            break;
-
-       }
-
-    elTool.classList.add('active');
+       elTool.classList.add('active');
+  }
 
 }
 
-/**
- * @todo this doc
- */
 function resetElements() {
     currMouseAction = MouseAction.EDIT;
     let activeElements = document.getElementsByClassName("active");
@@ -87,20 +76,12 @@ function resetElements() {
     document.getElementById("canvas-sim").style.cursor = "default";
 }
 
-/**
- * Reset Element
- * then set current action to EDIT 
- */
 export function backToEdit() {
     resetElements();
     document.getElementsByClassName("Edit")[0].classList.add("active");
     currMouseAction = MouseAction.EDIT;
 }
 
-/**
- * Save Option
- * Export All logic input and output on console
- */
 export function save() {
     //
 }

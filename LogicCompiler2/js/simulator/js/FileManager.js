@@ -1,21 +1,11 @@
-import { logicProto, logicClock, wireMng } from "./simulator.js"
+import { logicProto, wireMng } from "./simulator.js"
 import "./circuit_components/proto/index.js";
-import { Clock } from "./circuit_components/Clock.js";
 import { IC_type } from "./circuit_components/Enums.js";
 import { currentID, nodeList, resetNodeIDs } from "./circuit_components/Node.js";
 import { Wire } from "./circuit_components/Wire.js";
 
 
 let eventHistory = [];
-
-function loadLogicClocks(ws) {
-    if (!ws.logicClock) return;
-    for (const obj of ws.logicClock) {
-      const clk = new Clock({ deserialize: true });
-      Object.assign(clk, obj);
-      logicClock.push(clk);
-    }
-}
 
 function restoreWires(ws) {
   if (!ws.wire) return;
@@ -95,14 +85,13 @@ export class FileManager {
     this.isLoadingState = true;
 
     wireMng.wire.length = 0;
-    logicClock.length = 0;
     logicProto.length = 0;
     nodeList.length = 0;
 
     resetNodeIDs();
 
     await loadAllProtos(ws);
-    loadLogicClocks?.(ws);
+    
 
     this.isLoadingState = false;
     restoreWires?.(ws);
@@ -188,7 +177,6 @@ async loadFromServer(id) {
         let workspace = new Object();
 
         workspace["logicProto"] = logicProto;
-        workspace["logicClock"] = logicClock;
         workspace["wire"] = wireMng.wire;
 
         let jsonWorkspace = JSON.stringify(workspace,

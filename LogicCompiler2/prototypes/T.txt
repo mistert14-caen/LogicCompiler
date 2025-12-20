@@ -11,6 +11,6 @@ HEIGHT=80
 INPUTS=T;CLK
 OUTPUTS=Q;nQ
 DY=32
-EQUATIONS=Q=(CLK&(T&/@Q  |  /T&@Q)) | (/CLK&@Q)
+EQUATIONS=Q=(/CLK&(T&/@Q  |  /T&@Q)) | (CLK&@Q)
 EQUATIONS=nQ=/Q
 

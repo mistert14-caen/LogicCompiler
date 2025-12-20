@@ -57,8 +57,13 @@ constructor() {
     this.signals = {};
     this.last = {};
     this.equations = [];
+    this.seqEqs = [];
+    this.combEqs = [];
+
     this._instanceCounter = {}; // ?? clé = baseName, valeur = compteur
+ 
 }
+
 
   /* =======================
      API PUBLIQUE (inchangée)
@@ -193,23 +198,27 @@ importPrototype(text) {
   set(name, v) { this.signals[name] = Number(v); }
   get(name) { return this.signals[name] ?? 0; }
 
-  step() {
-    this.last = structuredClone(this.signals);
 
-    let changed, iter = 0;
-    do {
-      changed = false;
-      for (let eq of this.equations) {
-        const v = eq.eval(this.signals, this.last);
-        if (this.signals[eq.output] !== v) {
-          this.signals[eq.output] = v;
-          changed = true;
-        }
-      }
-      iter++;
-    } while (changed && iter < 10);
-   //console.trace("SIGNAL",this.signals); 
- }
+tickSequential() {
+  const prev = structuredClone(this.signals);
+  const next = structuredClone(this.signals);
+
+
+  for (let eq of this.seqEqs) {
+    const v = eq.eval(prev, prev);
+    next[eq.output] = v;
+  }
+
+  this.last = prev;
+  this.signals = next;
+}
+
+  step() {
+    for (let eq of this.combEqs) {
+       const v = eq.eval(this.signals, this.signals);
+       this.signals[eq.output] = v;
+    }
+  }
  
 
   /* =======================
@@ -276,10 +285,15 @@ loadPrototype(text, compName) {
 parseEquation(line) {
   const [lhs, rhs] = line.split("=");
 
-  return new LogicEquation(
-    lhs.trim(),
-    toRPN(tokenize(rhs.trim()))
-  );
+  const tokens = toRPN(tokenize(rhs.trim()));
+  const isSeq  = rhs.includes("CLK");
+
+  const eq = new LogicEquation(lhs.trim(), tokens);
+
+  if (isSeq) this.seqEqs.push(eq);
+  else       this.combEqs.push(eq);
+
+  return eq;
 }
   
 }

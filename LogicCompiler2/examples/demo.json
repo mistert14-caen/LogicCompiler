@@ -6,7 +6,6 @@
 			"type": "BTN",
 			"name": "BTN1",
 			"label": "LBL",
-			"icon": null,
 			"width": 50,
 			"height": 20,
 			"nodes": [
@@ -29,8 +28,8 @@
 			"nodeStartID": null,
 			"isSpawned": true,
 			"isMoving": false,
-			"offsetMouseX": 2.63067626953125,
-			"offsetMouseY": -3.0170516967773438,
+			"offsetMouseX": 0,
+			"offsetMouseY": 0,
 			"dy": 15
 		},
 		{
@@ -39,7 +38,6 @@
 			"type": "BTN",
 			"name": "BTN2",
 			"label": "LBL",
-			"icon": null,
 			"width": 50,
 			"height": 20,
 			"nodes": [
@@ -62,8 +60,8 @@
 			"nodeStartID": null,
 			"isSpawned": true,
 			"isMoving": false,
-			"offsetMouseX": -3.36932373046875,
-			"offsetMouseY": 1.9829483032226562,
+			"offsetMouseX": 0,
+			"offsetMouseY": 0,
 			"dy": 15
 		},
 		{
@@ -72,17 +70,6 @@
 			"type": "AND",
 			"name": "AND1",
 			"label": "LBL",
-			"icon": {
-				"width": 100,
-				"height": 50,
-				"canvas": {},
-				"drawingContext": {},
-				"_pixelDensity": 1,
-				"_pixelsDirty": true,
-				"_modified": false,
-				"pixels": [],
-				"modified": true
-			},
 			"width": 60,
 			"height": 40,
 			"nodes": [
@@ -145,7 +132,6 @@
 			"type": "LED",
 			"name": "LED1",
 			"label": "LBL",
-			"icon": null,
 			"width": 60,
 			"height": 40,
 			"nodes": [
@@ -178,7 +164,6 @@
 			"type": "cB",
 			"name": "cB1",
 			"label": "LBL",
-			"icon": null,
 			"width": 120,
 			"height": 100,
 			"nodes": [
@@ -244,7 +229,7 @@
 				},
 				{
 					"diameter": 10,
-					"value": 1,
+					"value": 0,
 					"posX": 326,
 					"posY": 251.5,
 					"isOutput": true,
@@ -277,7 +262,7 @@
 			"isSpawned": true,
 			"isMoving": false,
 			"offsetMouseX": 62.63067626953125,
-			"offsetMouseY": -8.017051696777344,
+			"offsetMouseY": -4.017051696777344,
 			"dy": 15
 		},
 		{
@@ -286,7 +271,6 @@
 			"type": "SEG",
 			"name": "SEG1",
 			"label": "LBL",
-			"icon": null,
 			"width": 100,
 			"height": 120,
 			"nodes": [
@@ -322,7 +306,7 @@
 				},
 				{
 					"diameter": 10,
-					"value": 1,
+					"value": 0,
 					"posX": 364,
 					"posY": 242.5,
 					"isOutput": false,
@@ -367,7 +351,7 @@
 				},
 				{
 					"diameter": 10,
-					"value": 1,
+					"value": 0,
 					"posX": 464,
 					"posY": 205,
 					"isOutput": true,
@@ -397,7 +381,7 @@
 				},
 				{
 					"diameter": 10,
-					"value": 0,
+					"value": 1,
 					"posX": 464,
 					"posY": 235,
 					"isOutput": true,
@@ -427,7 +411,7 @@
 				},
 				{
 					"diameter": 10,
-					"value": 0,
+					"value": 1,
 					"posX": 464,
 					"posY": 265,
 					"isOutput": true,
@@ -442,7 +426,7 @@
 				},
 				{
 					"diameter": 10,
-					"value": 0,
+					"value": 1,
 					"posX": 464,
 					"posY": 280,
 					"isOutput": true,
@@ -459,27 +443,41 @@
 			"nodeStartID": null,
 			"isSpawned": true,
 			"isMoving": false,
-			"offsetMouseX": 29.63067626953125,
-			"offsetMouseY": -32.017051696777344,
-			"dy": 15
-		}
-	],
-	"logicClock": [
-		{
-			"value": 0,
-			"posX": 136.36932373046875,
-			"posY": 252.01705169677734,
-			"diameter": 25,
-			"isSpawned": true,
-			"isMoving": false,
 			"offsetMouseX": 0,
 			"offsetMouseY": 0,
-			"nodeStartID": 23,
-			"isSaved": true,
-			"truePeriod": 10,
-			"falsePeriod": 990,
-			"lastTick": 1766245058237,
-			"strInfo": "CLOCK \nT = 1000 ms\nD% = 1"
+			"dy": 15
+		},
+		{
+			"posX": 136,
+			"posY": 263,
+			"type": "CLK",
+			"name": "CLK1",
+			"label": "LBL",
+			"width": 40,
+			"height": 40,
+			"nodes": [
+				{
+					"diameter": 10,
+					"value": 0,
+					"posX": 156,
+					"posY": 263,
+					"isOutput": true,
+					"hitRange": 20,
+					"signal": "CLK1_S",
+					"inputState": 1,
+					"isAlive": true,
+					"brotherNode": null,
+					"id": 23,
+					"localX": 20,
+					"localY": 0
+				}
+			],
+			"nodeStartID": null,
+			"isSpawned": true,
+			"isMoving": false,
+			"offsetMouseX": -18.36932373046875,
+			"offsetMouseY": -3.0170516967773438,
+			"dy": 15
 		}
 	],
 	"wire": [
@@ -487,57 +485,57 @@
 			"startID": 0,
 			"endID": 2,
 			"width": 8,
-			"endX": 302.36932373046875,
-			"endY": -41.982948303222656
+			"endX": 0,
+			"endY": 0
 		},
 		{
 			"startID": 1,
 			"endID": 3,
 			"width": 8,
-			"endX": 302.36932373046875,
-			"endY": -41.982948303222656
+			"endX": 0,
+			"endY": 0
 		},
 		{
 			"startID": 4,
 			"endID": 5,
 			"width": 8,
-			"endX": 302.36932373046875,
-			"endY": -41.982948303222656
+			"endX": 0,
+			"endY": 0
 		},
 		{
 			"startID": 8,
 			"endID": 12,
 			"width": 8,
-			"endX": 298.36932373046875,
-			"endY": 231.01705169677734
+			"endX": 0,
+			"endY": 0
 		},
 		{
 			"startID": 9,
 			"endID": 13,
 			"width": 8,
-			"endX": 299.36932373046875,
-			"endY": 246.01705169677734
+			"endX": 0,
+			"endY": 0
 		},
 		{
 			"startID": 10,
 			"endID": 14,
 			"width": 8,
-			"endX": 300.36932373046875,
-			"endY": 258.01705169677734
+			"endX": 0,
+			"endY": 0
 		},
 		{
 			"startID": 11,
 			"endID": 15,
 			"width": 8,
-			"endX": 297.36932373046875,
-			"endY": 275.01705169677734
+			"endX": 0,
+			"endY": 0
 		},
 		{
 			"startID": 23,
 			"endID": 7,
 			"width": 8,
-			"endX": 168.36932373046875,
-			"endY": 249.01705169677734
+			"endX": 154.36932373046875,
+			"endY": 266.01705169677734
 		}
 	]
 }
