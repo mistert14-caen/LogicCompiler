@@ -1,0 +1,117 @@
+{
+	"logicProto": [
+		{
+			"posX": 251,
+			"posY": 211,
+			"label": "AND0",
+			"type": "AND",
+			"isSpawned": true,
+			"isMoving": false,
+			"offsetMouseX": 0,
+			"offsetMouseY": 0,
+			"nodes": [
+				{
+					"diameter": 10,
+					"value": 1,
+					"posX": 211,
+					"posY": 203.5,
+					"isOutput": false,
+					"hitRange": 20,
+					"signal": "AND0_A",
+					"inputState": 1,
+					"isAlive": true,
+					"brotherNode": null,
+					"id": 0,
+					"localX": -40,
+					"localY": -7.5
+				},
+				{
+					"diameter": 10,
+					"value": false,
+					"posX": 211,
+					"posY": 218.5,
+					"isOutput": false,
+					"hitRange": 20,
+					"signal": "AND0_B",
+					"inputState": 1,
+					"isAlive": true,
+					"brotherNode": null,
+					"id": 1,
+					"localX": -40,
+					"localY": 7.5
+				},
+				{
+					"diameter": 10,
+					"value": 0,
+					"posX": 291,
+					"posY": 211,
+					"isOutput": true,
+					"hitRange": 20,
+					"signal": "AND0_S",
+					"inputState": 0,
+					"isAlive": true,
+					"brotherNode": null,
+					"id": 2,
+					"localX": 40,
+					"localY": 0
+				}
+			],
+			"width": 60,
+			"height": 40,
+			"nodeStartID": null
+		}
+	],
+	"logicInput": [
+		{
+			"value": false,
+			"posX": 134.36932373046875,
+			"posY": 312.01705169677734,
+			"diameter": 25,
+			"isSpawned": true,
+			"isMoving": false,
+			"offsetMouseX": 5,
+			"offsetMouseY": 1,
+			"nodeStartID": 4,
+			"isSaved": true
+		}
+	],
+	"logicOutput": [],
+	"logicValue": [],
+	"flipflop": [],
+	"logicClock": [
+		{
+			"value": 0,
+			"posX": 122.36932373046875,
+			"posY": 127.01705169677734,
+			"diameter": 25,
+			"isSpawned": true,
+			"isMoving": false,
+			"offsetMouseX": 3,
+			"offsetMouseY": 1,
+			"nodeStartID": 3,
+			"isSaved": true,
+			"truePeriod": 500,
+			"falsePeriod": 500,
+			"lastTick": 1765996190680,
+			"strInfo": "CLOCK \nT = 1000 ms\nD% = 50"
+		}
+	],
+	"gate": [],
+	"srLatch": [],
+	"wire": [
+		{
+			"startID": 3,
+			"endID": 1,
+			"width": 8,
+			"endX": 337.36932373046875,
+			"endY": -42.982948303222656
+		},
+		{
+			"startID": 4,
+			"endID": 0,
+			"width": 8,
+			"endX": 337.36932373046875,
+			"endY": -42.982948303222656
+		}
+	]
+}

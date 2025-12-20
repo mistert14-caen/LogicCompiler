@@ -1,0 +1,207 @@
+{
+	"logicInput": [],
+	"logicOutput": [],
+	"logicValue": [],
+	"flipflop": [],
+	"logicClock": [],
+	"logicProto": [
+		{
+			"posX": 275,
+			"posY": 127,
+			"label": "AND0",
+			"type": "AND",
+			"isSpawned": true,
+			"isMoving": false,
+			"offsetMouseX": -2.36932373046875,
+			"offsetMouseY": 11.982948303222656,
+			"nodes": [
+				{
+					"diameter": 10,
+					"value": 0,
+					"posX": 235,
+					"posY": 119.5,
+					"isOutput": false,
+					"hitRange": 20,
+					"signal": "AND0_A",
+					"inputState": 0,
+					"isAlive": true,
+					"brotherNode": null,
+					"id": 0,
+					"localX": -40,
+					"localY": -7.5
+				},
+				{
+					"diameter": 10,
+					"value": 0,
+					"posX": 235,
+					"posY": 134.5,
+					"isOutput": false,
+					"hitRange": 20,
+					"signal": "AND0_B",
+					"inputState": 0,
+					"isAlive": true,
+					"brotherNode": null,
+					"id": 1,
+					"localX": -40,
+					"localY": 7.5
+				},
+				{
+					"diameter": 10,
+					"value": 0,
+					"posX": 315,
+					"posY": 127,
+					"isOutput": true,
+					"hitRange": 20,
+					"signal": "AND0_S",
+					"inputState": 1,
+					"isAlive": true,
+					"brotherNode": null,
+					"id": 2,
+					"localX": 40,
+					"localY": 0
+				}
+			],
+			"width": 60,
+			"height": 40,
+			"nodeStartID": null
+		},
+		{
+			"posX": 419,
+			"posY": 175,
+			"label": "AND1",
+			"type": "AND",
+			"isSpawned": true,
+			"isMoving": false,
+			"offsetMouseX": 4.63067626953125,
+			"offsetMouseY": 10.982948303222656,
+			"nodes": [
+				{
+					"diameter": 10,
+					"value": 0,
+					"posX": 379,
+					"posY": 167.5,
+					"isOutput": false,
+					"hitRange": 20,
+					"signal": "AND1_A",
+					"inputState": 1,
+					"isAlive": true,
+					"brotherNode": null,
+					"id": 3,
+					"localX": -40,
+					"localY": -7.5
+				},
+				{
+					"diameter": 10,
+					"value": 0,
+					"posX": 379,
+					"posY": 182.5,
+					"isOutput": false,
+					"hitRange": 20,
+					"signal": "AND1_B",
+					"inputState": 0,
+					"isAlive": true,
+					"brotherNode": null,
+					"id": 4,
+					"localX": -40,
+					"localY": 7.5
+				},
+				{
+					"diameter": 10,
+					"value": 0,
+					"posX": 459,
+					"posY": 175,
+					"isOutput": true,
+					"hitRange": 20,
+					"signal": "AND1_S",
+					"inputState": 1,
+					"isAlive": true,
+					"brotherNode": null,
+					"id": 5,
+					"localX": 40,
+					"localY": 0
+				}
+			],
+			"width": 60,
+			"height": 40,
+			"nodeStartID": null
+		},
+		{
+			"posX": 520,
+			"posY": 260,
+			"label": "AND2",
+			"type": "AND",
+			"isSpawned": true,
+			"isMoving": false,
+			"offsetMouseX": 8.63067626953125,
+			"offsetMouseY": -4.017051696777344,
+			"nodes": [
+				{
+					"diameter": 10,
+					"value": 0,
+					"posX": 480,
+					"posY": 252.5,
+					"isOutput": false,
+					"hitRange": 20,
+					"signal": "AND2_A",
+					"inputState": 1,
+					"isAlive": true,
+					"brotherNode": null,
+					"id": 6,
+					"localX": -40,
+					"localY": -7.5
+				},
+				{
+					"diameter": 10,
+					"value": 0,
+					"posX": 480,
+					"posY": 267.5,
+					"isOutput": false,
+					"hitRange": 20,
+					"signal": "AND2_B",
+					"inputState": 0,
+					"isAlive": true,
+					"brotherNode": null,
+					"id": 7,
+					"localX": -40,
+					"localY": 7.5
+				},
+				{
+					"diameter": 10,
+					"value": 0,
+					"posX": 560,
+					"posY": 260,
+					"isOutput": true,
+					"hitRange": 20,
+					"signal": "AND2_S",
+					"inputState": 0,
+					"isAlive": true,
+					"brotherNode": null,
+					"id": 8,
+					"localX": 40,
+					"localY": 0
+				}
+			],
+			"width": 60,
+			"height": 40,
+			"nodeStartID": null
+		}
+	],
+	"gate": [],
+	"srLatch": [],
+	"wire": [
+		{
+			"startID": 2,
+			"endID": 3,
+			"endX": 315.36932373046875,
+			"endY": 121.01705169677734,
+			"width": 8
+		},
+		{
+			"startID": 5,
+			"endID": 6,
+			"endX": 459.36932373046875,
+			"endY": 170.01705169677734,
+			"width": 8
+		}
+	]
+}

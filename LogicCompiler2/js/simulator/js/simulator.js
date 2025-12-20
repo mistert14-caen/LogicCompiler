@@ -44,7 +44,6 @@ if (protoFile) {
        reader.readAsText(file);
     };
 }
-export const PROTO_IMG = {};
 
 
 /**
@@ -58,6 +57,12 @@ export function setup() {
     document.getElementsByClassName("tools")[0].style.height = canvHeight;
 
     wireMng = new WireManager();
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    if (id) {
+      fileManager.loadFromServer(id);
+    }
 }
 
 /**

@@ -112,39 +112,68 @@ export class FileManager {
 
 async loadFile(e) {
 
-      this.isLoadingState = true;
+  const file = e.target.files.item(0);
+  if (!file) return;
 
-      wireMng.wire.length = 0;
-      logicClock.length = 0;
-      logicProto.length = 0;
-      nodeList.length = 0;
+  const reader = new FileReader();
 
-      resetNodeIDs();
+  reader.onload = async () => {
+    const ws = JSON.parse(reader.result);
+    await this.loadWorkspace(ws);
+  };
 
-      const file = e.target.files.item(0);
-      const reader = new FileReader();
+  reader.readAsText(file);
+}
 
-      reader.onload = async () => {
+ async loadWorkspace(ws) {
 
-      const ws = JSON.parse(reader.result);
+    this.isLoadingState = true;
 
-      // 1?? PROTOS EN PREMIER (BLOQUANT)
-      await loadAllProtos(ws);
+    // --- reset UI ---
+    wireMng.wire.length = 0;
+    logicClock.length = 0;
+    logicProto.length = 0;
+    nodeList.length = 0;
 
-      // 2?? ENSUITE SEULEMENT
-    
-      loadLogicClocks?.(ws);
+    resetNodeIDs();
 
-      // 3?? FIN DU LOAD
-      this.isLoadingState = false;
-      restoreWires(ws); // plus tard
-     };
+    // --- 1?? PROTOS EN PREMIER (BLOQUANT) ---
+    await loadAllProtos(ws);
 
-     reader.readAsText(file);
-  
-}//fin classe
+    // --- 2?? AUTRES COMPOSANTS ---
+    loadLogicClocks?.(ws);
 
-      
+    // --- 3?? FIN ---
+    this.isLoadingState = false;
+
+    restoreWires?.(ws);
+}
+     
+async loadFromServer(id) {
+
+  if (!id) return;
+
+  const url = `https://mistert.freeboxos.fr/LogicCompiler2/examples/${id}.json`;
+
+  try {
+    const res = await fetch(url);
+
+    if (!res.ok) {
+      console.warn("Aucun fichier serveur pour id =", id);
+      this.currentWorkspaceId = id;   // mémorisé pour sauvegarde future
+      return;
+    }
+
+    const ws = await res.json();
+    await this.loadWorkspace(ws);
+
+    this.currentWorkspaceId = id;
+
+  } catch (err) {
+    console.error("Erreur chargement serveur :", err);
+    this.currentWorkspaceId = id;
+  }
+}
 
     /**
      * @todo TODO

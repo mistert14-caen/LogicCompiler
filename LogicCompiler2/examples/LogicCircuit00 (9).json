@@ -1,0 +1,284 @@
+{
+	"logicProto": [
+		{
+			"posX": 412,
+			"posY": 143,
+			"label": "AND0",
+			"type": "AND",
+			"isSpawned": true,
+			"isMoving": false,
+			"offsetMouseX": 0,
+			"offsetMouseY": 0,
+			"nodes": [
+				{
+					"diameter": 10,
+					"value": 1,
+					"posX": 372,
+					"posY": 135.5,
+					"isOutput": false,
+					"hitRange": 20,
+					"signal": "AND0_A",
+					"inputState": 1,
+					"isAlive": true,
+					"brotherNode": null,
+					"id": 0,
+					"localX": -40,
+					"localY": -7.5
+				},
+				{
+					"diameter": 10,
+					"value": 1,
+					"posX": 372,
+					"posY": 150.5,
+					"isOutput": false,
+					"hitRange": 20,
+					"signal": "AND0_B",
+					"inputState": 1,
+					"isAlive": true,
+					"brotherNode": null,
+					"id": 1,
+					"localX": -40,
+					"localY": 7.5
+				},
+				{
+					"diameter": 10,
+					"value": 1,
+					"posX": 452,
+					"posY": 143,
+					"isOutput": true,
+					"hitRange": 20,
+					"signal": "AND0_S",
+					"inputState": 1,
+					"isAlive": true,
+					"brotherNode": null,
+					"id": 2,
+					"localX": 40,
+					"localY": 0
+				}
+			],
+			"width": 60,
+			"height": 40,
+			"nodeStartID": null
+		},
+		{
+			"posX": 530,
+			"posY": 189,
+			"label": "AND1",
+			"type": "AND",
+			"isSpawned": true,
+			"isMoving": false,
+			"offsetMouseX": 7.63067626953125,
+			"offsetMouseY": -2.0170516967773438,
+			"nodes": [
+				{
+					"diameter": 10,
+					"value": 1,
+					"posX": 490,
+					"posY": 181.5,
+					"isOutput": false,
+					"hitRange": 20,
+					"signal": "AND1_A",
+					"inputState": 1,
+					"isAlive": true,
+					"brotherNode": null,
+					"id": 3,
+					"localX": -40,
+					"localY": -7.5
+				},
+				{
+					"diameter": 10,
+					"value": 1,
+					"posX": 490,
+					"posY": 196.5,
+					"isOutput": false,
+					"hitRange": 20,
+					"signal": "AND1_B",
+					"inputState": 1,
+					"isAlive": true,
+					"brotherNode": null,
+					"id": 4,
+					"localX": -40,
+					"localY": 7.5
+				},
+				{
+					"diameter": 10,
+					"value": 1,
+					"posX": 570,
+					"posY": 189,
+					"isOutput": true,
+					"hitRange": 20,
+					"signal": "AND1_S",
+					"inputState": 1,
+					"isAlive": true,
+					"brotherNode": null,
+					"id": 5,
+					"localX": 40,
+					"localY": 0
+				}
+			],
+			"width": 60,
+			"height": 40,
+			"nodeStartID": null
+		},
+		{
+			"posX": 648,
+			"posY": 242,
+			"label": "AND2",
+			"type": "AND",
+			"isSpawned": true,
+			"isMoving": false,
+			"offsetMouseX": 5.63067626953125,
+			"offsetMouseY": 3.9829483032226562,
+			"nodes": [
+				{
+					"diameter": 10,
+					"value": 1,
+					"posX": 608,
+					"posY": 234.5,
+					"isOutput": false,
+					"hitRange": 20,
+					"signal": "AND2_A",
+					"inputState": 1,
+					"isAlive": true,
+					"brotherNode": null,
+					"id": 6,
+					"localX": -40,
+					"localY": -7.5
+				},
+				{
+					"diameter": 10,
+					"value": 1,
+					"posX": 608,
+					"posY": 249.5,
+					"isOutput": false,
+					"hitRange": 20,
+					"signal": "AND2_B",
+					"inputState": 1,
+					"isAlive": true,
+					"brotherNode": null,
+					"id": 7,
+					"localX": -40,
+					"localY": 7.5
+				},
+				{
+					"diameter": 10,
+					"value": 1,
+					"posX": 688,
+					"posY": 242,
+					"isOutput": true,
+					"hitRange": 20,
+					"signal": "AND2_S",
+					"inputState": 0,
+					"isAlive": true,
+					"brotherNode": null,
+					"id": 8,
+					"localX": 40,
+					"localY": 0
+				}
+			],
+			"width": 60,
+			"height": 40,
+			"nodeStartID": null
+		}
+	],
+	"logicInput": [
+		{
+			"value": 1,
+			"posX": 161.36932373046875,
+			"posY": 141.01705169677734,
+			"diameter": 25,
+			"isSpawned": true,
+			"isMoving": false,
+			"offsetMouseX": 2,
+			"offsetMouseY": 0,
+			"nodeStartID": 9,
+			"isSaved": true
+		},
+		{
+			"value": 1,
+			"posX": 170.36932373046875,
+			"posY": 203.01705169677734,
+			"diameter": 25,
+			"isSpawned": true,
+			"isMoving": false,
+			"offsetMouseX": 1,
+			"offsetMouseY": 5,
+			"nodeStartID": 10,
+			"isSaved": true
+		},
+		{
+			"value": 1,
+			"posX": 220.36932373046875,
+			"posY": 257.01705169677734,
+			"diameter": 25,
+			"isSpawned": true,
+			"isMoving": false,
+			"offsetMouseX": -5,
+			"offsetMouseY": 1,
+			"nodeStartID": 11,
+			"isSaved": true
+		},
+		{
+			"value": 1,
+			"posX": 335.36932373046875,
+			"posY": 295.01705169677734,
+			"diameter": 25,
+			"isSpawned": true,
+			"isMoving": false,
+			"offsetMouseX": 5,
+			"offsetMouseY": -2,
+			"nodeStartID": 12,
+			"isSaved": true
+		}
+	],
+	"logicOutput": [],
+	"logicValue": [],
+	"flipflop": [],
+	"logicClock": [],
+	"gate": [],
+	"srLatch": [],
+	"wire": [
+		{
+			"startID": 9,
+			"endID": 0,
+			"width": 8,
+			"endX": 330.36932373046875,
+			"endY": -43.982948303222656
+		},
+		{
+			"startID": 2,
+			"endID": 3,
+			"width": 8,
+			"endX": 453.36932373046875,
+			"endY": 144.01705169677734
+		},
+		{
+			"startID": 5,
+			"endID": 6,
+			"width": 8,
+			"endX": 567.3693237304688,
+			"endY": 186.01705169677734
+		},
+		{
+			"startID": 10,
+			"endID": 1,
+			"width": 8,
+			"endX": 204.36932373046875,
+			"endY": 206.01705169677734
+		},
+		{
+			"startID": 11,
+			"endID": 4,
+			"width": 8,
+			"endX": 251.36932373046875,
+			"endY": 255.01705169677734
+		},
+		{
+			"startID": 12,
+			"endID": 7,
+			"width": 8,
+			"endX": 365.36932373046875,
+			"endY": 294.01705169677734
+		}
+	]
+}

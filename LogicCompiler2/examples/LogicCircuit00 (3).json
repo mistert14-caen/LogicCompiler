@@ -1,0 +1,111 @@
+{
+	"logicInput": [
+		{
+			"value": false,
+			"posX": 125.36932373046875,
+			"posY": 66.01705169677734,
+			"diameter": 25,
+			"isSpawned": true,
+			"isMoving": false,
+			"offsetMouseX": -3,
+			"offsetMouseY": 1,
+			"nodeStartID": 3,
+			"isSaved": true
+		},
+		{
+			"value": false,
+			"posX": 113.36932373046875,
+			"posY": 137.01705169677734,
+			"diameter": 25,
+			"isSpawned": true,
+			"isMoving": false,
+			"offsetMouseX": 0,
+			"offsetMouseY": 0,
+			"nodeStartID": 4,
+			"isSaved": true
+		}
+	],
+	"logicOutput": [],
+	"logicValue": [],
+	"flipflop": [],
+	"logicClock": [],
+	"logicProto": [
+		{
+			"posX": 289,
+			"posY": 98,
+			"label": "AND0",
+			"type": "AND",
+			"isSpawned": true,
+			"isMoving": false,
+			"offsetMouseX": 8.63067626953125,
+			"offsetMouseY": -11.017051696777344,
+			"nodes": [
+				{
+					"diameter": 10,
+					"value": false,
+					"posX": 249,
+					"posY": 90.5,
+					"isOutput": false,
+					"hitRange": 20,
+					"signal": "AND0_A",
+					"inputState": 1,
+					"isAlive": true,
+					"brotherNode": null,
+					"id": 5,
+					"localX": -40,
+					"localY": -7.5
+				},
+				{
+					"diameter": 10,
+					"value": false,
+					"posX": 249,
+					"posY": 105.5,
+					"isOutput": false,
+					"hitRange": 20,
+					"signal": "AND0_B",
+					"inputState": 1,
+					"isAlive": true,
+					"brotherNode": null,
+					"id": 6,
+					"localX": -40,
+					"localY": 7.5
+				},
+				{
+					"diameter": 10,
+					"value": 0,
+					"posX": 329,
+					"posY": 98,
+					"isOutput": true,
+					"hitRange": 20,
+					"signal": "AND0_S",
+					"inputState": 0,
+					"isAlive": true,
+					"brotherNode": null,
+					"id": 7,
+					"localX": 40,
+					"localY": 0
+				}
+			],
+			"width": 60,
+			"height": 40
+		}
+	],
+	"gate": [],
+	"srLatch": [],
+	"wire": [
+		{
+			"startID": 3,
+			"endID": 5,
+			"endX": 157.36932373046875,
+			"endY": 61.017051696777344,
+			"width": 8
+		},
+		{
+			"startID": 4,
+			"endID": 6,
+			"endX": 146.36932373046875,
+			"endY": 140.01705169677734,
+			"width": 8
+		}
+	]
+}

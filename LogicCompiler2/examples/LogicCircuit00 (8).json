@@ -1,0 +1,213 @@
+{
+	"logicProto": [
+		{
+			"posX": 412,
+			"posY": 143,
+			"label": "AND0",
+			"type": "AND",
+			"isSpawned": true,
+			"isMoving": false,
+			"offsetMouseX": -6.36932373046875,
+			"offsetMouseY": -1.0170516967773438,
+			"nodes": [
+				{
+					"diameter": 10,
+					"value": false,
+					"posX": 372,
+					"posY": 135.5,
+					"isOutput": false,
+					"hitRange": 20,
+					"signal": "AND0_A",
+					"inputState": 1,
+					"isAlive": true,
+					"brotherNode": null,
+					"id": 0,
+					"localX": -40,
+					"localY": -7.5
+				},
+				{
+					"diameter": 10,
+					"value": 0,
+					"posX": 372,
+					"posY": 150.5,
+					"isOutput": false,
+					"hitRange": 20,
+					"signal": "AND0_B",
+					"inputState": 0,
+					"isAlive": true,
+					"brotherNode": null,
+					"id": 1,
+					"localX": -40,
+					"localY": 7.5
+				},
+				{
+					"diameter": 10,
+					"value": 0,
+					"posX": 452,
+					"posY": 143,
+					"isOutput": true,
+					"hitRange": 20,
+					"signal": "AND0_S",
+					"inputState": 0,
+					"isAlive": true,
+					"brotherNode": null,
+					"id": 2,
+					"localX": 40,
+					"localY": 0
+				}
+			],
+			"width": 60,
+			"height": 40,
+			"nodeStartID": null
+		},
+		{
+			"posX": 478,
+			"posY": 206,
+			"label": "AND1",
+			"type": "AND",
+			"isSpawned": true,
+			"isMoving": false,
+			"offsetMouseX": -3.36932373046875,
+			"offsetMouseY": -7.017051696777344,
+			"nodes": [
+				{
+					"diameter": 10,
+					"value": 0,
+					"posX": 438,
+					"posY": 198.5,
+					"isOutput": false,
+					"hitRange": 20,
+					"signal": "AND1_A",
+					"inputState": 0,
+					"isAlive": true,
+					"brotherNode": null,
+					"id": 3,
+					"localX": -40,
+					"localY": -7.5
+				},
+				{
+					"diameter": 10,
+					"value": 0,
+					"posX": 438,
+					"posY": 213.5,
+					"isOutput": false,
+					"hitRange": 20,
+					"signal": "AND1_B",
+					"inputState": 0,
+					"isAlive": true,
+					"brotherNode": null,
+					"id": 4,
+					"localX": -40,
+					"localY": 7.5
+				},
+				{
+					"diameter": 10,
+					"value": 0,
+					"posX": 518,
+					"posY": 206,
+					"isOutput": true,
+					"hitRange": 20,
+					"signal": "AND1_S",
+					"inputState": 0,
+					"isAlive": true,
+					"brotherNode": null,
+					"id": 5,
+					"localX": 40,
+					"localY": 0
+				}
+			],
+			"width": 60,
+			"height": 40,
+			"nodeStartID": null
+		},
+		{
+			"posX": 546,
+			"posY": 270,
+			"label": "AND2",
+			"type": "AND",
+			"isSpawned": true,
+			"isMoving": false,
+			"offsetMouseX": -16.36932373046875,
+			"offsetMouseY": -5.017051696777344,
+			"nodes": [
+				{
+					"diameter": 10,
+					"value": 0,
+					"posX": 506,
+					"posY": 262.5,
+					"isOutput": false,
+					"hitRange": 20,
+					"signal": "AND2_A",
+					"inputState": 0,
+					"isAlive": true,
+					"brotherNode": null,
+					"id": 6,
+					"localX": -40,
+					"localY": -7.5
+				},
+				{
+					"diameter": 10,
+					"value": 0,
+					"posX": 506,
+					"posY": 277.5,
+					"isOutput": false,
+					"hitRange": 20,
+					"signal": "AND2_B",
+					"inputState": 0,
+					"isAlive": true,
+					"brotherNode": null,
+					"id": 7,
+					"localX": -40,
+					"localY": 7.5
+				},
+				{
+					"diameter": 10,
+					"value": 0,
+					"posX": 586,
+					"posY": 270,
+					"isOutput": true,
+					"hitRange": 20,
+					"signal": "AND2_S",
+					"inputState": 0,
+					"isAlive": true,
+					"brotherNode": null,
+					"id": 8,
+					"localX": 40,
+					"localY": 0
+				}
+			],
+			"width": 60,
+			"height": 40,
+			"nodeStartID": null
+		}
+	],
+	"logicInput": [
+		{
+			"value": false,
+			"posX": 161.36932373046875,
+			"posY": 141.01705169677734,
+			"diameter": 25,
+			"isSpawned": true,
+			"isMoving": false,
+			"offsetMouseX": 0,
+			"offsetMouseY": 0,
+			"nodeStartID": 9,
+			"isSaved": true
+		}
+	],
+	"logicOutput": [],
+	"logicValue": [],
+	"flipflop": [],
+	"logicClock": [],
+	"gate": [],
+	"srLatch": [],
+	"wire": [
+		{
+			"startID": 9,
+			"endID": 0,
+			"endX": 192.36932373046875,
+			"endY": 140.01705169677734,
+			"width": 8
+		}
+	]
+}
