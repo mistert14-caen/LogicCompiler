@@ -5,8 +5,8 @@ import { colorMouseOver, fileManager } from "../simulator.js";
 
 export class LogicValue {
     constructor(options = {}) {
-        this.value = options.value ?? 0;     // valeur décimale
-        this.step  = options.step  ?? 1;     // incrément
+        this.value = options.value ?? 0;     // valeur dÃ©cimale
+        this.step  = options.step  ?? 1;     // incrÃ©ment
         this.min   = options.min   ?? 0;
         this.max   = options.max   ?? 255;
         this.diameter = 25;
@@ -107,7 +107,7 @@ draw() {
     this.output.updatePosition(this.posX + 30, this.posY);
     this.output.setValue(this.value);
 
-    // ===== DESSIN HARMONISÉ =====
+    // ===== DESSIN HARMONISÃ‰ =====
     push();
 
     const diameter = 35;
@@ -121,7 +121,7 @@ draw() {
     fill(30);
     circle(this.posX, this.posY, diameter);
 
-    // valeur centrée
+    // valeur centrÃ©e
     fill(255);
     textAlign(CENTER, CENTER);
     textStyle(BOLD);

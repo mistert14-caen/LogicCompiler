@@ -34,7 +34,7 @@ if (protoFile) {
         const cy = 50;
         engine.buildProtoNodes(cx,cy,engine.proto, logicProto);
 
-        // ? CRUCIAL : reset pour autoriser re-import du même fichier
+        // ? CRUCIAL : reset pour autoriser re-import du mÃªme fichier
         e.target.value = "";
         };
        reader.readAsText(file);

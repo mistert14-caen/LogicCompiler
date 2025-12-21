@@ -1,0 +1,25 @@
+[BLOCK Q2B#]
+TYPE=BLOCK
+SYMBOL=Q2B
+CATEGORY=BUS
+ORDER=4
+DESCRIPTION=Découpage d'une valeur (0..15) en 4 bits
+POS=200,200
+WIDTH=60
+HEIGHT=120
+
+INPUTS=VAL
+OUTPUTS=C3;C2;C1;C0
+
+# --- Bit 0 (LSB) ---
+EQUATIONS=C0=VAL&1
+
+# --- Bit 1 ---
+EQUATIONS=C1=(VAL>>1)&1
+
+# --- Bit 2 ---
+EQUATIONS=C2=(VAL>>2)&1
+
+# --- Bit 3 ---
+EQUATIONS=C3=(VAL>>3)&1
+

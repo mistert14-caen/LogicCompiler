@@ -20,7 +20,7 @@ class LogicPrototype {
     this.outputs = [];
     this.internals = [];
 
-    // Équations associées au composant
+    // Ã‰quations associÃ©es au composant
     this.equations = [];
     this.width  = 60;
     this.height = 40;
@@ -51,22 +51,22 @@ class LogicCompiler {
   
 
 constructor() {
-    this.protos = [];        // prototypes instanciés (V2)
+    this.protos = [];        // prototypes instanciÃ©s (V2)
     this.protoCache = {};
-    this.proto = null;      // proto VIRTUEL exposé à l’UI
+    this.proto = null;      // proto VIRTUEL exposÃ© Ã  lâ€™UI
     this.signals = {};
     this.last = {};
     this.equations = [];
     this.seqEqs = [];
     this.combEqs = [];
 
-    this._instanceCounter = {}; // ?? clé = baseName, valeur = compteur
+    this._instanceCounter = {}; // ?? clÃ© = baseName, valeur = compteur
  
 }
 
 
   /* =======================
-     API PUBLIQUE (inchangée)
+     API PUBLIQUE (inchangÃ©e)
      ======================= */
 
  integrateProto(proto) {
@@ -94,7 +94,7 @@ buildProtoNodes(cx,cy,proto, lP) {
   
 
 
-  // proto.name est DÉJÀ PATCHÉ
+  // proto.name est DÃ‰JÃ€ PATCHÃ‰
   //console.log(proto);
   const comp = new LogicProto(cx, cy, proto.type, proto.name);
   comp.type = proto.type;
@@ -110,7 +110,7 @@ buildProtoNodes(cx,cy,proto, lP) {
     const n = new LogicNode(0, 0, false, 0);
     n.inputState = INPUT_STATE.FREE;
 
-    // ?? name est déjà du type AND0_A
+    // ?? name est dÃ©jÃ  du type AND0_A
     n.signal = name;
 
     comp.addNode(n, -comp.width / 2 , y0 + i * DY);
@@ -123,7 +123,7 @@ buildProtoNodes(cx,cy,proto, lP) {
     const n = new LogicNode(0, 0, true, 0);
     n.inputState = INPUT_STATE.FREE;
 
-    // ?? name est déjà du type AND0_Y
+    // ?? name est dÃ©jÃ  du type AND0_Y
     n.signal = name;
 
     comp.addNode(n, comp.width / 2 , y0 + i * DY);
@@ -140,7 +140,7 @@ pushInputsToEngine(lP,lB) {
   for (const comp of lP) {
     for (const n of comp.nodes) {
 
-      // uniquement les entrées libres
+      // uniquement les entrÃ©es libres
       if (!n.isOutput && n.signal) {
         this.set(n.signal, n.value);      
       }
@@ -177,7 +177,7 @@ importPrototype(text) {
 
   const compName = baseName.replace("#", n);
 
-  // --- CACHE : mémoriser le TEXTE BRUT ---
+  // --- CACHE : mÃ©moriser le TEXTE BRUT ---
   if (!this.protoCache[baseName]) {
     this.protoCache[baseName] = text;   // ?? texte avec AND#
   }
@@ -188,7 +188,7 @@ importPrototype(text) {
   // --- parse instance ---
   const proto = this.parsePrototype(patchedText, compName);
 
-  // --- intégration moteur ---
+  // --- intÃ©gration moteur ---
   this.integrateProto(proto);
   this.proto = proto;
   this.protos.push(proto);
@@ -298,3 +298,4 @@ parseEquation(line) {
   
 }
 window.engine = new LogicCompiler();
+

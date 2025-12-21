@@ -1,5 +1,5 @@
 /* =======================
-   Parser Ã©quations
+   Parser ÃƒÂ©quations
    ======================= */
 const PRECEDENCE = {
   
@@ -35,7 +35,7 @@ function tokenize(expr) {
       continue;
     }
 
-    // opérateurs doubles
+    // opÃ©rateurs doubles
     if (expr.startsWith("<<", i)) {
       tokens.push({ type: "OP", value: "<<" });
       i += 2;
@@ -48,13 +48,13 @@ function tokenize(expr) {
     }
 
    
-    // hexadécimal : 0xFF
+    // hexadÃ©cimal : 0xFF
 if (c === "0" && (expr[i + 1] === "x" || expr[i + 1] === "X")) {
   let j = i + 2;
   while (j < expr.length && /[0-9a-fA-F]/.test(expr[j])) j++;
 
   if (j === i + 2)
-    throw new Error("Hexa invalide à " + i);
+    throw new Error("Hexa invalide Ã  " + i);
 
   tokens.push({
     type: "CONST",
@@ -70,7 +70,7 @@ if (c === "0" && (expr[i + 1] === "b" || expr[i + 1] === "B")) {
   while (j < expr.length && /[01]/.test(expr[j])) j++;
 
   if (j === i + 2)
-    throw new Error("Binaire invalide à " + i);
+    throw new Error("Binaire invalide Ã  " + i);
 
   tokens.push({
     type: "CONST",
@@ -80,7 +80,7 @@ if (c === "0" && (expr[i + 1] === "b" || expr[i + 1] === "B")) {
   continue;
 }
 
-    // nombre décimal
+    // nombre dÃ©cimal
     if (/[0-9]/.test(c)) {
       let j = i;
       //while (/[0-9]/.test(expr[j])) j++;
@@ -94,12 +94,12 @@ if (c === "0" && (expr[i + 1] === "b" || expr[i + 1] === "B")) {
       continue;
     }
 
-    // mémoire : @Q, @ACC, @SEL, etc.
+    // mÃ©moire : @Q, @ACC, @SEL, etc.
 if (c === "@") {
   let j = i + 1;
 
   if (j >= expr.length || !/[A-Za-z_]/.test(expr[j])) {
-    throw new Error("Syntaxe invalide après @ à " + i);
+    throw new Error("Syntaxe invalide aprÃ¨s @ Ã  " + i);
   }
 
   while (j < expr.length && /[A-Za-z0-9_]/.test(expr[j])) j++;
@@ -127,7 +127,7 @@ if (c === "@") {
       continue;
     }
 
-     // opérateurs simples
+     // opÃ©rateurs simples
     if ("+*&|^()/".includes(c)) {
       tokens.push({
       type: "OP",
@@ -137,7 +137,7 @@ if (c === "@") {
     continue;  
   }
 
-    throw new Error("Token inconnu à " + i);
+    throw new Error("Token inconnu Ã  " + i);
    
   }
 
@@ -231,7 +231,7 @@ function evalRPN(rpn, vars = {}) {
       case "|": stack.push(a | b); break;
       case "^": stack.push(a ^ b); break;
       default:
-        throw new Error("Opérateur inconnu " + op);
+        throw new Error("OpÃ©rateur inconnu " + op);
     }
   }
 
@@ -272,7 +272,7 @@ function evalRPN(rpn, resolveVar) {
       case "|": stack.push(a | b); break;
       case "^": stack.push(a ^ b); break;
       default:
-        throw new Error("Opérateur inconnu " + op);
+        throw new Error("OpÃ©rateur inconnu " + op);
     }
   }
 

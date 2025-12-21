@@ -60,7 +60,7 @@ LogicProto.prototype.drawLED = function () {
     if (n) v = engine.get(n.signal) ?? 0;
   }
 
-  // --- boîtier ---
+  // --- boÃ®tier ---
   push();
   rectMode(CENTER);
   noStroke();
@@ -157,7 +157,7 @@ LogicProto.prototype.drawROM = function () {
 
     // ?? surlignage si adresse active
     if (this.activeAddr === i) {
-      fill(255, 240, 180); // jaune pâle
+      fill(255, 240, 180); // jaune pÃ¢le
       rectMode(CENTER);
       rect(cx, cy, cellW - 4, cellH - 4, 4);
       fill(0);
@@ -205,7 +205,7 @@ LogicProto.prototype.drawDICE = function () {
 
   if (v < 0 || v > 5) return;
 
-  // positions normalisées
+  // positions normalisÃ©es
   const P = {
     TL: [-0.25, -0.25],
     TR: [ 0.25, -0.25],
@@ -216,7 +216,7 @@ LogicProto.prototype.drawDICE = function () {
     C : [ 0.00,  0.00],
   };
 
-  // faces du dé (CORRIGÉES)
+  // faces du dÃ© (CORRIGÃ‰ES)
   const faces = [
     ["C"],                                   // 1
     ["TR", "BL"],                            // 2  ? diagonale correcte

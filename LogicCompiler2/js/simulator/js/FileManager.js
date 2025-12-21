@@ -10,7 +10,7 @@ let eventHistory = [];
 function restoreWires(ws) {
   if (!ws.wire) return;
 
-  // sécurité : on sort de tout mode "linking"
+  // sÃ©curitÃ© : on sort de tout mode "linking"
   wireMng.isOpened = false;
 
   for (const w of ws.wire) {
@@ -18,11 +18,11 @@ function restoreWires(ws) {
     const endNode   = nodeList[w.endID];
 
     if (!startNode || !endNode) {
-      console.warn("Wire ignoré (node manquant)", w);
+      console.warn("Wire ignorÃ© (node manquant)", w);
       continue;
     }
 
-    // ?? création déclarative : wire déjà fermé
+    // ?? crÃ©ation dÃ©clarative : wire dÃ©jÃ  fermÃ©
     const wire = new Wire(startNode).close(endNode);
     wireMng.wire.push(wire);
   }
@@ -37,18 +37,18 @@ async function loadProtosOnly(p) {
   const proto = engine.importPrototype(text);
   engine.buildProtoNodes(p.posX, p.posY, proto, logicProto);
 
-  // ?? instance UI réellement créée
+  // ?? instance UI rÃ©ellement crÃ©Ã©e
   const ui = logicProto[logicProto.length - 1];
 
   if (p.type === "LBL") {
 
-    // le signal doit être le label sauvegardé
+    // le signal doit Ãªtre le label sauvegardÃ©
     const signalName = p.label;
 
     // applique la logique proprement
     ui.renameLabelSignal(signalName);
 
-    // sécurité moteur
+    // sÃ©curitÃ© moteur
     if (window.engine && engine.signals && !(signalName in engine.signals)) {
       engine.set(signalName, 0);
     }
@@ -57,7 +57,7 @@ async function loadProtosOnly(p) {
 
 async function loadAllProtos(ws) {
   for (const p of ws.logicProto) {
-    await loadProtosOnly(p);   // ?? ATTENTE RÉELLE
+    await loadProtosOnly(p);   // ?? ATTENTE RÃ‰ELLE
   }
 }
 
@@ -144,7 +144,7 @@ async loadFromServer(id) {
 
     if (!res.ok) {
       console.warn("Aucun fichier serveur pour id =", id);
-      this.currentWorkspaceId = id;   // mémorisé pour sauvegarde future
+      this.currentWorkspaceId = id;   // mÃ©morisÃ© pour sauvegarde future
       return;
     }
 

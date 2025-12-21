@@ -1,0 +1,84 @@
+[BLOCK CTRL6#]
+TYPE=BLOCK
+SYMBOL=CTRL6
+CATEGORY=SAP
+DESCRIPTION=Contrôleur SAP-1 (fidèle au livre p.160)
+POS=200,200
+WIDTH=240
+HEIGHT=220
+
+# ----- Entrées -----
+INPUTS=H3;H2;H1;H0;T1;T2;T3;T4;T5;T6
+
+# ----- Sorties -----
+OUTPUTS=CP;EP;LM;CE;LI;EI;LA;LB;SU;EU;EA;LO;HLT
+
+# ----- Décodage opcode -----
+INTERNALS=I0;I1;I2;I3;I4
+EQUATIONS=I0 = /H3 & /H2 & /H1 & /H0        # LDA
+EQUATIONS=I1 = /H3 & /H2 & /H1 &  H0        # ADD
+EQUATIONS=I2 = /H3 & /H2 &  H1 & /H0        # SUB
+EQUATIONS=I3 =  H3 &  H2 &  H1 & /H0        # OUT
+EQUATIONS=I4 =  H3 &  H2 &  H1 &  H0        # HLT (option)
+
+# ======================================================
+#                     FETCH (T1–T3)
+# ======================================================
+
+# T1 : PC → MAR
+EQUATIONS=EP = @T1
+
+# LM (actif bas) : charge MAR en T1 ou T4 pour LDA/ADD/SUB
+INTERNALS=LM_A
+EQUATIONS=LM_A = @T1 | (@T4 & (I0 | I1 | I2))
+EQUATIONS=LM   = /LM_A
+
+# T2 : PC ← PC+1
+EQUATIONS=CP = @T2
+
+# T3 : ROM → IR  (CE et LI actifs bas)
+INTERNALS=CE_A
+EQUATIONS=CE_A = @T3 | (@T5 & (I0 | I1 | I2))
+EQUATIONS=CE   = /CE_A
+
+INTERNALS=LI_A
+EQUATIONS=LI_A = @T3
+EQUATIONS=LI   = /LI_A
+
+# ======================================================
+#                EXECUTION (T4–T6)
+# ======================================================
+
+# ----- Immédiat (IR low) → bus (EA actif bas) -----
+INTERNALS=EI_A
+EQUATIONS=EI_A = @T4 & (I0 | I1 | I2)
+EQUATIONS=EI   = /EI_A
+
+# ----- A ← RAM (LDA) ou A ← ALU (ADD/SUB) -----
+INTERNALS=LA_A
+EQUATIONS=LA_A = (@T5 & I0) | (@T6 & (I1 | I2))
+EQUATIONS=LA   = /LA_A
+
+# ----- B ← RAM (ADD/SUB) -----
+INTERNALS=LB_A
+EQUATIONS=LB_A = @T5 & (I1 | I2)
+EQUATIONS=LB   = /LB_A
+
+# ----- Sélection SUB dans ALU (actif haut) -----
+EQUATIONS=SU = @T6 & I2
+
+# ----- Enable ALU → BUS (ADD/SUB en T6) -----
+INTERNALS=EU_A
+EQUATIONS=EU_A = @T6 & (I1 | I2)
+EQUATIONS=EU   = /EU_A
+
+# ----- OUT ----- 
+# A → bus
+EQUATIONS=EA = @T4 & I3
+
+# latch OUT (actif bas)
+INTERNALS=LO_A
+EQUATIONS=LO_A = @T4 & I3
+EQUATIONS=LO   = /LO_A
+
+EQUATIONS=HLT = (H3 & H2 & H1 & H0)

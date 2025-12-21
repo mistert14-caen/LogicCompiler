@@ -1,0 +1,75 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+#app {
+  display: flex;
+  height: 100vh;
+}
+
+/* -------- Palette -------- */
+
+#protoPanel {
+  width: 280px;
+  padding: 8px;
+  overflow-y: auto;
+  background: #ffffff;
+  border-right: 1px solid #ccc;
+}
+
+details {
+  margin-bottom: 6px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  background: #fafafa;
+}
+
+summary {
+  cursor: pointer;
+  padding: 6px 10px;
+  font-weight: bold;
+  background: #e0e0e0;
+}
+
+/* -------- Boutons -------- */
+
+.proto-box {
+  padding: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.proto-btn {
+  padding: 4px 8px;
+  cursor: pointer;
+  border: 1px solid #999;
+  border-radius: 3px;
+  background: #fff;
+}
+
+.proto-btn:hover {
+  background: #e8e8e8;
+}
+
+/* -------- Visionneuse -------- */
+
+#protoView {
+  flex: 1;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+#protoView h3 {
+  margin: 0 0 6px 0;
+}
+
+#protoText {
+  flex: 1;
+  width: 100%;
+  resize: none;
+  font-family: monospace;
+  font-size: 13px;
+}

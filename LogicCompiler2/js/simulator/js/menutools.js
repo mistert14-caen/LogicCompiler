@@ -16,7 +16,7 @@ async function loadProtosOnly(m) {
   const res = await fetch('/LogicCompiler2/prototypes/' + m + '.txt');
   const text = await res.text();
 
-  // ?? récupération EXPLICITE du prototype logique
+  // ?? rÃ©cupÃ©ration EXPLICITE du prototype logique
   const proto = engine.importPrototype(text);
 
   const index = logicProto.length;

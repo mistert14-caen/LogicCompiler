@@ -12,7 +12,7 @@ LogicProto.prototype.updateROM = function () {
 
   let ce = engine.get(`${this.name}_CE`);
   //ce = 0;
-  // ROM désactivée
+  // ROM dÃ©sactivÃ©e
   if (ce > 0) {
     engine.set(`${this.name}_D`, 0);
     this.activeAddr = null;

@@ -161,7 +161,7 @@ export class LogicInput {
 
     doubleClicked() {
 
-      // priorité au label
+      // prioritÃ© au label
       if (this.label && this.isMouseOver()) alert('clic');
 
      // sinon comportement normal du composant

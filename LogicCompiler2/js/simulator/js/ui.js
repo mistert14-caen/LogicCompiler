@@ -7,7 +7,7 @@ const protoText = document.getElementById("protoText");
 const inputs    = document.getElementById("inputs");
 const leds      = document.getElementById("leds");
 
-// attendre que engine soit prêt
+// attendre que engine soit prÃªt
 function getEngine() {
   if (!engine) engine = window.engine;
   return engine;
@@ -55,6 +55,6 @@ function render() {
   }
 }
 
-// exposer seulement ce qui est appelé depuis HTML
+// exposer seulement ce qui est appelÃ© depuis HTML
 window.loadPrototype = loadPrototype;
 window.step = step;

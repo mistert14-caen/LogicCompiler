@@ -1,0 +1,25 @@
+# --- Prototype: DecTo7Seg ---
+
+[BLOCK SEG#]
+TYPE=SEG
+SYMBOL=SEG
+WIDTH=100
+HEIGHT=120
+SYMBOLE=SEG
+DESCRIPTION=Afficheur 7 segments commandés en signaux bianire
+CATEGORIE=E/S
+ORDER=5
+
+INPUTS=A;B;C;D
+OUTPUTS=SA;SB;SC;SD;SE;SF;SG
+
+# Équations 7 segments (common-cathode)
+# 1 = segment allumé
+
+EQUATIONS=SA= (A | C | /(B^D))
+EQUATIONS=SB= (/B | /(C^D))
+EQUATIONS=SC= (/C | B | D)
+EQUATIONS=SD= (A | C&/B | C&/D | /B&/D | B&/C&D)
+EQUATIONS=SE= (/B&/D | C&/D)
+EQUATIONS=SF= (/C&/D | B&/C | B&/D | A)
+EQUATIONS=SG= (A | B^C | B&/D)

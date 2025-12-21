@@ -1,0 +1,18 @@
+[BLOCK BUSAs#]
+TYPE=BLOCK
+SYMBOL=BUSAs
+CATEGORY=SAP
+DESCRIPTION=Bus d'adresse (sélecteur PC / IMM)
+POS=200,200
+WIDTH=100
+HEIGHT=100
+
+# Entrées de contrôle (activées par T1 et T4)
+INPUTS=T1;T4;PC;IMM
+
+# Sortie vers MAR
+OUTPUTS=A
+
+# ---- Équation : bus d'adresse combinatoire ----
+# Seule une des deux sources est active grâce au contrôleur
+EQUATIONS=A = (@T1 * PC) + (@T4 * IMM)
