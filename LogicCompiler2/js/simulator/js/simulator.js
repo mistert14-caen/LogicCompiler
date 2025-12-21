@@ -2,12 +2,11 @@ import { activeTool, currMouseAction } from "./menutools.js"
 import { MouseAction } from "./circuit_components/Enums.js"
 import { WireManager } from "./circuit_components/Wire.js";
 import { FileManager } from "./FileManager.js"
-//import { LogicProto } from "./circuit_components/proto/Proto.core.js";
-import "./circuit_components/proto/index.js";
+//import "./circuit_components/proto/index.js";
+import { PROTO_PATH , LogicProto} from "./circuit_components/proto/index.js";
 
 import { Node as LogicNode } from "./circuit_components/Node.js";
 import { INPUT_STATE } from "./circuit_components/Enums.js";
-
 
 export let wireMng;
 export let colorMouseOver = [0 ,0x7B, 0xFF];
@@ -15,7 +14,9 @@ export let fileManager = new FileManager();
 
 export let logicTimer = null;
 export const logicProto = [];
+export let started=false;
 
+window.protoIndex = [];
 /**
  * @todo TODO
  */
@@ -30,7 +31,7 @@ if (protoFile) {
       reader.onload = () => {
         engine.importPrototype(reader.result);
         const index = logicProto.length;
-        const cx = 50;
+        const cx = 350;
         const cy = 50;
         engine.buildProtoNodes(cx,cy,engine.proto, logicProto);
 
@@ -62,24 +63,89 @@ function stopLogicClock() {
 /**
  * @todo TODO
  */
+function injectProtoPanel(groups) {
+  const panel = document.getElementById("protoPanel");
+  if (!panel) return;
+
+  panel.innerHTML = "";
+
+  for (const group of groups) {
+
+    const details = document.createElement("details");
+    details.classList.add("cat-" + group.folder);
+
+    const summary = document.createElement("summary");
+    summary.textContent = group.title;
+    details.appendChild(summary);
+
+    const box = document.createElement("div");
+    box.className = "proto-box";
+
+    for (const model of group.files) {
+      const btn = document.createElement("button");
+      
 
 
-export function setup() {
+      // ✅ attributs simples
+      btn.setAttribute("folder", group.folder);
+      btn.setAttribute("model", model);
+      btn.setAttribute("tool", "PROTO");
+      btn.setAttribute("onclick", 'activeTool(this);');
+      btn.setAttribute("class",'"proto-btn list-group-item list-group-item-action pl-1">');
+
+
+
+      // SVG si présent
+      const img = document.createElement("img");
+      img.src = PROTO_PATH+`/js/simulator/img/${model}.svg`;
+      img.alt = model;
+      img.title = model;
+
+      img.onload = () => btn.appendChild(img);
+      img.onerror = () => btn.textContent = model;
+
+      box.appendChild(btn);
+    }
+
+    details.appendChild(box);
+    panel.appendChild(details);
+  }
+}
+
+
+async function setup() {
+
+ 
+  const canvHeight = windowHeight - 90;
+  let canvas = createCanvas(windowWidth - 115, canvHeight, P2D);
+  canvas.parent('canvas-sim');
+  document.getElementsByClassName("tools")[0].style.height = canvHeight;
+
+  try {
+    const res = await fetch(
+      "https://mistert.freeboxos.fr/"+PROTO_PATH+"/api/list_protos.php"
+    );
+
+    window.protoIndex = await res.json();   // ✅ ICI le vrai fix
+    console.log(window.protoIndex);          // Array(7)
+
+    // initialisation UI une fois les protos chargés
+    injectProtoPanel(window.protoIndex);
+    started = true; 
     
 
-    const canvHeight = windowHeight - 90;
-    let canvas = createCanvas(windowWidth - 115, canvHeight, P2D);
-   
-    canvas.parent('canvas-sim');
-    document.getElementsByClassName("tools")[0].style.height = canvHeight;
+  } catch (e) {
+    console.error("Erreur chargement prototypes", e);
+  }
 
-    wireMng = new WireManager();
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get("id");
-    startLogicClock(2); // 2 Hz par exemple
-    if (id) {
-      fileManager.loadFromServer(id);
-    }
+  wireMng = new WireManager();
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+
+  startLogicClock(2);
+  if (id) {
+    fileManager.loadFromServer(id);
+  }
 }
 
 /**
@@ -95,7 +161,10 @@ export function windowResized() {
 /**
  * @todo TODO
  */
-export function draw() {
+function draw() {
+
+ if (!started) return false;
+  
   background(0xFF);
 
   if (window.engine) {

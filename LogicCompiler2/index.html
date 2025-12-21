@@ -2,30 +2,38 @@
 <html lang="en">
 
 <head>
-	<!-- BOOTSTRAP STUFF -->
-	<meta charset="utf-8">
-	<meta name="description"
-		content="A logic circuit simulator made with p5.js library, useful for educational use. It can be used to simulate combinational and sequential circuits.">
-	<meta name="author" content="MisterT">
-	<link rel="stylesheet" href="js/vendor/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="js/simulator/css/simstyle.css">
-	<script src="js/vendor/js/jquery-3.3.1.slim.min.js"></script>
-	<script src="js/vendor/js/popper.min.js"></script>
-	<script src="js/vendor/js/bootstrap.min.js"></script>
-	<!-- p5 stuff -->
-	<script src="js/vendor/js/p5.min.js"></script>
-	<!-- Simulator stuff -->
-        <script src="js/simulator/js/parser.js"></script>
-	<script type="module" src="js/simulator/js/engine2.js"></script>
-	<script type="module" src="js/simulator/js/simulator.js"></script>
-        
-	<title>Logic Circuit Simulator</title>
+  <!-- Meta -->
+  <meta charset="utf-8">
+  <meta name="description"
+    content="A logic circuit simulator made with p5.js library, useful for educational use. It can be used to simulate combinational and sequential circuits.">
+  <meta name="author" content="MisterT">
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="js/vendor/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Simulator CSS -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- JS libs -->
+  <script src="js/vendor/js/jquery-3.3.1.slim.min.js"></script>
+  <script src="js/vendor/js/popper.min.js"></script>
+  <script src="js/vendor/js/bootstrap.min.js"></script>
+
+  <!-- p5.js -->
+  <script src="js/vendor/js/p5.min.js"></script>
+
+  <!-- Simulator -->
+  <script src="js/simulator/js/parser.js"></script>
+  <script type="module" src="js/simulator/js/engine2.js"></script>
+  <script type="module" src="js/simulator/js/simulator.js"></script>
+
+  <title>Logic Circuit Simulator</title>
 </head>
 
 <body>
 
-	<!-- Fixed navbar -->
+  <!-- Fixed navbar -->
 	<nav class="navbar navbar-expand-md navbar-dark bg-dark">
 		<a class="navbar-brand text-center" href="#">
 			Logic 
@@ -97,189 +105,24 @@
 			</ul>
 		</div>
 	</nav>
-	<!-- Begin page content -->
 
-	<div class="container-fluid pt-3">
-		<div class="row">
-			<div class="tools col-0 ml-3 pr-0 overflow-scroll" style="overflow-y: scroll;height: calc(100vh - 5rem);">
-				<div class="list-group float-right" style="min-width: 50px; max-width: 60px">
-					
-					<!--
-					<button type="button" tool="LogicInput" title="Logic Input" onclick="activeTool(this)"
-						class="list-group-item list-group-item-action pl-1">
-						<img src="js/simulator/img/LogicInput.svg" class="ml-2" width="32">
-					</button>
-					<button type="button" tool="LogicOutput" title="Logic Output" onclick="activeTool(this)"
-						class="list-group-item list-group-item-action pl-1">
-						<img src="js/simulator/img/LogicOutput.svg" class="ml-2" width="32">
-					</button>
+  <!-- ================= CONTENT ================= -->
+  <div class="container-fluid pt-3">
+  <div class="row">
 
-					<button type="button" tool="LogicValue" title="Logic Value" onclick="activeTool(this)"
-						class="list-group-item list-group-item-action pl-1">
-						<img src="js/simulator/img/LogicValue.svg" class="ml-2" width="32">
-					</button>
-					-->
+    <!-- TOOLBOX LEFT -->
+    <div class="tools col-2 pr-0 overflow-scroll"
+         style="height: calc(100vh - 5rem);">
+      <div id="protoPanel"></div>
+      <input type="file" id="protoFile" accept=".txt" hidden>
+    </div>
 
-                                        <button type="button" tool="PROTO" model="BTN" title="Logic Input" onclick="activeTool(this)"
-						class="list-group-item list-group-item-action pl-1">
-						<img src="js/simulator/img/LogicInput.svg" class="ml-2" width="32">
-					</button>
-					<button type="button" tool="PROTO" model="LED" title="LED" onclick="activeTool(this)"
-						class="list-group-item list-group-item-action pl-1">
-						<img src="js/simulator/img/LogicOutput.svg" class="ml-2" width="32">
-					</button>
+    <!-- CANVAS RIGHT -->
+    <div class="col-10 pl-0">
+      <div id="canvas-sim"></div>
+    </div>
 
-					<button type="button" tool="PROTO" model="VAL" title="Logic Value" onclick="activeTool(this)"
-						class="list-group-item list-group-item-action pl-1">
-						<img src="js/simulator/img/LogicValue.svg" class="ml-2" width="32">
-					</button>
-
-					<button type="button"  tool="PROTO" model="CLK" title="Clock2" onclick="activeTool(this)"
-						class="list-group-item list-group-item-action pl-1">
-						<img src="js/simulator/img/Clock.svg" width="50">
-					HORLOGE
-					</button>
-
-					
-					<button type="button" tool="PROTO" title="Label" model="LBL" onclick="activeTool(this)"
-						class="list-group-item list-group-item-action pl-1">
-						<!--<img src="js/simulator/img/LogicValue.svg" class="ml-2" width="32">-->
-					LABEL
-					</button>
-
-					<button type="button"
-        					tool="PROTO"
-						title="NOT GATE"
-                                                model="NOT"
-        					isGate="false"
-        					onclick="activeTool(this)"
-        					class="list-group-item list-group-item-action pl-1">
-    						<img src="js/simulator/img/NOT.svg" width="50">
-					</button>
-
-					<button type="button"
-        					tool="PROTO"
-						title="AND GATE"
-                                                model="AND"
-        					isGate="false"
-        					onclick="activeTool(this)"
-        					class="list-group-item list-group-item-action pl-1">
-    						<img src="js/simulator/img/AND.svg" width="50">
-					</button>
-					<button type="button"
-        					tool="PROTO"
-						title="NAND GATE"
-                                                model="NAND"
-        					isGate="false"
-        					onclick="activeTool(this)"
-        					class="list-group-item list-group-item-action pl-1">
-    						<img src="js/simulator/img/NAND.svg" width="50">
-					</button>
-
-					<button type="button"
-        					tool="PROTO"
-						title="OR GATE"
-                                                model="OR"
-        					isGate="false"
-        					onclick="activeTool(this)"
-        					class="list-group-item list-group-item-action pl-1">
-    						<img src="js/simulator/img/OR.svg" width="50">
-					</button>
-					<button type="button"
-        					tool="PROTO"
-						title="NOR GATE"
-                                                model="NOR"
-        					isGate="false"
-        					onclick="activeTool(this)"
-        					class="list-group-item list-group-item-action pl-1">
-    						<img src="js/simulator/img/NOR.svg" width="50">
-					</button>
-					<button type="button"
-        					tool="PROTO"
-						title="XOR GATE"
-                                                model="XOR"
-        					isGate="false"
-        					onclick="activeTool(this)"
-        					class="list-group-item list-group-item-action pl-1">
-    						<img src="js/simulator/img/XOR.svg" width="50">
-					</button>
-					<button type="button"
-        					tool="PROTO"
-						title="NOT XOR GATE"
-                                                model="NXOR"
-        					isGate="false"
-        					onclick="activeTool(this)"
-        					class="list-group-item list-group-item-action pl-1">
-    						<img src="js/simulator/img/NXOR.svg" width="50">
-					</button>
-					<button type="button"
-        					tool="PROTO"
-						title="RS FF"
-                                                model="RS"
-        					isGate="false"
-        					onclick="activeTool(this)"
-        					class="list-group-item list-group-item-action pl-1">
-    						<img src="js/simulator/img/RS.svg" width="50">
-					</button>
-                                        <button type="button"
-        					tool="PROTO"
-						title="D_FF"
-                                                model="D"
-        					isGate="false"
-        					onclick="activeTool(this)"
-        					class="list-group-item list-group-item-action pl-1">
-    						<img src="js/simulator/img/D.svg" width="50">
-					</button>
-                                         <button type="button"
-        					tool="PROTO"
-						title="JK_FF"
-                                                model="JK"
-        					isGate="false"
-        					onclick="activeTool(this)"
-        					class="list-group-item list-group-item-action pl-1">
-    						<img src="js/simulator/img/JK.svg" width="50">
-					</button>
-					<button type="button"
-        					tool="PROTO"
-						title="T_FF"
-                                                model="T"
-        					isGate="false"
-        					onclick="activeTool(this)"
-        					class="list-group-item list-group-item-action pl-1">
-    						<img src="js/simulator/img/T.svg" width="50">
-					</button>
-                                        <button type="button"
-        					tool="PROTO"
-						title="cB"
-                                                caption="cB"
-                                                model="cB"
-        					isGate="false"
-        					onclick="activeTool(this)"
-        					class="list-group-item list-group-item-action pl-1">
-    						<!--<img src="js/simulator/img/T.svg" width="50">-->
-					COMPT. <br />BINAIRE
-					</button>
-                                         <button type="button"
-        					tool="PROTO"
-						title="AFFICHEUR 7 SEGMENTS"
-                                                model="SEG"
-        					isGate="false"
-        					onclick="activeTool(this)"
-        					class="list-group-item list-group-item-action pl-1">
-    						<!--<img src="js/simulator/img/T.svg" width="50">-->
-					AFFICH.<br />7SEGS
-					</button>
-
-					<input type="file" id="protoFile" accept=".txt" hidden>
-					
-				</div>
-			</div>
-			<div class="col-10 pl-0">
-				<!-- Simulator Canvas -->
-				<div id="canvas-sim"></div>
-			</div>
-		</div>
-	</div>
+  </div>
+</div>
 </body>
-
 </html>

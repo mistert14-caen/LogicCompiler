@@ -1,5 +1,5 @@
 import { logicProto, wireMng } from "./simulator.js"
-import "./circuit_components/proto/index.js";
+import { PROTO_PATH, LogicProto } from "./circuit_components/proto/index.js";
 import { IC_type } from "./circuit_components/Enums.js";
 import { currentID, nodeList, resetNodeIDs } from "./circuit_components/Node.js";
 import { Wire } from "./circuit_components/Wire.js";
@@ -137,7 +137,7 @@ async loadFromServer(id) {
 
   if (!id) return;
 
-  const url = `https://mistert.freeboxos.fr/LogicCompiler2/examples/${id}.json`;
+  const url = "https://mistert.freeboxos.fr/"+PROTO_PATH+"/examples/${id}.json";
 
   try {
     const res = await fetch(url);
