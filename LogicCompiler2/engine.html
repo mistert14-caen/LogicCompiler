@@ -20,19 +20,25 @@
     <h2>LogicCompiler – Page de test</h2>
 
     <h3>Prototype texte</h3>
-    <textarea id="protoText">
-    </textarea>
+    
+   <textarea id="protoText"></textarea>
 
-    <button onclick="loadPrototype()">Charger prototype</button>
+   <div>
+     <button id="btnLoad">Load</button>
+     <button id="btnStep">Step Comb</button>
+     <button id="btnStepSeq">Step Seq</button>
+   </div>
+
+<div id="inputs"></div>
+<div id="leds"></div>
+
+<script type="module" src="ui.js"></script>
+
+
 
     <div class="panel">
       <h3>Entrées</h3>
       <div id="inputs"></div>
-    </div>
-
-    <div class="panel">
-      <h3>Simulation</h3>
-      <button onclick="step()">STEP</button>
     </div>
 
     <div class="panel">
