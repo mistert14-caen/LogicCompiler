@@ -1,16 +1,21 @@
-# --- Blocs ---
 [BLOCK T#]
 TYPE=BLOCK
 SYMBOL=T
 CATEGORY=SEQUENTIELLE
-DESCRIPTION=BASCULE_T
+SEQUENTIAL=TRUE
+DESCRIPTION=BASCULE T
 ORDER=4
-POS=200,200
 WIDTH=80
 HEIGHT=80
-INPUTS=T;CLK
-OUTPUTS=Q;nQ
-DY=32
-EQUATIONS=Q=(/CLK&(T&/@Q  |  /T&@Q)) | (CLK&@Q)
-EQUATIONS=nQ=/Q
+INPUTS=T;;CLK
+OUTPUTS=Q;;nQ
+DY=15
 
+# --- Next state combinatoire ---
+EQUATIONS=NQ=@Q ^ @T
+
+# --- Stockage (front montant modélisé) ---
+EQUATIONS=Q=(CLK&@NQ) | (/CLK&@Q)
+
+# --- Sortie complémentée ---
+EQUATIONS=nQ=/Q

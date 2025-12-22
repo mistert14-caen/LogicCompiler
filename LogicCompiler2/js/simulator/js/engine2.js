@@ -198,11 +198,9 @@ importPrototype(text) {
   set(name, v) { this.signals[name] = Number(v); }
   get(name) { return this.signals[name] ?? 0; }
 
-
 tickSequential() {
   const prev = structuredClone(this.signals);
   const next = structuredClone(this.signals);
-
 
   for (let eq of this.seqEqs) {
     const v = eq.eval(prev, prev);
@@ -212,6 +210,8 @@ tickSequential() {
   this.last = prev;
   this.signals = next;
 }
+
+  
 
   step() {
     for (let eq of this.combEqs) {
