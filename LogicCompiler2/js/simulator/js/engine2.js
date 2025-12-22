@@ -168,7 +168,7 @@ importPrototype(text) {
 
   // --- extraction du nom de bloc ---
   const m = text.match(/\[BLOCK\s+([^\]]+)\]/);
-  console.trace("MODULE:",m);
+  //console.trace("MODULE:",m);
   const baseName = m ? m[1] : "PROTO";
 
   // --- compteur par type ---

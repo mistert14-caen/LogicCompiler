@@ -14,7 +14,7 @@ OUTPUTS=Q;;nQ
 DY=15
 
 EQUATIONS=NQ = J & /@Q  |  /K & @Q
-EQUATIONS=Q = CLK & @NQ  |  /CLK & @Q
+EQUATIONS=Q = /CLK & @NQ  |  CLK & @Q
 EQUATIONS=nQ = /Q
 
 
