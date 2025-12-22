@@ -29,23 +29,22 @@ class LogicPrototype {
 }
 
 class LogicEquation {
-
   constructor(output, tokens) {
     this.output = output;
     this.tokens = tokens;
   }
 
-  eval(signals, last) {
-  return evalRPN(this.tokens, name => {
-
-    if (name.startsWith("@")) {
-      const s = name.slice(1);
-      return last[s] ?? 0;
-    }
-
-    return signals[name] ?? 0;
-  });
-}
+  bit(v) {
+    return v ? 1 : 0;
+  }
+  eval(curr, last) {
+    return evalRPN(this.tokens, name => {
+      if (name.startsWith("@")) {
+        return last[name.slice(1)] ?? 0;
+      }
+      return curr[name] ?? 0;
+    });
+  }
 }
 
 class LogicCompiler {
@@ -70,17 +69,16 @@ constructor() {
      API PUBLIQUE (inchangée)
      ======================= */
 
-integrateProto(proto) {
+ integrateProto(proto) {
+
   const inputs    = Array.isArray(proto.inputs)    ? proto.inputs    : [];
   const outputs   = Array.isArray(proto.outputs)   ? proto.outputs   : [];
   const internals = Array.isArray(proto.internals) ? proto.internals : [];
 
   for (const s of [...inputs, ...outputs, ...internals]) {
     if (!s || s.endsWith("_")) continue;
-
     if (!(s in this.signals)) {
       this.signals[s] = 0;
-      this.last[s] = 0;
     }
   }
 
@@ -166,29 +164,11 @@ pullOutputsFromEngine(lP,lB) {
 
 }
 
-initSignalsFromEquations(proto) {
-  for (const eq of proto.equations) {
-    for (const tok of eq.tokens) {
-      if (tok.type !== "VAR") continue;
-
-      const name = tok.name.startsWith("@")
-        ? tok.name.slice(1)
-        : tok.name;
-
-      if (!(name in this.signals)) {
-        this.signals[name] = 0;
-        this.last[name] = 0;
-      }
-    }
-  }
-}
-
-
 importPrototype(text) {
 
   // --- extraction du nom de bloc ---
   const m = text.match(/\[BLOCK\s+([^\]]+)\]/);
-  console.trace("MODULE:",m);
+  //console.trace("MODULE:",m);
   const baseName = m ? m[1] : "PROTO";
 
   // --- compteur par type ---
@@ -210,48 +190,36 @@ importPrototype(text) {
 
   // --- intégration moteur ---
   this.integrateProto(proto);
-  this.initSignalsFromEquations(proto);
   this.proto = proto;
   this.protos.push(proto);
   return proto;
 }
 
-
-  set(name, v) {
-    
-    const oldVal = this.signals[name] ?? 0;
-    const newVal = Number(v) ?? 0;
-    this.last[name] = oldVal;
-    this.signals[name] = newVal;
-    console.log(name,',',oldVal,'-->',newVal);
-    if (name.startsWith('CLK')) {
-       if (this.signals[name+'#FM'] == 1) this.signals[name+'.FM']=0;
-       else this.signals[name+'#FM'] =(1-oldVal) * newVal;
-    }
-  }
-
-
-get(name) { return this.signals[name] ?? 0; }
-
+  set(name, v) { this.signals[name] = Number(v); }
+  get(name) { return this.signals[name] ?? 0; }
 
 tickSequential() {
-   this.step(true);  
+  const prev = structuredClone(this.signals);
+  const next = structuredClone(this.signals);
+
+  for (let eq of this.seqEqs) {
+    const v = eq.eval(prev, prev);
+    next[eq.output] = v;
+  }
+
+  this.last = prev;
+  this.signals = next;
 }
 
-step(mode=false) {
-  if (mode) 
-  for (let eq of this.seqEqs) {
-    const v = eq.eval(this.signals,this.last);
-    this.set(eq.output, v);
-  }
-  for (let eq of this.combEqs) {
-    const v = eq.eval(this.signals,this.last);
-    this.set(eq.output, v);
+  
 
+  step() {
+    for (let eq of this.combEqs) {
+       const v = eq.eval(this.signals, this.signals);
+       this.signals[eq.output] = v;
+    }
   }
  
-
-}
 
   /* =======================
      Parsing / patch (V1 OK)
@@ -318,7 +286,7 @@ parseEquation(line) {
   const [lhs, rhs] = line.split("=");
 
   const tokens = toRPN(tokenize(rhs.trim()));
-  const isSeq  = rhs.includes('CLK');
+  const isSeq  = rhs.includes("CLK");
 
   const eq = new LogicEquation(lhs.trim(), tokens);
 
@@ -330,3 +298,4 @@ parseEquation(line) {
   
 }
 window.engine = new LogicCompiler();
+
