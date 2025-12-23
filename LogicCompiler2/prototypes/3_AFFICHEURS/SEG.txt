@@ -15,11 +15,15 @@ OUTPUTS=SA;SB;SC;SD;SE;SF;SG
 
 # Équations 7 segments (common-cathode)
 # 1 = segment allumé
+# Correction: si valeur >=10 (BCD invalide), afficher "0"
 
-EQUATIONS=SA= (A | C | /(B^D))
-EQUATIONS=SB= (/B | /(C^D))
-EQUATIONS=SC= (/C | B | D)
-EQUATIONS=SD= (A | C&/B | C&/D | /B&/D | B&/C&D)
-EQUATIONS=SE= (/B&/D | C&/D)
-EQUATIONS=SF= (/C&/D | B&/C | B&/D | A)
-EQUATIONS=SG= (A | B^C | B&/D)
+INTERNALS=INV
+EQUATIONS=INV=(A & (B | C))
+
+EQUATIONS=SA=(INV | (A | C | /(B^D)))
+EQUATIONS=SB=(INV | (/B | /(C^D)))
+EQUATIONS=SC=(INV | (/C | B | D))
+EQUATIONS=SD=(INV | (A | C&/B | C&/D | /B&/D | B&/C&D))
+EQUATIONS=SE=(INV | (/B&/D | C&/D))
+EQUATIONS=SF=(INV | (/C&/D | B&/C | B&/D | A))
+EQUATIONS=SG=(/INV & (A | B^C | B&/D))

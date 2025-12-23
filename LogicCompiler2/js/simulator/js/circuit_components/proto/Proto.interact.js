@@ -62,6 +62,18 @@ LogicProto.prototype.onDblClickVAL = function () {
   }
 };
 
+LogicProto.prototype.onDblClickOCST = function () {
+ 
+ const newValue = prompt("Octet entre 0 et 255 :", this.value);
+
+
+  if (window.engine) {
+    engine.signals[this.name+'_VAL']= newValue;
+    this.value=newValue;
+  }
+};
+
+
 LogicProto.prototype.onDblClickLBL = function () {
 
   const newName = prompt("Nom du signal :", this.label);
@@ -76,6 +88,7 @@ LogicProto.prototype.getDoubleClickHandler = function () {
     case "LBL":  return this.onDblClickLBL;
     case "ROM":  return this.onDblClickROM;
     case "VAL":  return this.onDblClickVAL;
+    case "OCST":  return this.onDblClickOCST;
 
     default:     return null;
   }

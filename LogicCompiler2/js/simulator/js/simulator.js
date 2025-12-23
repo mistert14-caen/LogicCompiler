@@ -29,7 +29,9 @@ if (protoFile) {
       if (!file) return;
       const reader = new FileReader();
       reader.onload = () => {
+        engine.isUserImporting = true;
         engine.importPrototype(reader.result);
+        engine.isUserImporting = false;
         const index = logicProto.length;
         const cx = 350;
         const cy = 50;
@@ -40,6 +42,22 @@ if (protoFile) {
         };
        reader.readAsText(file);
     };
+}
+
+function preloadUserPrototypes() {
+  for (let key in localStorage) {
+    if (!key.startsWith("proto_USER_")) continue;
+
+    const text = localStorage[key];
+
+    // ⚠️ on ne veut PAS créer d’instance
+    // on veut juste remplir protoCache
+    const m = text.match(/\[BLOCK\s+([^\]]+)\]/);
+    const baseName = m ? m[1] : null;
+    if (!baseName) continue;
+
+    engine.protoCache[baseName] = text;
+  }
 }
 
 function engineTick() {
@@ -60,6 +78,26 @@ function stopLogicClock() {
   }
 }
 
+
+function buildUserGroup() {
+  const files = [];
+
+  for (const k of Object.keys(localStorage)) {
+    if (!k.startsWith("proto_USER_")) continue;
+
+    // ex: proto_USER_AND# → AND
+    const baseName = k.substring("proto_USER_".length);
+    files.push(baseName.replace("#", ""));
+  }
+
+  if (files.length === 0) return null;
+
+  return {
+    folder: "USER",
+    title: "USER",
+    files: files.sort()
+  };
+}
 /**
  * @todo TODO
  */
@@ -68,6 +106,12 @@ function injectProtoPanel(groups) {
   if (!panel) return;
 
   panel.innerHTML = "";
+
+  const userGroup = buildUserGroup();
+  //alert(userGroup);
+  if (userGroup) groups.push(userGroup);
+
+  //console.log(groups);
 
   for (const group of groups) {
 
@@ -144,9 +188,12 @@ async function setup() {
 
   wireMng = new WireManager();
   const params = new URLSearchParams(window.location.search);
-  const id = params.get("id");
+  
+  preloadUserPrototypes();
 
   startLogicClock(5);
+  
+  const id = params.get("id");
   if (id) {
     fileManager.loadFromServer(id);
   }

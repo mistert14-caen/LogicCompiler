@@ -30,25 +30,48 @@ function restoreWires(ws) {
 
 
 async function loadProtosOnly(p) {
-  console.log(p);
-  const res = await fetch(PROTO_PATH+'/prototypes/' + p.folder+'/'+p.type + '.txt');
-  const text = await res.text();
+  //console.log("LOAD PROTO:", p);
 
+  let text;
+
+  // 🔹 CAS USER
+  if (p.folder === "USER") {
+    const baseName = p.type + "#";
+
+    text =
+      engine.protoCache[baseName] ||
+      localStorage.getItem("proto_USER_" + baseName);
+
+    if (!text) {
+      console.error("Prototype USER introuvable :", p.type);
+      return;
+    }
+
+  } else {
+
+    // 🔹 CAS SYSTEME
+    const res = await fetch(
+      PROTO_PATH + '/prototypes/' + p.folder + '/' + p.type + '.txt'
+    );
+    text = await res.text();
+  }
+
+  // 🔹 Import logique (identique)
   const proto = engine.importPrototype(text);
+  proto.folder = p.folder;
+
+  // 🔹 Reconstruction UI
   engine.buildProtoNodes(p.posX, p.posY, proto, logicProto);
 
-  // ?? instance UI réellement créée
+  // 🔹 Instance UI réellement créée
   const ui = logicProto[logicProto.length - 1];
 
+  // 🔹 Cas particulier : LABEL
   if (p.type === "LBL") {
-
-    // le signal doit être le label sauvegardé
     const signalName = p.label;
 
-    // applique la logique proprement
     ui.renameLabelSignal(signalName);
 
-    // sécurité moteur
     if (window.engine && engine.signals && !(signalName in engine.signals)) {
       engine.set(signalName, 0);
     }

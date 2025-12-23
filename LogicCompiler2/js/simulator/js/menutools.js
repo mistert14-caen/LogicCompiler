@@ -10,22 +10,39 @@ export let currMouseAction = MouseAction.EDIT;
 
 
 
-async function loadProtosOnly(f,m) {
-  //console.trace("LOAD:",m);
+async function loadProtosOnly(f, m) {
+  //console.trace("LOAD:", f, m);
 
-  const res = await fetch(PROTO_PATH+'/prototypes/' +f+'/'+m+ '.txt');
-  const text = await res.text();
+  let text;
 
-  
-  // ?? récupération EXPLICITE du prototype logique
+  // 🔹 CAS USER : depuis le cache / localStorage
+  if (f === "USER") {
+
+    const baseName = m + "#";
+
+    text =
+      engine.protoCache[baseName] ||
+      localStorage.getItem("proto_USER_" + baseName);
+
+    if (!text) {
+      console.error("Prototype USER introuvable :", m);
+      return;
+    }
+
+  } else {
+
+    // 🔹 CAS NORMAL : fetch serveur
+    const res = await fetch(PROTO_PATH + '/prototypes/' + f + '/' + m + '.txt');
+    text = await res.text();
+  }
+
+  // 🔹 Import logique (identique dans les deux cas)
   const proto = engine.importPrototype(text);
   proto.folder = f;
-  const index = logicProto.length;
+
   const cx = 250;
   const cy = 50;
 
-  // ?? on passe le proto explicitement
- 
   engine.buildProtoNodes(cx, cy, proto, logicProto);
 }
 

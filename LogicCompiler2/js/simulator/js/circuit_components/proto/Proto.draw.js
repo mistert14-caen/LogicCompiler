@@ -11,7 +11,7 @@ LogicProto.prototype.dec2hex = function (val) {
      const v = val & 0xFF;
      const dec = v.toString(10);
      const hex = v.toString(16).toUpperCase().padStart(2, "0");
-     return `${dec} (0x${hex})`;
+     return `${dec} \n(0x${hex})`;
 }  
 LogicProto.prototype.draw = function () {
     
@@ -84,44 +84,73 @@ LogicProto.prototype.drawLED = function () {
 };
 
 
-  LogicProto.prototype.drawDefaultProto = function (show=true) {
+ LogicProto.prototype.drawDefaultProto = function (show = true) {
 
-    if (this.icon) {
-      image(
-        this.icon,
-        this.posX - this.width / 2,
-        this.posY - this.height / 2,
-        this.width,
-        this.height
-      );
-    } else {
-      strokeWeight(3);
-      fill(30);
-      rectMode(CENTER);
-      rect(this.posX, this.posY, this.width, this.height, 6);
-
-      noStroke();
-      fill(255);
-      textAlign(CENTER, CENTER);
-      textSize(12);
-
-     
-
-
-     if (this.type === "LBL")
-        text(this.label, this.posX, this.posY);
-     else if (this.type === "DEC")
-        text(this.dec2hex(engine.signals[this.name+'_A']), this.posX, this.posY);
-     else if (this.type === "VAL")
-        text(this.dec2hex(this.value), this.posX, this.posY);
-     else
-        text(this.name, this.posX, this.posY);
-    }
-
+  // ======================
+  // 1. Fond / icône
+  // ======================
+  if (this.icon) {
+    image(
+      this.icon,
+      this.posX - this.width / 2,
+      this.posY - this.height / 2,
+      this.width,
+      this.height
+    );
+  } else {
+    strokeWeight(3);
+    fill(30);
+    rectMode(CENTER);
+    rect(this.posX, this.posY, this.width, this.height, 6);
   }
 
+  // ======================
+  // 2. Nom du bloc (haut)
+  // ======================
+  push();
+  noStroke();
+  fill(30);
+  textAlign(CENTER, TOP);
+  textSize(8);
+
+  const title = this.name;
+  text(
+    title,
+    this.posX,
+    this.posY - this.height / 2 -10
+  );
+  pop();
+  
+ // ======================
+// 3. Contenu central (EXCEPTIONS)
+// ======================
+let content = null;
+textAlign(CENTER, CENTER);
+
+if (this.type === "LBL") {
+  content = this.label;
+}
+else if (this.type === "DEC") {
+  const v = engine.signals[this.name + "_A"] ?? 0;
+  content = this.dec2hex(v);
+}
+else if (this.type === "VAL" || this.type === "OCST") {
+  content = this.dec2hex(this.value);
+}
+
+if (content !== null) {
+  push();
+  noStroke();
+  fill(255);
+  textSize(12);
+  textLeading(12);        // 🔑 espace entre les lignes
+  text(content, this.posX, this.posY + 2);
+  pop();
+}
+}
 
 
+/*
 LogicProto.prototype.drawVAL = function () {
 if (!window.engine) return;
 
@@ -143,7 +172,7 @@ if (!window.engine) return;
 
     
 }
-
+*/
 LogicProto.prototype.drawROM = function () {
 
   const x = this.posX;
