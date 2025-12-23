@@ -1,6 +1,6 @@
 import { logicProto } from "./simulator.js";
 import { MouseAction, syncType } from "./circuit_components/Enums.js"
-import { PROTO_PATH,LogicProto } from "./circuit_components/proto/index.js";
+import { PROTO_PATH, LogicProto } from "./circuit_components/proto/index.js";
 
 export let currMouseAction = MouseAction.EDIT;
 
@@ -10,15 +10,16 @@ export let currMouseAction = MouseAction.EDIT;
 
 
 
-async function loadProtosOnly(m) {
-  console.trace("LOAD:",m);
+async function loadProtosOnly(f,m) {
+  //console.trace("LOAD:",m);
 
-  const res = await fetch(PROTO_PATH+'/prototypes/' + m + '.txt');
+  const res = await fetch(PROTO_PATH+'/prototypes/' +f+'/'+m+ '.txt');
   const text = await res.text();
 
+  
   // ?? récupération EXPLICITE du prototype logique
   const proto = engine.importPrototype(text);
-
+  proto.folder = f;
   const index = logicProto.length;
   const cx = 250;
   const cy = 50;
@@ -37,7 +38,7 @@ export function activeTool(elTool) {
          const f = elTool.getAttribute("folder") ?? null;
          //console.log(f);
 
-         loadProtosOnly(f +'/'+ t).catch(err => {
+         loadProtosOnly(f,t).catch(err => {
          console.error("Erreur chargement proto", f +'/'+ t, err);
        });
        return;

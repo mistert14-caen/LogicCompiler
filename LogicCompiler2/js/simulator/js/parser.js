@@ -284,7 +284,7 @@ function test(expr, vars = {}) {
   const v = evalRPN(rpn, name => vars[name] ?? 0);
   console.log(expr, vars, "=>", v);
 }
-
+/*
 test("A & B", { A: 0, B: 0 });
 test("A & B", { A: 0, B: 1 });
 test("A & B", { A: 1, B: 0 });
@@ -292,3 +292,4 @@ test("A & B", { A: 1, B: 1 });
 test("A & B");
 test("A | B");
 test("A ^ B");
+*/

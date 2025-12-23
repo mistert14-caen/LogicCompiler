@@ -39,6 +39,7 @@ export class LogicProto {
     this.type  = type;
     this.name  = name;   // nom du proto
     this.label = name;   // nom logique / signal (LBL)
+    this.value = 0;  
 
     this.icon = null;
 

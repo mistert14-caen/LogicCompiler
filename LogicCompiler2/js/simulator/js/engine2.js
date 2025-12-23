@@ -8,9 +8,10 @@ import { INPUT_STATE } from "./circuit_components/Enums.js";
 
 
 class LogicPrototype {
-  constructor(name) {
+  constructor(name,folder=null) {
     // Nom du composant (ex: AND0, NOT1)
     
+    this.folder = folder;  
     this.name = name;
     this.type=null;
     this.label='LBL';
@@ -102,6 +103,7 @@ buildProtoNodes(cx,cy,proto, lP) {
   comp.height = proto.height;
   if (proto.label) comp.label = proto.label;
   comp.dy = proto.dy;
+  comp.folder = proto.folder;
   const DY = comp.dy;
   // --- INPUTS ---
   let y0 = -((proto.inputs.length - 1) * DY) / 2;

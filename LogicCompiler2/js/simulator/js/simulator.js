@@ -3,7 +3,7 @@ import { MouseAction } from "./circuit_components/Enums.js"
 import { WireManager } from "./circuit_components/Wire.js";
 import { FileManager } from "./FileManager.js"
 //import "./circuit_components/proto/index.js";
-import { PROTO_PATH , LogicProto} from "./circuit_components/proto/index.js";
+import { PROTO_PATH , SVGS, LogicProto} from "./circuit_components/proto/index.js";
 
 import { Node as LogicNode } from "./circuit_components/Node.js";
 import { INPUT_STATE } from "./circuit_components/Enums.js";
@@ -79,7 +79,9 @@ function injectProtoPanel(groups) {
     details.appendChild(summary);
 
     const box = document.createElement("div");
-    box.className = "proto-box";
+    box.setAttribute("class",'"proto-box">');
+
+
 
     for (const model of group.files) {
       const btn = document.createElement("button");
@@ -91,19 +93,21 @@ function injectProtoPanel(groups) {
       btn.setAttribute("model", model);
       btn.setAttribute("tool", "PROTO");
       btn.setAttribute("onclick", 'activeTool(this);');
-      btn.setAttribute("class",'"proto-btn list-group-item list-group-item-action pl-1">');
-
-
-
-      // SVG si présent
-      const img = document.createElement("img");
-      img.src = PROTO_PATH+`/js/simulator/img/${model}.svg`;
-      img.alt = model;
-      img.title = model;
-
-      img.onload = () => btn.appendChild(img);
-      img.onerror = () => btn.textContent = model;
-
+      btn.className="btn proto-btn";
+      
+     
+     const test =  SVGS.includes(model);
+     //console.log(model,'',test);
+      if (test) {
+      	// SVG si présent
+        const img = document.createElement("img");
+        img.src = PROTO_PATH+`/js/simulator/img/${model}.svg`;
+        img.alt = model;
+        img.title = model;
+        img.onload = () => btn.appendChild(img);
+     } else {
+          btn.textContent = model;
+      }
       box.appendChild(btn);
     }
 
@@ -127,7 +131,7 @@ async function setup() {
     );
 
     window.protoIndex = await res.json();   // ✅ ICI le vrai fix
-    console.log(window.protoIndex);          // Array(7)
+    //console.log(window.protoIndex);          // Array(7)
 
     // initialisation UI une fois les protos chargés
     injectProtoPanel(window.protoIndex);
@@ -142,7 +146,7 @@ async function setup() {
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
 
-  startLogicClock(2);
+  startLogicClock(5);
   if (id) {
     fileManager.loadFromServer(id);
   }

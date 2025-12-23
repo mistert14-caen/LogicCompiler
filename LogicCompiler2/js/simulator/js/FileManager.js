@@ -1,5 +1,5 @@
 import { logicProto, wireMng } from "./simulator.js"
-import { PROTO_PATH, LogicProto } from "./circuit_components/proto/index.js";
+import { PROTO_PATH, SVGS, LogicProto } from "./circuit_components/proto/index.js";
 import { IC_type } from "./circuit_components/Enums.js";
 import { currentID, nodeList, resetNodeIDs } from "./circuit_components/Node.js";
 import { Wire } from "./circuit_components/Wire.js";
@@ -30,8 +30,8 @@ function restoreWires(ws) {
 
 
 async function loadProtosOnly(p) {
-
-  const res = await fetch('/LogicCompiler2/prototypes/' + p.type + '.txt');
+  console.log(p);
+  const res = await fetch(PROTO_PATH+'/prototypes/' + p.folder+'/'+p.type + '.txt');
   const text = await res.text();
 
   const proto = engine.importPrototype(text);
@@ -137,7 +137,7 @@ async loadFromServer(id) {
 
   if (!id) return;
 
-  const url = "https://mistert.freeboxos.fr/"+PROTO_PATH+"/examples/${id}.json";
+  const url = `https://mistert.freeboxos.fr/${PROTO_PATH}/examples/${id}.json`;
 
   try {
     const res = await fetch(url);
@@ -194,25 +194,6 @@ async loadFromServer(id) {
     			 return undefined;
                     case "output":
                     case "input":
-                    case "nodeSet":
-                    case "nodeReset":
-                    case "nodeClock":
-                    case "nodeD":
-                    case "nodeT":
-                    case "nodeJ":
-                    case "nodeK":
-                    case "nodeQ":
-                    case "nodeNotQ":
-                    case "andGate_NotQ":
-                    case "andGate_Q":
-                    case "ff_D":
-                    case "orGate":
-                    case "gateSet":
-                    case "gateReset":
-                    case "asyncLatch":
-                    case "master":
-                    case "slave":
-                    case "srLatchSync":
                     case "startNode":
                     case "endNode":
                         return undefined;
@@ -222,5 +203,6 @@ async loadFromServer(id) {
                 return value;
             }, '\t');
         return jsonWorkspace;
+        console.log(jsonWorkspace);
     }
 }

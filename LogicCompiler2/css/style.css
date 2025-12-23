@@ -1,14 +1,50 @@
-/* ===========================
-   GLOBAL
-   =========================== */
-
-body {
-  margin: 0;
-  font-family: sans-serif;
+summary.proto-summary {
+  display: block;
 }
 
-input[type="file"] {
+summary.proto-summary::marker,
+summary.proto-summary::-webkit-details-marker {
   display: none;
+}
+
+.proto-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  width: 110px:
+}
+
+#protoPanel {
+  width: 130px;
+}
+//.tools{
+//   width: 110px;
+//}
+
+/* 🔥 OVERRIDE BOOTSTRAP */
+.proto-btn {
+  display: inline-flex !important;
+  width: 42px !important;
+  height: 42px;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 1px;
+  cursor: pointer;
+
+  border: 1px solid #999;
+  border-radius: 3px;
+  background: #fff;
+
+  font-size: 10px;
+}
+
+.proto-btn img {
+  max-width: 36px;
+  max-height: 36px;
+  object-fit: contain;
+  pointer-events: none;
 }
 
 .navbar-brand {
@@ -32,80 +68,6 @@ input[type="file"] {
     display: inline-flex;
 }
 
-
-
-/* ===========================
-   TOOLBOX / PROTOTYPES
-   =========================== */
-
-#protoPanel {
-  width: 140px;
-  padding: 1px;
-  overflow-y: auto;
-  background: #ffffff;
-}
-
-/* ===========================
-   PROTO BUTTONS
-   =========================== */
-
-.proto-box {
-  padding: 1px;
-  display: inline;
-  //flex-wrap: wrap;
-  width: auto;
-  gap: 1px;
-}
-
-.proto-btn {
-  width: 40px;
-  height: 40px;              /* 🔒 hauteur FIXE */
-  //display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 2px;
-  cursor: pointer;
-
-  border: 1px solid #999;
-  border-radius: 3px;
-  background: #fff;
-
-  font-size: 11px;
-  text-align: center;
-}
-
-.proto-btn img {
-  max-width: 100%;
-  max-height: 100%;          /* 🔒 jamais dépasser le bouton */
-  object-fit: contain;
-  display: block;
-}
-
-
-.proto-btn:hover {
-  background: #e8e8e8;
-}
-
-/* ===========================
-   OPTIONAL : PROTO VIEWER
-   =========================== */
-
-#protoView {
-  flex: 1;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-}
-
-#protoView h3 {
-  margin: 0 0 6px 0;
-}
-
-#protoText {
-  flex: 1;
-  width: 100%;
-  resize: none;
-  font-family: monospace;
-  font-size: 13px;
+input[type="file"] {
+    display: none;
 }

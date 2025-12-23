@@ -6,7 +6,13 @@ import { LogicProto } from "./Proto.core.js";
      DRAW
      ============================================================ */
 
-  
+LogicProto.prototype.dec2hex = function (val) {
+
+     const v = val & 0xFF;
+     const dec = v.toString(10);
+     const hex = v.toString(16).toUpperCase().padStart(2, "0");
+     return `${dec} (0x${hex})`;
+}  
 LogicProto.prototype.draw = function () {
     
 
@@ -27,8 +33,6 @@ LogicProto.prototype.draw = function () {
       this.drawSEG();
     } else if (this.type === "DICE") {
       this.drawDICE();
-    }  else if (this.type === "VAL") {
-      this.drawVAL();
     }  else if (this.type === "LED") {
       this.drawLED();
     } else if (this.type === "ROM") {
@@ -44,6 +48,8 @@ LogicProto.prototype.draw = function () {
       n.draw();
     }
   }
+
+
 
 LogicProto.prototype.drawLED = function () {
 
@@ -78,7 +84,7 @@ LogicProto.prototype.drawLED = function () {
 };
 
 
-  LogicProto.prototype.drawDefaultProto = function () {
+  LogicProto.prototype.drawDefaultProto = function (show=true) {
 
     if (this.icon) {
       image(
@@ -99,13 +105,22 @@ LogicProto.prototype.drawLED = function () {
       textAlign(CENTER, CENTER);
       textSize(12);
 
-      if (this.type === "LBL")
+     
+
+
+     if (this.type === "LBL")
         text(this.label, this.posX, this.posY);
-      else
+     else if (this.type === "DEC")
+        text(this.dec2hex(engine.signals[this.name+'_A']), this.posX, this.posY);
+     else if (this.type === "VAL")
+        text(this.dec2hex(this.value), this.posX, this.posY);
+     else
         text(this.name, this.posX, this.posY);
     }
 
   }
+
+
 
 LogicProto.prototype.drawVAL = function () {
 if (!window.engine) return;

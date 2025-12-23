@@ -28,12 +28,6 @@ LogicProto.prototype.isMouseOver = function () {
     }
   }
 
-LogicProto.prototype.onDblClickVAL = function () {
-   
-    if (!window.engine) return;
-    const sig = this.name+'_VAL';
-    engine.set(sig, 0);
-};
 
 
 
@@ -59,6 +53,14 @@ LogicProto.prototype.onDblClickVAL = function () {
   return true;
 }
 
+LogicProto.prototype.onDblClickVAL = function () {
+ 
+ this.value = 0;
+
+  if (window.engine) {
+    engine.signals[this.name+'_OUT']= 0;
+  }
+};
 
 LogicProto.prototype.onDblClickLBL = function () {
 
@@ -117,14 +119,11 @@ LogicProto.prototype.onClickBTN = function () {
 
 
 LogicProto.prototype.onClickVAL = function () {
-   
-
-    if (!window.engine) return;
-
-    const sig = this.name+'_VAL';
-    const curr = engine.get(sig) ?? 0;
-    const next = (curr + 1) % 255;
-    engine.set(sig, next);
+  this.value = (this.value + 1) & 0xFF;
+  
+  if (window.engine) {
+    engine.set(this.name+'_OUT', this.value);
+  }
 };
 
 
