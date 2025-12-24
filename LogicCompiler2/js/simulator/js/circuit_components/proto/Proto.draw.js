@@ -1,6 +1,7 @@
 import { colorMouseOver } from "../../simulator.js";
 
 import { LogicProto } from "./Proto.core.js";
+import {FONT14_ASCII} from "./index.js";
 
  /* ============================================================
      DRAW
@@ -31,7 +32,14 @@ LogicProto.prototype.draw = function () {
 
     if (this.type === "SEG") {
       this.drawSEG();
-    } else if (this.type === "DICE") {
+    } else if (this.type === "SEG14A") {
+      this.drawSEG14A();
+    }
+    else if (this.type === "SEG14R") {
+      this.drawSEG14R();
+    }
+
+      else if (this.type === "DICE") {
       this.drawDICE();
     }  else if (this.type === "LED") {
       this.drawLED();
@@ -150,29 +158,6 @@ if (content !== null) {
 }
 
 
-/*
-LogicProto.prototype.drawVAL = function () {
-if (!window.engine) return;
-
-    const sig = this.name+'_VAL';
-    const curr = engine.get(sig) ?? 0;
-     {
-      strokeWeight(3);
-      fill(30);
-      rectMode(CENTER);
-      rect(this.posX, this.posY, this.width, this.height, 6);
-
-      noStroke();
-      fill(255);
-      textAlign(CENTER, CENTER);
-      textSize(12);
-
-      text(curr, this.posX, this.posY);
-     }
-
-    
-}
-*/
 LogicProto.prototype.drawROM = function () {
 
   const x = this.posX;
@@ -342,3 +327,115 @@ LogicProto.prototype.drawSEG = function (){
   textSize(12);
   text(this.name, x, y + h/2 + 4);
 }
+
+
+LogicProto.prototype.drawSeg14 = function (id, on) {
+  if (!on) return;
+
+  stroke(255, 0, 0);
+  strokeWeight(4);
+
+  // géométrie volontairement simple (exemples)
+ LogicProto.prototype.drawSeg14 = function (id, on) {
+  if (!on) return;
+
+  stroke(255, 0, 0);
+  strokeWeight(4);
+
+  switch (id) {
+
+    // ===== Segments horizontaux / verticaux =====
+    case 0: line(-20, -50,  20, -50); break; // A
+    case 1: line( 25, -45,  25, -10); break; // B
+    case 2: line( 25,  10,  25,  45); break; // C
+    case 3: line(-20,  50,  20,  50); break; // D
+    case 4: line(-25,  10, -25,  45); break; // E
+    case 5: line(-25, -45, -25, -10); break; // F
+
+    // centre (double)
+    case 6: line(-20,   0,   0,   0); break; // G1
+    case 7: line(  0,   0,  20,   0); break; // G2
+
+    // ===== Diagonales =====
+   case 8:  line(-22, -42,  0,   0); break; // H (haut-gauche -> centre)
+   case 10: line(  0,   0, 22,  42); break; // J (centre -> bas-droit)
+   case 9:  line( 22, -42,  0,   0); break; // I (haut-droit -> centre)
+   case 11: line(  0,   0,-22,  42); break; // K (centre -> bas-gauche)
+
+    // ===== Verticaux centraux (pour M, N, W) =====
+    case 12: line(  0, -45,   0, -10); break; // L (haut-centre)
+    case 13: line(  0,  10,   0,  45); break; // M (bas-centre)
+  }
+};
+};
+
+LogicProto.prototype.drawSEG14R = function () {
+
+  if (!window.engine) return;
+
+  push();
+  translate(this.posX, this.posY);
+
+  // fond
+  rectMode(CENTER);
+  stroke(0);
+  fill(0);
+  rect(0, 0, this.width, this.height, 6);
+
+  // lire directement les 14 entrées
+  const names = [
+    "A","B","C","D","E","F",
+    "G1","G2",
+    "H","I","J","K",
+    "L","M"
+  ];
+
+  for (let i = 0; i < 14; i++) {
+    const v = engine.get(this.name + "_" + names[i]) ? 1 : 0;
+    this.drawSeg14(i, v);
+  }
+
+  pop();
+};
+
+
+LogicProto.prototype.drawSEG14A = function () {
+
+  if (!window.engine) return;
+
+  const en  = engine.get(this.name + "_EN") ?? 1;
+  const dp  = engine.get(this.name + "_DP") ?? 0;
+  let chr   = engine.get(this.name + "_CHR") | 0;
+  //alert(chr);
+  // fond
+  push();
+  translate(this.posX, this.posY);
+  rectMode(CENTER);
+  stroke(0);
+  fill(0);
+  rect(0, 0, this.width, this.height, 6);
+
+  let mask = 0;
+
+  if (en) {
+    // normalisation minuscules → majuscules
+    if (chr >= 97 && chr <= 122) chr -= 32;
+
+    mask = FONT14_ASCII[chr] ?? 0;
+   
+  }
+
+  // dessiner les 14 segments
+  for (let i = 0; i < 14; i++) {
+    this.drawSeg14(i, (mask >> i) & 1);
+  }
+
+  // point décimal
+  if (dp) {
+    fill(255, 0, 0);
+    noStroke();
+    circle(this.width / 2 - 8, this.height / 2 - 8, 6);
+  }
+
+  pop();
+};

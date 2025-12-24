@@ -6,6 +6,7 @@ const PRECEDENCE = {
   "/": 5,
   "*": 4,
   "+": 3,
+  "-": 3,
   "<<": 2,
   ">>": 2,
   "&": 1,
@@ -128,7 +129,7 @@ if (c === "@") {
     }
 
      // opérateurs simples
-    if ("+*&|^()/".includes(c)) {
+    if ("+*&|^()/-".includes(c)) {
       tokens.push({
       type: "OP",
       value: c
@@ -224,6 +225,7 @@ function evalRPN(rpn, vars = {}) {
 
     switch (op) {
       case "+": stack.push(a + b); break;
+      case "-": stack.push(a - b); break;
       case "*": stack.push(a * b); break;
       case "<<": stack.push(a << b); break;
       case ">>": stack.push(a >> b); break;
@@ -265,6 +267,7 @@ function evalRPN(rpn, resolveVar) {
 
     switch (op) {
       case "+": stack.push(a + b); break;
+      case "-": stack.push(a - b); break;
       case "*": stack.push(a * b); break;
       case "<<": stack.push(a << b); break;
       case ">>": stack.push(a >> b); break;
@@ -293,3 +296,7 @@ test("A & B");
 test("A | B");
 test("A ^ B");
 */
+test("A - B", { A: 5, B: 3 }); // 2
+test("A - B - C", { A: 10, B: 3, C: 2 }); // 5
+test("A + B - C", { A: 1, B: 2, C: 1 }); // 2
+test("(A - B) & 1", { A: 3, B: 2 }); // 1

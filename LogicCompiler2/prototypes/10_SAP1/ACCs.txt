@@ -9,7 +9,7 @@ HEIGHT=100
 
 # Ordre des broches : EA /LA CLK A D
 INPUTS=EA;LA;CLK;A
-OUTPUTS=D
+OUTPUTS=VAL;D
 INTERNALS=N;ACC
 
 # LA actif bas : 0 = charge A, 1 = conserve ACC
@@ -17,6 +17,6 @@ EQUATIONS=N   = (/LA * A) + (LA * @ACC)
 
 # Bascule 8 bits
 EQUATIONS=ACC = (CLK * @N) + (/CLK * @ACC)
-
+EQUATIONS=VAL=ACC
 # EA : Enable Accu vers le bus (actif haut)
 EQUATIONS=D   = (EA * ACC)
