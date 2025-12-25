@@ -1,0 +1,22 @@
+[BLOCK PC8#]
+TYPE=PC8
+SYMBOL=PC8
+CATEGORY=UC
+ORDER=1
+DESCRIPTION=PC 8 bits (next-state / clocked)
+WIDTH=80
+HEIGHT=120
+
+INPUTS=DIN;LD;INC;EPC;RST;CLK
+OUTPUTS=VAL;PC
+INTERNALS=R;N
+
+# Next state (combinatoire)
+EQUATIONS=N = (/RST * LD * DIN) + (/RST * /LD * INC * ((@R + 1) & 255)) + (/RST * /LD * /INC * @R)
+
+# State register (séquentiel)
+EQUATIONS=R = (CLK * N) + (/CLK * @R)
+
+# Observabilité / bus
+EQUATIONS=VAL = R
+EQUATIONS=PC  = EPC * R

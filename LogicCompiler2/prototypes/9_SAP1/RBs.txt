@@ -1,0 +1,22 @@
+[BLOCK RBs#]
+TYPE=BLOCK
+SYMBOL=RBs
+CATEGORY=SAP
+DESCRIPTION=Registre B 8 bits (SAP-1 compatible)
+POS=200,200
+WIDTH=120
+HEIGHT=100
+
+# Ordre des broches : /LB  CLK  B  D
+INPUTS=LB;CLK;B
+OUTPUTS=D
+INTERNALS=N;RB
+
+# /LB actif bas : 0 = charge, 1 = hold
+EQUATIONS=N  = (/LB * B) + (LB * @RB)
+
+# Bascule 8 bits
+EQUATIONS=RB = (CLK * @N) + (/CLK * @RB)
+
+# Sortie directe (RB ne drive jamais le bus : ALU s’en charge)
+EQUATIONS=D  = RB

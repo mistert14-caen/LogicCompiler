@@ -1,5 +1,5 @@
 import { logicProto, wireMng } from "./simulator.js"
-import "./circuit_components/proto/index.js";
+import { PROTO_PATH, SVGS, LogicProto } from "./circuit_components/proto/index.js";
 import { IC_type } from "./circuit_components/Enums.js";
 import { currentID, nodeList, resetNodeIDs } from "./circuit_components/Node.js";
 import { Wire } from "./circuit_components/Wire.js";
@@ -30,25 +30,58 @@ function restoreWires(ws) {
 
 
 async function loadProtosOnly(p) {
+  console.log("LOAD PROTO:", p);
 
-  const res = await fetch('/LogicCompiler2/prototypes/' + p.type + '.txt');
-  const text = await res.text();
+  let text;
 
+  // 🔹 CAS USER
+  if (p.folder === "USER") {
+    const baseName = p.type + "#";
+
+    text =
+      engine.protoCache[baseName] ||
+      localStorage.getItem("proto_USER_" + baseName);
+
+    if (!text) {
+      console.error("Prototype USER introuvable :", p.type);
+      return;
+    }
+
+  } else {
+
+    // 🔹 CAS SYSTEME
+    const res = await fetch(
+      PROTO_PATH + '/prototypes/' + p.folder + '/' + p.type + '.txt'
+    );
+    text = await res.text();
+  }
+
+  // 🔹 Import logique (identique)
   const proto = engine.importPrototype(text);
+  proto.folder = p.folder;
+
+  
+  // 🔹 Reconstruction UI
   engine.buildProtoNodes(p.posX, p.posY, proto, logicProto);
 
-  // ?? instance UI réellement créée
+  // 🔹 Instance UI réellement créée
   const ui = logicProto[logicProto.length - 1];
 
+  if (p.note) ui.note = p.note;
+/*  
+if (p.rom)  {
+     ui.mem = new Uint8Array(p.rom.length);
+     for (const k in p.rom) {
+       ui.mem[+k] = p.rom[k];
+     }
+  }
+*/
+  // 🔹 Cas particulier : LABEL
   if (p.type === "LBL") {
-
-    // le signal doit être le label sauvegardé
     const signalName = p.label;
 
-    // applique la logique proprement
     ui.renameLabelSignal(signalName);
 
-    // sécurité moteur
     if (window.engine && engine.signals && !(signalName in engine.signals)) {
       engine.set(signalName, 0);
     }
@@ -137,7 +170,7 @@ async loadFromServer(id) {
 
   if (!id) return;
 
-  const url = `https://mistert.freeboxos.fr/LogicCompiler2/examples/${id}.json`;
+  const url = `https://mistert.freeboxos.fr/${PROTO_PATH}/examples/${id}.json`;
 
   try {
     const res = await fetch(url);
@@ -173,54 +206,53 @@ async loadFromServer(id) {
     /**
      * @todo TODO
      */
-    static getJSON_Workspace() {
-        let workspace = new Object();
+static getJSON_Workspace() {
+  let workspace = {};
 
-        workspace["logicProto"] = logicProto;
-        workspace["wire"] = wireMng.wire;
+  workspace.logicProto = logicProto.map(p => {
+    const o = {
+      type: p.type,
+      folder: p.folder,
+      posX: p.posX,
+      posY: p.posY
+    };
 
-        let jsonWorkspace = JSON.stringify(workspace,
-            function (key, value) {
-                switch (key) {
-                    case "_pixelsState":
-                         return;
-                    case "parent":
-                         return undefined;
-                    case "icon":
-                         return undefined;
-
-                    case "protoCache":
-                    case "engine":
-    			 return undefined;
-                    case "output":
-                    case "input":
-                    case "nodeSet":
-                    case "nodeReset":
-                    case "nodeClock":
-                    case "nodeD":
-                    case "nodeT":
-                    case "nodeJ":
-                    case "nodeK":
-                    case "nodeQ":
-                    case "nodeNotQ":
-                    case "andGate_NotQ":
-                    case "andGate_Q":
-                    case "ff_D":
-                    case "orGate":
-                    case "gateSet":
-                    case "gateReset":
-                    case "asyncLatch":
-                    case "master":
-                    case "slave":
-                    case "srLatchSync":
-                    case "startNode":
-                    case "endNode":
-                        return undefined;
-                }
-
-                // other things which is not possible to export on JSON
-                return value;
-            }, '\t');
-        return jsonWorkspace;
+    // ----- LABEL -----
+    if (p.type === "LBL" && p.label) {
+      o.label = p.label;
     }
+
+    // ----- ROM -----
+    if (p.type == "ROM") {
+      
+        o.rom = {};
+        p.mem.forEach((v, i) => {
+           if (v !== 0) o.rom[i] = v;
+        });      
+    }
+
+    if (p.type == "NOTE") {
+      
+        o.note = p.note;
+      
+    }
+
+    return o;
+  });
+
+  // ----- WIRES -----
+  workspace.wire = wireMng.wire.map(w => ({
+    startID: w.startNode.id,
+    endID:   w.endNode.id,
+    width:   w.width ?? 1,
+    endX:    w.endX ?? w.p2?.x,
+    endY:    w.endY ?? w.p2?.y
+  }));
+
+  return JSON.stringify(workspace, null, "\t");
 }
+
+
+}
+
+

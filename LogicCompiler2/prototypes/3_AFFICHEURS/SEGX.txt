@@ -1,0 +1,40 @@
+# --- Prototype: HexTo7Seg ---
+
+[BLOCK SEGX#]
+TYPE=SEG
+SYMBOL=SEG
+WIDTH=100
+HEIGHT=120
+SYMBOLE=SEG
+DESCRIPTION=Afficheur 7 segments HEX (0–F) common-cathode
+CATEGORIE=E/S
+ORDER=6
+
+INPUTS=A;B;C;D
+OUTPUTS=SA;SB;SC;SD;SE;SF;SG
+
+# Table visée :
+# 0: abcdef
+# 1: bc
+# 2: abdeg
+# 3: abcdg
+# 4: bcfg
+# 5: acdfg
+# 6: acdefg
+# 7: abc
+# 8: abcdefg
+# 9: abcdfg
+# A: abcefg
+# b: cdefg
+# C: adef
+# d: bcdeg
+# E: adefg
+# F: aefg
+
+EQUATIONS=SA=(B&C | A&/D | C&/A | /B&/D | B&D&/A | A&/B&/C)
+EQUATIONS=SB=(/A&/B | /B&/D | A&D&/C | C&D&/A | /A&/C&/D)
+EQUATIONS=SC=(A&/B | B&/A | D&/A | D&/C | /A&/C)
+EQUATIONS=SD=(A&/C | B&C&/D | B&D&/C | C&D&/B | /A&/B&/D)
+EQUATIONS=SE=(A&B | A&C | C&/D | /B&/D)
+EQUATIONS=SF=(A&C | A&/B | B&/D | /C&/D | B&/A&/C)
+EQUATIONS=SG=(A&D | A&/B | C&/B | C&/D | B&/A&/C)

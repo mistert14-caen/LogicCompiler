@@ -1,0 +1,29 @@
+[BLOCK IR8s#]
+TYPE=BLOCK
+SYMBOL=IR8s
+TYPE=IR8s
+CATEGORY=SAP
+DESCRIPTION=Instruction Register SAP-1 (ENTIER, bus+opcode+imm)
+POS=200,200
+WIDTH=120
+HEIGHT=120
+
+INPUTS=A;CLK;CLR;LI;EI
+OUTPUTS=VAL;OP;D
+INTERNALS=N;IR;IMM
+
+# ----- Next state (chargement depuis BUS si L_I=1) -----
+EQUATIONS=N = (/LI * A) + ((LI) * @IR)
+
+# ----- Flip-Flop d’enregistrement -----
+EQUATIONS=IR = /CLR * ( (CLK * @N) + (/CLK * @IR) )
+
+# ----- Extraction OPCODE (bits 7..4) -----
+EQUATIONS=OP = (IR >> 4) & 15
+
+# ----- Extraction IMM (bits 3..0) -----
+EQUATIONS=IMM = IR & 15
+
+# ----- IMM vers BUS (activé uniquement si EN_IMM = 1) -----
+EQUATIONS=D = /EI * IMM
+EQUATIONS=VAL=IR

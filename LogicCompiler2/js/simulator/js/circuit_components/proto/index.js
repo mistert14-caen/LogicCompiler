@@ -1,37 +1,69 @@
 // proto/index.js
-import "./Proto.core.js";
+
 import "./Proto.draw.js";
 import "./Proto.mem.js";
 import "./Proto.interact.js";
+import "./Proto.note.js";
 
 export { LogicProto } from "./Proto.core.js";
 
-/* ============================================================
-   Proto index – résolution des chemins de prototypes
-   ============================================================ */
+export const PROTO_PATH = "/Logic/LogicCompiler2";
 
-export const PROTO_BASE = "/LogicCompiler2/prototypes";
+export const SVGS = ['AND','ANDXXX','OR','ORXXX','NOR','NAND','NOT','XOR','NXOR','D','JK','RS','RSC','T'];
 
-export const PROTO_CATEGORIES = {
-  "E-S":        "1_E-S",
-  "PORTES":    "2_PORTES",
-  "BASCULES":  "3_BASCULES",
-  "BUS":       "4_BUS",
-  "UC":        "5_UC",
-  "SAP1":      "10_SAP1"
+export const FONT14_ASCII = {
+
+  // ===== Chiffres =====
+  48: 0b00101000111111, // '0' (0 barré : A B C D E F + H J)
+  49: 0b00000000000110, // '1' = B C
+  50: 0b00000011011011, // '2' = A B D E G
+  51: 0b00000011001111, // '3' = A B C D G
+  52: 0b00000011100110, // '4' = F B C G
+  53: 0b00000011101101, // '5' = A F C D G
+  54: 0b00000011111101, // '6' = A F E D C G
+  55: 0b00000000000111, // '7' = A B C
+  56: 0b00000011111111, // '8' = A B C D E F G
+  64: 0b01000010111011, // '@' (ta version)
+
+  65: 0b00000011110111, // 'A'
+  66: 0b00000010111111, // 'B'
+  67: 0b00000000111001, // 'C'
+
+  68: 0b00000011011110, // 'D'  ✅ ta version (d stylisé, ≠ 9)
+
+  69: 0b00000011111001, // 'E'
+  70: 0b00000011110001, // 'F'
+  71: 0b00000010111101, // 'G'
+  72: 0b00000011110110, // 'H'
+
+  73: 0b11000000000000, // 'I' (barre verticale centrale L+M)
+
+  74: 0b00000000001110, // 'J'
+  75: 0b00011001110000, // 'K'
+  76: 0b00000000111000, // 'L'
+  77: 0b00001100110110, // 'M'
+  78: 0b00010100110110, // 'N'
+  79: 0b00000000111111, // 'O'
+  80: 0b00000011110011, // 'P'
+  81: 0b00010000111111, // 'Q'
+  82: 0b00010011110011, // 'R'
+  83: 0b00000011101101, // 'S'
+
+  84: 0b11000000000001, // 'T' (A + L + M)
+
+  85: 0b00000000111110, // 'U'
+  86: 0b00101000110000, // 'V'
+  87: 0b00110000110110, // 'W'
+  88: 0b00111100000000, // 'X'
+  89: 0b10001100000000, // 'Y'
+  90: 0b00101000001001,  // 'Z' 57: 0b00000011101111, // '9' = A B C D F G  // ===== Lettres =====
+  128: 0x0008,
+  129: 0x0018,
+  130: 0x0038,
+  131: 0x0039,
+  132: 0x1039,
+  133: 0x1239,
+  134: 0x1339,
+  135: 0x1739,
+  136: 0x1F39
 };
-
-/**
- * Résout le chemin réel d'un prototype
- * @param {string} tool   catégorie logique (PORTES, BASCULES…)
- * @param {string} name   nom du proto (AND, RS, ALU8s…)
- */
-export function resolveProtoPath(tool, name) {
-  const folder = PROTO_CATEGORIES[tool];
-  if (folder) {
-    return `${PROTO_BASE}/${folder}/${name}.txt`;
-  }
-
-  // fallback legacy temporaire
-  return `${PROTO_BASE}/${name}.txt`;
-}

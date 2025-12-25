@@ -6,9 +6,11 @@ const PRECEDENCE = {
   "/": 5,
   "*": 4,
   "+": 3,
+  "-": 3,
   "<<": 2,
   ">>": 2,
   "&": 1,
+ "==": 0,
   "^": 0,
   "|": -1
 };
@@ -35,6 +37,17 @@ function tokenize(expr) {
       continue;
     }
 
+    if (expr.startsWith("//", i)) {
+      while (i < expr.length && expr[i] !== "\n") i++;
+      continue; 
+    }
+
+    if (expr.startsWith("#", i)) {
+      while (i < expr.length && expr[i] !== "\n") i++;
+      continue; 
+    }
+    
+
     // opérateurs doubles
     if (expr.startsWith("<<", i)) {
       tokens.push({ type: "OP", value: "<<" });
@@ -46,6 +59,13 @@ function tokenize(expr) {
       i += 2;
       continue;
     }
+
+  
+   if (expr.startsWith("==", i)) {
+     tokens.push({ type: "OP", value: "==" });
+     i += 2;
+     continue;
+   }
 
    
     // hexadécimal : 0xFF
@@ -94,6 +114,7 @@ if (c === "0" && (expr[i + 1] === "b" || expr[i + 1] === "B")) {
       continue;
     }
 
+
     // mémoire : @Q, @ACC, @SEL, etc.
 if (c === "@") {
   let j = i + 1;
@@ -128,7 +149,7 @@ if (c === "@") {
     }
 
      // opérateurs simples
-    if ("+*&|^()/".includes(c)) {
+    if ("+*&|^()/-".includes(c)) {
       tokens.push({
       type: "OP",
       value: c
@@ -197,47 +218,6 @@ function toRPN(tokens) {
 
   return output;
 }
-/*
-function evalRPN(rpn, vars = {}) {
-  const stack = [];
-
-  for (const t of rpn) {
-    if (t.type === "CONST") {
-      stack.push(t.value);
-      continue;
-    }
-
-    if (t.type === "VAR") {
-      stack.push(vars[t.name] ?? 0);
-      continue;
-    }
-
-    const op = t.value;
-
-    if (op === "/") {
-      stack.push(~stack.pop());
-      continue;
-    }
-
-    const b = stack.pop();
-    const a = stack.pop();
-
-    switch (op) {
-      case "+": stack.push(a + b); break;
-      case "*": stack.push(a * b); break;
-      case "<<": stack.push(a << b); break;
-      case ">>": stack.push(a >> b); break;
-      case "&": stack.push(a & b); break;
-      case "|": stack.push(a | b); break;
-      case "^": stack.push(a ^ b); break;
-      default:
-        throw new Error("Opérateur inconnu " + op);
-    }
-  }
-
-  return stack.pop();
-}
-*/
 
 function evalRPN(rpn, resolveVar) {
   const stack = [];
@@ -265,12 +245,15 @@ function evalRPN(rpn, resolveVar) {
 
     switch (op) {
       case "+": stack.push(a + b); break;
+      case "-": stack.push(a - b); break;
       case "*": stack.push(a * b); break;
       case "<<": stack.push(a << b); break;
       case ">>": stack.push(a >> b); break;
       case "&": stack.push(a & b); break;
       case "|": stack.push(a | b); break;
       case "^": stack.push(a ^ b); break;
+      case "==": stack.push(a === b ? 1 : 0); break;
+
       default:
         throw new Error("Opérateur inconnu " + op);
     }
@@ -284,7 +267,7 @@ function test(expr, vars = {}) {
   const v = evalRPN(rpn, name => vars[name] ?? 0);
   console.log(expr, vars, "=>", v);
 }
-
+/*
 test("A & B", { A: 0, B: 0 });
 test("A & B", { A: 0, B: 1 });
 test("A & B", { A: 1, B: 0 });
@@ -292,3 +275,13 @@ test("A & B", { A: 1, B: 1 });
 test("A & B");
 test("A | B");
 test("A ^ B");
+*/
+test("A - B #test", { A: 5, B: 3 }); // 2
+test("A - B - C //et oui", { A: 10, B: 3, C: 2 }); // 5
+test("A + B - C", { A: 1, B: 2, C: 1 }); // 2
+test("(A - B) & 1", { A: 3, B: 2 }); // 1
+test("A == 31", { A: 31});
+test("// commentaire");
+test("# commentaire");
+test("(OP==12) & T4",{ OP: 5, T4: 0 });
+test("(OP==12) & T4",{ OP: 12, T4: 1 });

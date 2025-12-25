@@ -1,0 +1,21 @@
+[BLOCK MAR16#]
+TYPE=BLOCK
+SYMBOL=MAR16
+CATEGORY=SAP
+DESCRIPTION=Memory Address Register N bits (ENTIER)
+POS=200,200
+WIDTH=120
+HEIGHT=100
+
+INPUTS=A;CLR;LM;CLK
+OUTPUTS=VAL;MAR
+INTERNALS=N;MAR
+
+# ----- Next state (LOAD actif bas) -----
+EQUATIONS=N = (LM * A) + (LM * @MAR)
+
+# ----- Flip-flop -----
+EQUATIONS=MAR = /CLR * ( (CLK * @N) + (/CLK * @MAR) )
+
+# ----- Affichage -----
+EQUATIONS=VAL = MAR

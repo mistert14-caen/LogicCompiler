@@ -8,9 +8,10 @@ import { INPUT_STATE } from "./circuit_components/Enums.js";
 
 
 class LogicPrototype {
-  constructor(name) {
+  constructor(name,folder=null) {
     // Nom du composant (ex: AND0, NOT1)
     
+    this.folder = folder;  
     this.name = name;
     this.type=null;
     this.label='LBL';
@@ -59,7 +60,7 @@ constructor() {
     this.equations = [];
     this.seqEqs = [];
     this.combEqs = [];
-
+    this.isUserImporting = false;
     this._instanceCounter = {}; // ?? clé = baseName, valeur = compteur
  
 }
@@ -89,6 +90,132 @@ constructor() {
   }
 }
  
+
+buildProtoNodes(cx, cy, proto, lP) {
+
+  const comp = new LogicProto(cx, cy, proto.type, proto.name);
+  comp.type   = proto.type;
+  comp.width  = proto.width;
+  comp.height = proto.height;
+  if (proto.label) comp.label = proto.label;
+  comp.dy     = proto.dy;
+  comp.folder = proto.folder;
+
+  const DY = comp.dy;
+  const inputs  = proto.inputs  || [];
+  const outputs = proto.outputs || [];
+
+  const isRail = s => (s === "G" || s === "P" || s === "GND" || s === "VCC");
+  const full   = s => proto.name + "_" + s;
+
+  // ======================================================
+  // CAS 1 : PINOUT défini
+  // ======================================================
+  if (proto.pinout && proto.left && proto.right) {
+
+    // ---------- LEFT (ordre normal)
+    let y0 = -((proto.left.length - 1) * DY) / 2;
+
+    proto.left.forEach((name, i) => {
+      if (!name) return;
+
+      const y = y0 + i * DY;
+
+      // rail → occupe la place, pas de node
+      if (isRail(name)) return;
+
+      const f = full(name);
+
+      if (inputs.includes(f)) {
+        const n = new LogicNode(0, 0, false, 0);
+        n.inputState = INPUT_STATE.FREE;
+        n.signal = f;
+        comp.addNode(n, -comp.width / 2, y);
+        return;
+      }
+
+      if (outputs.includes(f)) {
+        const n = new LogicNode(0, 0, true, 0);
+        n.inputState = INPUT_STATE.FREE;
+        n.signal = f;
+        comp.addNode(n, -comp.width / 2, y);
+        return;
+      }
+
+      // NC / autre → ignoré silencieusement
+      return;
+    });
+
+    // ---------- RIGHT (ordre inversé)
+    y0 = -((proto.right.length - 1) * DY) / 2;
+    const nR = proto.right.length;
+
+    proto.right.forEach((name, i) => {
+      if (!name) return;
+
+      const ii = nR - 1 - i;   // 🔑 inversion verticale
+      const y  = y0 + ii * DY;
+
+      // rail → occupe la place, pas de node
+      if (isRail(name)) return;
+
+      const f = full(name);
+
+      if (inputs.includes(f)) {
+        const n = new LogicNode(0, 0, false, 0);
+        n.inputState = INPUT_STATE.FREE;
+        n.signal = f;
+        comp.addNode(n, comp.width / 2, y);
+        return;
+      }
+
+      if (outputs.includes(f)) {
+        const n = new LogicNode(0, 0, true, 0);
+        n.inputState = INPUT_STATE.FREE;
+        n.signal = f;
+        comp.addNode(n, comp.width / 2, y);
+        return;
+      }
+
+      // NC / autre → ignoré
+      return;
+    });
+
+  }
+
+  // ======================================================
+  // CAS 2 : pas de PINOUT → comportement historique
+  // ======================================================
+  else {
+
+    // INPUTS à gauche
+    let y0 = -((inputs.length - 1) * DY) / 2;
+    inputs.forEach((name, i) => {
+      if (!name || name.endsWith("_")) return;
+
+      const n = new LogicNode(0, 0, false, 0);
+      n.inputState = INPUT_STATE.FREE;
+      n.signal = name;
+      comp.addNode(n, -comp.width / 2, y0 + i * DY);
+    });
+
+    // OUTPUTS à droite
+    y0 = -((outputs.length - 1) * DY) / 2;
+    outputs.forEach((name, i) => {
+      if (!name || name.endsWith("_")) return;
+
+      const n = new LogicNode(0, 0, true, 0);
+      n.inputState = INPUT_STATE.FREE;
+      n.signal = name;
+      comp.addNode(n, comp.width / 2, y0 + i * DY);
+    });
+  }
+
+  lP.push(comp);
+}
+
+
+/*
 buildProtoNodes(cx,cy,proto, lP) {
 
   
@@ -102,6 +229,7 @@ buildProtoNodes(cx,cy,proto, lP) {
   comp.height = proto.height;
   if (proto.label) comp.label = proto.label;
   comp.dy = proto.dy;
+  comp.folder = proto.folder;
   const DY = comp.dy;
   // --- INPUTS ---
   let y0 = -((proto.inputs.length - 1) * DY) / 2;
@@ -132,7 +260,7 @@ buildProtoNodes(cx,cy,proto, lP) {
   lP.push(comp);
 }
 
-
+*/
 
 pushInputsToEngine(lP,lB) {
     
@@ -180,6 +308,10 @@ importPrototype(text) {
   // --- CACHE : mémoriser le TEXTE BRUT ---
   if (!this.protoCache[baseName]) {
     this.protoCache[baseName] = text;   // ?? texte avec AND#
+  }
+  //AJOUT : persistance USER
+  if (this.isUserImporting) {
+    localStorage.setItem("proto_USER_" + baseName, text);
   }
 
   // --- PATCH TOUJOURS AVANT PARSE ---
@@ -264,6 +396,15 @@ tickSequential() {
       else if (l.startsWith("WIDTH=")) p.width = parseInt(l.split("=")[1], 10);
       else if (l.startsWith("HEIGHT=")) p.height = parseInt(l.split("=")[1], 10);
       else if (l.startsWith("DY=")) p.dy = parseInt(l.split("=")[1], 10);
+      else if (l.startsWith('PINOUT=')) {
+        p.pinout = parseInt(l.split('=')[1], 10);
+      }
+      else if (l.startsWith('LEFT=')) {
+        p.left = l.slice(5).split(';');
+      }
+      else if (l.startsWith('RIGHT=')) {
+        p.right = l.slice(6).split(';');
+      }
 
 
     }
@@ -283,19 +424,25 @@ loadPrototype(text, compName) {
 
 
 parseEquation(line) {
-  const [lhs, rhs] = line.split("=");
+  const idx = line.indexOf("=");
 
-  const tokens = toRPN(tokenize(rhs.trim()));
+  if (idx < 0) {
+    throw new Error("Invalid equation (missing '='): " + line);
+  }
+
+  const lhs = line.slice(0, idx).trim();
+  const rhs = line.slice(idx + 1).trim();
+
+  const tokens = toRPN(tokenize(rhs));
   const isSeq  = rhs.includes("CLK");
 
-  const eq = new LogicEquation(lhs.trim(), tokens);
+  const eq = new LogicEquation(lhs, tokens);
 
   if (isSeq) this.seqEqs.push(eq);
   else       this.combEqs.push(eq);
 
   return eq;
 }
-  
 }
 window.engine = new LogicCompiler();
 

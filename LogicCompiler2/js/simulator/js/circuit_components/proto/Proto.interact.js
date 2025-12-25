@@ -1,5 +1,6 @@
 import { LogicProto } from "./Proto.core.js";
 
+
   /* ============================================================
      HIT TEST / EVENTS
      ============================================================ */
@@ -28,20 +29,16 @@ LogicProto.prototype.isMouseOver = function () {
     }
   }
 
-LogicProto.prototype.onDblClickVAL = function () {
-   
-    if (!window.engine) return;
-    const sig = this.name+'_VAL';
-    engine.set(sig, 0);
-};
 
 
 
  LogicProto.prototype.onDblClickROM = function () {
 
+  const size = this.mem.length;
+
   const txt = prompt(
-    "Programme HEXA (16 octets)",
-    this.mem.map(v => v.toString(16).padStart(2,"0")).join(" ")
+    `Programme HEXA (${size} octets)`,
+    this.mem.map(v => v.toString(16).padStart(2, "0")).join(" ")
   );
 
   if (!txt) return true;
@@ -52,12 +49,32 @@ LogicProto.prototype.onDblClickVAL = function () {
     .split(/\s+/)
     .map(v => parseInt(v, 16));
 
-  for (let i = 0; i < 16; i++) {
+  for (let i = 0; i < size; i++) {
     this.mem[i] = bytes[i] ?? 0;
   }
 
   return true;
 }
+
+LogicProto.prototype.onDblClickVAL = function () {
+ 
+ this.value = 0;
+
+  if (window.engine) {
+    engine.signals[this.name+'_OUT']= 0;
+  }
+};
+
+LogicProto.prototype.onDblClickOCST = function () {
+ 
+ const newValue = prompt("Octet entre 0 et 255 :", this.value);
+
+
+  if (window.engine) {
+    engine.signals[this.name+'_VAL']= newValue;
+    this.value=newValue;
+  }
+};
 
 
 LogicProto.prototype.onDblClickLBL = function () {
@@ -74,6 +91,8 @@ LogicProto.prototype.getDoubleClickHandler = function () {
     case "LBL":  return this.onDblClickLBL;
     case "ROM":  return this.onDblClickROM;
     case "VAL":  return this.onDblClickVAL;
+    case "OCST":  return this.onDblClickOCST;
+    case "NOTE":  return this.onDblClickNOTE;
 
     default:     return null;
   }
@@ -117,14 +136,11 @@ LogicProto.prototype.onClickBTN = function () {
 
 
 LogicProto.prototype.onClickVAL = function () {
-   
-
-    if (!window.engine) return;
-
-    const sig = this.name+'_VAL';
-    const curr = engine.get(sig) ?? 0;
-    const next = (curr + 1) % 255;
-    engine.set(sig, next);
+  this.value = (this.value + 1) & 0xFF;
+  
+  if (window.engine) {
+    engine.set(this.name+'_OUT', this.value);
+  }
 };
 
 

@@ -2,12 +2,11 @@ import { activeTool, currMouseAction } from "./menutools.js"
 import { MouseAction } from "./circuit_components/Enums.js"
 import { WireManager } from "./circuit_components/Wire.js";
 import { FileManager } from "./FileManager.js"
-//import { LogicProto } from "./circuit_components/proto/Proto.core.js";
-import "./circuit_components/proto/index.js";
+//import "./circuit_components/proto/index.js";
+import { PROTO_PATH , SVGS, LogicProto} from "./circuit_components/proto/index.js";
 
 import { Node as LogicNode } from "./circuit_components/Node.js";
 import { INPUT_STATE } from "./circuit_components/Enums.js";
-
 
 export let wireMng;
 export let colorMouseOver = [0 ,0x7B, 0xFF];
@@ -15,7 +14,9 @@ export let fileManager = new FileManager();
 
 export let logicTimer = null;
 export const logicProto = [];
+export let started=false;
 
+window.protoIndex = [];
 /**
  * @todo TODO
  */
@@ -28,9 +29,11 @@ if (protoFile) {
       if (!file) return;
       const reader = new FileReader();
       reader.onload = () => {
+        engine.isUserImporting = true;
         engine.importPrototype(reader.result);
+        engine.isUserImporting = false;
         const index = logicProto.length;
-        const cx = 50;
+        const cx = 350;
         const cy = 50;
         engine.buildProtoNodes(cx,cy,engine.proto, logicProto);
 
@@ -39,6 +42,22 @@ if (protoFile) {
         };
        reader.readAsText(file);
     };
+}
+
+function preloadUserPrototypes() {
+  for (let key in localStorage) {
+    if (!key.startsWith("proto_USER_")) continue;
+
+    const text = localStorage[key];
+
+    // ⚠️ on ne veut PAS créer d’instance
+    // on veut juste remplir protoCache
+    const m = text.match(/\[BLOCK\s+([^\]]+)\]/);
+    const baseName = m ? m[1] : null;
+    if (!baseName) continue;
+
+    engine.protoCache[baseName] = text;
+  }
 }
 
 function engineTick() {
@@ -59,27 +78,125 @@ function stopLogicClock() {
   }
 }
 
+
+function buildUserGroup() {
+  const files = [];
+
+  for (const k of Object.keys(localStorage)) {
+    if (!k.startsWith("proto_USER_")) continue;
+
+    // ex: proto_USER_AND# → AND
+    const baseName = k.substring("proto_USER_".length);
+    files.push(baseName.replace("#", ""));
+  }
+
+  if (files.length === 0) return null;
+
+  return {
+    folder: "USER",
+    title: "USER",
+    files: files.sort()
+  };
+}
 /**
  * @todo TODO
  */
+function injectProtoPanel(groups) {
+  const panel = document.getElementById("protoPanel");
+  if (!panel) return;
+
+  panel.innerHTML = "";
+
+  const userGroup = buildUserGroup();
+  //alert(userGroup);
+  if (userGroup) groups.push(userGroup);
+
+  //console.log(groups);
+
+  for (const group of groups) {
+
+    const details = document.createElement("details");
+    details.classList.add("cat-" + group.folder);
+
+    const summary = document.createElement("summary");
+    summary.textContent = group.title;
+    details.appendChild(summary);
+
+    const box = document.createElement("div");
+    box.setAttribute("class",'"proto-box">');
 
 
-export function setup() {
+
+    for (const model of group.files) {
+      const btn = document.createElement("button");
+      
+
+
+      // ✅ attributs simples
+      btn.setAttribute("folder", group.folder);
+      btn.setAttribute("model", model);
+      btn.setAttribute("tool", "PROTO");
+      btn.setAttribute("onclick", 'activeTool(this);');
+      btn.className="btn proto-btn";
+      
+     
+     const test =  SVGS.includes(model);
+     //console.log(model,'',test);
+      if (test) {
+      	// SVG si présent
+        const img = document.createElement("img");
+        img.src = PROTO_PATH+`/js/simulator/img/${model}.svg`;
+        img.alt = model;
+        img.title = model;
+        img.onload = () => btn.appendChild(img);
+     } else {
+          btn.textContent = model;
+      }
+      box.appendChild(btn);
+    }
+
+    details.appendChild(box);
+    panel.appendChild(details);
+  }
+}
+
+
+async function setup() {
+
+ 
+  const canvHeight = windowHeight - 90;
+  let canvas = createCanvas(windowWidth - 115, canvHeight, P2D);
+  canvas.parent('canvas-sim');
+  document.getElementsByClassName("tools")[0].style.height = canvHeight;
+
+  try {
+    const res = await fetch(
+      "https://mistert.freeboxos.fr/"+PROTO_PATH+"/api/list_protos.php"
+    );
+
+    window.protoIndex = await res.json();   // ✅ ICI le vrai fix
+    //console.log(window.protoIndex);          // Array(7)
+
+    // initialisation UI une fois les protos chargés
+    injectProtoPanel(window.protoIndex);
+    started = true; 
     
 
-    const canvHeight = windowHeight - 90;
-    let canvas = createCanvas(windowWidth - 115, canvHeight, P2D);
-   
-    canvas.parent('canvas-sim');
-    document.getElementsByClassName("tools")[0].style.height = canvHeight;
+  } catch (e) {
+    console.error("Erreur chargement prototypes", e);
+  }
 
-    wireMng = new WireManager();
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get("id");
-    startLogicClock(2); // 2 Hz par exemple
-    if (id) {
-      fileManager.loadFromServer(id);
-    }
+  wireMng = new WireManager();
+  const params = new URLSearchParams(window.location.search);
+  
+  preloadUserPrototypes();
+
+  startLogicClock(5);
+  
+  const id = params.get("id");
+  if (id) {
+    fileManager.loadFromServer(id);
+  }
 }
 
 /**
@@ -95,7 +212,10 @@ export function windowResized() {
 /**
  * @todo TODO
  */
-export function draw() {
+function draw() {
+
+ if (!started) return false;
+  
   background(0xFF);
 
   if (window.engine) {

@@ -1,5 +1,6 @@
 import { INPUT_STATE } from "./Enums.js";
 import { wireMng } from "../simulator.js";
+import { SVGS } from "../circuit_components/proto/index.js";
 
 export let nodeList = [];
 
@@ -47,32 +48,79 @@ export class Node {
     /**
      * @todo TODO
      */
-    draw() {
-        fillValue(this.value);
 
-        stroke(0);
-        strokeWeight(4);
-        circle(this.posX, this.posY, this.diameter);
+shortSignalName(sig) {
+    const i = sig.lastIndexOf("_");
+    return (i >= 0) ? sig.slice(i + 1) : sig;
+}
 
-        if (this.isMouseOver()) {
-            fill(128, 128);
-            noStroke();
-            circle(this.posX, this.posY, this.hitRange)
-        }
+pinTextSize(type) {
+    if (!type) return 6;
 
-        if (this.isMoving) {
-            const X = mouseX + this.offsetMouseX;
-            const Y = mouseY + this.offsetMouseY;
-            this.updatePosition(X,Y);
-        }
+    if (SVGS.includes(type))
+        return 0;
+    return 12;
+}
 
 
-        /*noStroke();
-        fill(0);
-        textSize(12);
-        textStyle(NORMAL);
-        text(this.id, this.posX - 20, this.posY + 25);*/
+draw() {
+    fillValue(this.value);
+
+    stroke(0);
+    strokeWeight(4);
+    circle(this.posX, this.posY, this.diameter);
+
+    if (this.isMouseOver()) {
+        fill(128, 128);
+        noStroke();
+        circle(this.posX, this.posY, this.hitRange);
     }
+
+    if (this.isMoving) {
+        const X = mouseX + this.offsetMouseX;
+        const Y = mouseY + this.offsetMouseY;
+        this.updatePosition(X, Y);
+    }
+
+    // ==========================
+    // Nom de la broche (signal)
+    // ==========================
+    if (this.signal) {
+
+    const label = this.shortSignalName(this.signal);
+    const size  = this.pinTextSize(this.parent?.type);
+
+    
+    // Option : masquer totalement pour certains blocs
+    if (SVGS.includes(this.parent?.type) && size < 7)
+        return;
+     if (this.parent?.type == 'LBL')
+        return;
+
+    push();
+    noStroke();
+    fill(200);
+    textSize(size);
+
+    if (this.isOutput) {
+        textAlign(RIGHT, CENTER);
+        text(label, this.posX - this.diameter / 2 - 4, this.posY);
+    } else {
+        textAlign(LEFT, CENTER);
+        text(label, this.posX + this.diameter / 2 + 4, this.posY);
+    }
+    pop();
+}
+
+    /*
+    // debug optionnel
+    noStroke();
+    fill(0);
+    textSize(12);
+    textStyle(NORMAL);
+    text(this.id, this.posX - 20, this.posY + 25);
+    */
+}
 
     /**
      * @todo TODO
@@ -171,6 +219,6 @@ export function fillValue(value) {
     if (value)
         fill(255, 193, 7);
     else
-        fill(52, 58, 64);
+        fill(255, 255, 255);
 }
 

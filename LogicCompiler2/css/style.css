@@ -1,80 +1,73 @@
-body {
-  margin: 0;
-  font-family: sans-serif;
+summary.proto-summary {
+  display: block;
 }
 
-#app {
-  display: flex;
-  height: 100vh;
+summary.proto-summary::marker,
+summary.proto-summary::-webkit-details-marker {
+  display: none;
 }
-
-/* -------- Palette -------- */
-
-#list-group-item {
-  width: auto;
-}
-//list-group-item-action pl-1
-
-#protoPanel {
-  width: 150px;
-  padding: 8px;
-  overflow-y: auto;
-  background: #ffffff;
-  border-right: 1px solid #ccc;
-}
-
-details {
-  margin-bottom: 6px;
-  border: 1px solid #bbb;
-  border-radius: 4px;
-  background: #fafafa;
-}
-
-summary {
-  cursor: pointer;
-  padding: 6px 10px;
-  font-weight: bold;
-  background: #e0e0e0;
-}
-
-/* -------- Boutons -------- */
 
 .proto-box {
-  padding: 6px;
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 1px;
+  width: 110px:
 }
 
+#protoPanel {
+  width: 130px;
+}
+//.tools{
+//   width: 110px;
+//}
+
+/* 🔥 OVERRIDE BOOTSTRAP */
 .proto-btn {
-  padding: 4px 8px;
+  display: inline-flex !important;
+  width: 42px !important;
+  height: 42px;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 1px;
   cursor: pointer;
+
   border: 1px solid #999;
   border-radius: 3px;
   background: #fff;
+
+  font-size: 10px;
 }
 
-.proto-btn:hover {
-  background: #e8e8e8;
+.proto-btn img {
+  max-width: 36px;
+  max-height: 36px;
+  object-fit: contain;
+  pointer-events: none;
 }
 
-/* -------- Visionneuse -------- */
-
-#protoView {
-  flex: 1;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
+.navbar-brand {
+    font-size: 12px;
+    padding-top: 0px !important;
+}
+.navGroupTools {
+    padding-left: 2px;
+    padding-right: 2px;
+    border-right-style: dotted;
+    border-color:gray;
 }
 
-#protoView h3 {
-  margin: 0 0 6px 0;
+.githubSection {
+    display: flex;
+    padding-left: 2px;
+    padding-right: 2px;
 }
 
-#protoText {
-  flex: 1;
-  width: 100%;
-  resize: none;
-  font-family: monospace;
-  font-size: 13px;
+.nav-item {
+    display: inline-flex;
+}
+
+input[type="file"] {
+    display: none;
 }

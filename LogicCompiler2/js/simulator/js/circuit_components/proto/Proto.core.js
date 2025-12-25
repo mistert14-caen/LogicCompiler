@@ -35,10 +35,11 @@ export class LogicProto {
 
     this.posX = x;
     this.posY = y;
-
+    this.note = "Double clic pour éditer";
     this.type  = type;
     this.name  = name;   // nom du proto
     this.label = name;   // nom logique / signal (LBL)
+    this.value = 0;  
 
     this.icon = null;
 
