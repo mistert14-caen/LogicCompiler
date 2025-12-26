@@ -7,7 +7,7 @@ import "./Proto.note.js";
 
 export { LogicProto } from "./Proto.core.js";
 
-export const PROTO_PATH = "/Logic/LogicCompiler2";
+export const PROTO_PATH = "/LogicCompiler2";
 
 export const SVGS = ['AND','ANDXXX','OR','ORXXX','NOR','NAND','NOT','XOR','NXOR','D','JK','RS','RSC','T'];
 
