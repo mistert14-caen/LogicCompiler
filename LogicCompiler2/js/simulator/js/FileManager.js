@@ -7,6 +7,16 @@ import { Wire } from "./circuit_components/Wire.js";
 
 let eventHistory = [];
 
+function romtToString(mem) {
+  let s = "";
+  for (let i = 0; i < mem.length; i++) {
+    if (mem[i] === 0) break;
+    s += String.fromCharCode(mem[i]);
+  }
+  return s;
+}
+
+
 function restoreWires(ws) {
   if (!ws.wire) return;
 
@@ -67,25 +77,43 @@ async function loadProtosOnly(p) {
   // 🔹 Instance UI réellement créée
   const ui = logicProto[logicProto.length - 1];
 
-  if (p.note) ui.note = p.note;
-/*  
-if (p.rom)  {
-     ui.mem = new Uint8Array(p.rom.length);
-     for (const k in p.rom) {
-       ui.mem[+k] = p.rom[k];
-     }
-  }
-*/
-  // 🔹 Cas particulier : LABEL
-  if (p.type === "LBL") {
-    const signalName = p.label;
 
-    ui.renameLabelSignal(signalName);
 
-    if (window.engine && engine.signals && !(signalName in engine.signals)) {
-      engine.set(signalName, 0);
+    if (p.note) ui.note = p.note;
+    if ((p.type === "ROMT" || p.type === "ROM")) {
+      ui.mem = new Uint8Array(
+        p.type === "ROMT" ? 256 : 16
+      );
+      
     }
-  }
+    if (p.type === "ROM" && p.rom) {
+       Object.entries(p.rom).forEach(([i, v]) => {
+         ui.mem[+i] = v;
+       });
+    }
+    if (p.type === "ROMT" && typeof p.romt === "string") {
+         const txt  = p.romt;
+         const size = ui.mem.length;
+
+         for (let i = 0; i < size; i++) {
+         if (i < txt.length) {
+           ui.mem[i] = txt.charCodeAt(i) & 0xFF;
+         } else {
+           ui.mem[i] = 0;
+         }
+      }
+    }
+
+    // 🔹 Cas particulier : LABEL
+    if (p.type === "LBL") {
+      const signalName = p.label;
+
+      ui.renameLabelSignal(signalName);
+
+      if (window.engine && engine.signals && !(signalName in engine.signals)) {
+        engine.set(signalName, 0);
+     }
+    }
 }
 
 async function loadAllProtos(ws) {
@@ -210,6 +238,7 @@ static getJSON_Workspace() {
   let workspace = {};
 
   workspace.logicProto = logicProto.map(p => {
+
     const o = {
       type: p.type,
       folder: p.folder,
@@ -217,30 +246,36 @@ static getJSON_Workspace() {
       posY: p.posY
     };
 
-    // ----- LABEL -----
+    // ---------- ROM classique ----------
+    if (p.type === "ROM" && p.mem instanceof Uint8Array) {
+      o.rom = {};
+      p.mem.forEach((v, i) => {
+        if (v !== 0) o.rom[i] = v;
+      });
+    }
+
+    // ---------- ROM TEXTE ----------
+    if (p.type === "ROMT" && p.mem instanceof Uint8Array) {
+      const txt = romtToString(p.mem);
+      if (txt.length > 0) {
+        o.romt = txt;
+      }
+    }
+
+    // ---------- LABEL ----------
     if (p.type === "LBL" && p.label) {
       o.label = p.label;
     }
 
-    // ----- ROM -----
-    if (p.type == "ROM") {
-      
-        o.rom = {};
-        p.mem.forEach((v, i) => {
-           if (v !== 0) o.rom[i] = v;
-        });      
-    }
-
-    if (p.type == "NOTE") {
-      
-        o.note = p.note;
-      
+    // ---------- NOTE ----------
+    if (p.type === "NOTE" && p.note) {
+      o.note = p.note;
     }
 
     return o;
   });
 
-  // ----- WIRES -----
+  // ---------- WIRES ----------
   workspace.wire = wireMng.wire.map(w => ({
     startID: w.startNode.id,
     endID:   w.endNode.id,

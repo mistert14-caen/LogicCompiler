@@ -1,0 +1,121 @@
+{
+	"logicProto": [
+		{
+			"type": "SAP1",
+			"folder": "9_SAP1",
+			"posX": 413,
+			"posY": 279
+		},
+		{
+			"type": "BTN",
+			"folder": "1_E-S",
+			"posX": 273,
+			"posY": 310
+		},
+		{
+			"type": "CLK",
+			"folder": "1_E-S",
+			"posX": 260,
+			"posY": 241
+		},
+		{
+			"type": "DEC",
+			"folder": "1_E-S",
+			"posX": 603,
+			"posY": 121
+		},
+		{
+			"type": "ROM",
+			"folder": "8_MEMOIRE",
+			"posX": 759,
+			"posY": 294,
+			"rom": {
+				"0": 15,
+				"1": 30,
+				"2": 63,
+				"3": 112,
+				"14": 1,
+				"15": 4
+			}
+		},
+		{
+			"type": "LBL",
+			"folder": "1_E-S",
+			"posX": 279,
+			"posY": 362,
+			"label": "BUS"
+		},
+		{
+			"type": "LBL",
+			"folder": "1_E-S",
+			"posX": 901,
+			"posY": 295,
+			"label": "BUS"
+		}
+	],
+	"wire": [
+		{
+			"startID": 15,
+			"endID": 1,
+			"width": 8,
+			"endX": 0,
+			"endY": 0
+		},
+		{
+			"startID": 16,
+			"endID": 0,
+			"width": 8,
+			"endX": 0,
+			"endY": 0
+		},
+		{
+			"startID": 3,
+			"endID": 17,
+			"width": 8,
+			"endX": 0,
+			"endY": 0
+		},
+		{
+			"startID": 6,
+			"endID": 18,
+			"width": 8,
+			"endX": 0,
+			"endY": 0
+		},
+		{
+			"startID": 7,
+			"endID": 19,
+			"width": 8,
+			"endX": 0,
+			"endY": 0
+		},
+		{
+			"startID": 24,
+			"endID": 2,
+			"width": 8,
+			"endX": 0,
+			"endY": 0
+		},
+		{
+			"startID": 22,
+			"endID": 25,
+			"width": 8,
+			"endX": 0,
+			"endY": 0
+		},
+		{
+			"startID": 14,
+			"endID": 20,
+			"width": 8,
+			"endX": 462.84375,
+			"endY": 360
+		},
+		{
+			"startID": 11,
+			"endID": 21,
+			"width": 8,
+			"endX": 656.84375,
+			"endY": 316
+		}
+	]
+}

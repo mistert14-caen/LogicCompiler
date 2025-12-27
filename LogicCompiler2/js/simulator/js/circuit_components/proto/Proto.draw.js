@@ -67,6 +67,9 @@ LogicProto.prototype.draw = function () {
         this.updateROM();
         this.drawROM();
     }
+   
+
+    
     else {
       this.drawDefaultProto();
     }
@@ -155,6 +158,8 @@ LogicProto.prototype.drawLED = function () {
 let content = null;
 textAlign(CENTER, CENTER);
 
+if (this.type === "ROMT") this.updateROM();   
+
 if (this.type === "LBL") {
   content = this.label;
 }
@@ -177,56 +182,6 @@ if (content !== null) {
 }
 }
 
-
-LogicProto.prototype.drawROM = function () {
-
-  const x = this.posX;
-  const y = this.posY;
-  const w = this.width;
-  const h = this.height;
-
-  stroke(0);
-  strokeWeight(2);
-  fill(245);
-  rectMode(CENTER);
-  rect(x, y, w, h, 8);
-
-  textAlign(CENTER, CENTER);
-  textSize(12);
-
-  const cols = 4;
-  const rows = 4;
-  const cellW = w / cols;
-  const cellH = (h - 20) / rows;
-
-  for (let i = 0; i < 16; i++) {
-
-    const cx = x - w/2 + cellW/2 + (i % cols) * cellW;
-    const cy = y - h/2 + 20 + cellH/2 + Math.floor(i / cols) * cellH;
-
-    // ?? surlignage si adresse active
-    if (this.activeAddr === i) {
-      fill(255, 240, 180); // jaune pâle
-      rectMode(CENTER);
-      rect(cx, cy, cellW - 4, cellH - 4, 4);
-      fill(0);
-    } else {
-      fill(0);
-    }
-
-    const v = this.mem[i]
-      .toString(16)
-      .padStart(2, "0")
-      .toUpperCase();
-
-    text(v, cx, cy);
-  }
-
-  // label
-  textAlign(CENTER, TOP);
-  fill(0);
-  text(this.name, x, y + h/2 + 4);
-}
 
 
 LogicProto.prototype.drawDICE = function () {

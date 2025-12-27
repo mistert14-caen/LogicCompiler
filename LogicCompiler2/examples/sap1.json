@@ -4,7 +4,7 @@
 			"type": "CTRLs",
 			"folder": "9_SAP1",
 			"posX": 389,
-			"posY": 308
+			"posY": 306
 		},
 		{
 			"type": "SEQ6",
@@ -15,7 +15,7 @@
 		{
 			"type": "PC4",
 			"folder": "9_SAP1",
-			"posX": 164,
+			"posX": 162,
 			"posY": 64
 		},
 		{
@@ -28,13 +28,13 @@
 			"type": "OR",
 			"folder": "2_PORTES",
 			"posX": 124,
-			"posY": 344
+			"posY": 343
 		},
 		{
 			"type": "BTN",
 			"folder": "1_E-S",
-			"posX": 25,
-			"posY": 289
+			"posX": 22,
+			"posY": 288
 		},
 		{
 			"type": "LBL",
@@ -47,7 +47,7 @@
 			"type": "LBL",
 			"folder": "1_E-S",
 			"posX": 482,
-			"posY": 212,
+			"posY": 211,
 			"label": "CP"
 		},
 		{
@@ -66,14 +66,14 @@
 		{
 			"type": "LBL",
 			"folder": "1_E-S",
-			"posX": 31,
+			"posX": 30,
 			"posY": 76,
 			"label": "EP"
 		},
 		{
 			"type": "DEC",
 			"folder": "1_E-S",
-			"posX": 1247,
+			"posX": 1246,
 			"posY": 213
 		},
 		{
@@ -86,14 +86,14 @@
 		{
 			"type": "MAR4s",
 			"folder": "9_SAP1",
-			"posX": 534,
+			"posX": 533,
 			"posY": 133
 		},
 		{
 			"type": "DEC",
 			"folder": "1_E-S",
 			"posX": 668,
-			"posY": 26
+			"posY": 27
 		},
 		{
 			"type": "LBL",
@@ -105,7 +105,7 @@
 		{
 			"type": "LBL",
 			"folder": "1_E-S",
-			"posX": 480,
+			"posX": 479,
 			"posY": 257,
 			"label": "LM"
 		},
@@ -119,13 +119,13 @@
 		{
 			"type": "IR8s",
 			"folder": "9_SAP1",
-			"posX": 1104,
+			"posX": 1105,
 			"posY": 125
 		},
 		{
 			"type": "DEC",
 			"folder": "1_E-S",
-			"posX": 1243,
+			"posX": 1242,
 			"posY": 80
 		},
 		{
@@ -159,21 +159,21 @@
 		{
 			"type": "LBL",
 			"folder": "1_E-S",
-			"posX": 572,
-			"posY": 231,
+			"posX": 574,
+			"posY": 204,
 			"label": "RC"
 		},
 		{
 			"type": "LBL",
 			"folder": "1_E-S",
-			"posX": 478,
+			"posX": 477,
 			"posY": 271,
 			"label": "RC"
 		},
 		{
 			"type": "DEC",
 			"folder": "1_E-S",
-			"posX": 1217,
+			"posX": 1216,
 			"posY": 325
 		},
 		{
@@ -200,26 +200,30 @@
 		{
 			"type": "ADD8",
 			"folder": "7_UC",
-			"posX": 344,
-			"posY": 77
+			"posX": 343,
+			"posY": 78
 		},
 		{
 			"type": "ROM",
 			"folder": "8_MEMOIRE",
 			"posX": 737,
-			"posY": 202
+			"posY": 199,
+			"rom": {
+				"0": 113,
+				"1": 112
+			}
 		},
 		{
 			"type": "DEC",
 			"folder": "1_E-S",
-			"posX": 1219,
-			"posY": 391
+			"posX": 1218,
+			"posY": 390
 		},
 		{
 			"type": "DEC",
 			"folder": "1_E-S",
 			"posX": 501,
-			"posY": 26
+			"posY": 25
 		},
 		{
 			"type": "LBL",
@@ -231,19 +235,19 @@
 		{
 			"type": "ACCs",
 			"folder": "9_SAP1",
-			"posX": 1074,
-			"posY": 383
+			"posX": 1071,
+			"posY": 382
 		},
 		{
 			"type": "RBs",
 			"folder": "9_SAP1",
-			"posX": 1075,
+			"posX": 1076,
 			"posY": 506
 		},
 		{
 			"type": "DEC",
 			"folder": "1_E-S",
-			"posX": 1223,
+			"posX": 1222,
 			"posY": 483
 		},
 		{
@@ -264,12 +268,12 @@
 			"type": "DEC",
 			"folder": "1_E-S",
 			"posX": 958,
-			"posY": 266
+			"posY": 267
 		},
 		{
 			"type": "Q2B",
 			"folder": "6_BUS",
-			"posX": 269,
+			"posX": 268,
 			"posY": 222
 		},
 		{
@@ -311,14 +315,14 @@
 			"type": "LBL",
 			"folder": "1_E-S",
 			"posX": 953,
-			"posY": 513,
+			"posY": 512,
 			"label": "CK"
 		},
 		{
 			"type": "LBL",
 			"folder": "1_E-S",
-			"posX": 86,
-			"posY": 535,
+			"posX": 87,
+			"posY": 534,
 			"label": "CK"
 		},
 		{
@@ -338,8 +342,8 @@
 		{
 			"type": "ALU8s",
 			"folder": "9_SAP1",
-			"posX": 641,
-			"posY": 513
+			"posX": 639,
+			"posY": 511
 		},
 		{
 			"type": "LBL",
@@ -386,8 +390,8 @@
 		{
 			"type": "LBL",
 			"folder": "1_E-S",
-			"posX": 958,
-			"posY": 491,
+			"posX": 957,
+			"posY": 490,
 			"label": "LB"
 		},
 		{
@@ -428,7 +432,7 @@
 			"type": "LBL",
 			"folder": "1_E-S",
 			"posX": 477,
-			"posY": 319,
+			"posY": 318,
 			"label": "LA"
 		},
 		{
@@ -441,28 +445,28 @@
 		{
 			"type": "LBL",
 			"folder": "1_E-S",
-			"posX": 478,
+			"posX": 477,
 			"posY": 348,
 			"label": "SU"
 		},
 		{
 			"type": "LBL",
 			"folder": "1_E-S",
-			"posX": 479,
-			"posY": 363,
+			"posX": 478,
+			"posY": 362,
 			"label": "EU"
 		},
 		{
 			"type": "LBL",
 			"folder": "1_E-S",
-			"posX": 480,
+			"posX": 479,
 			"posY": 376,
 			"label": "EA"
 		},
 		{
 			"type": "DEC",
 			"folder": "1_E-S",
-			"posX": 817,
+			"posX": 815,
 			"posY": 518
 		},
 		{
@@ -482,7 +486,7 @@
 		{
 			"type": "OUTs",
 			"folder": "9_SAP1",
-			"posX": 216,
+			"posX": 215,
 			"posY": 538
 		},
 		{
@@ -508,8 +512,8 @@
 		{
 			"type": "LBL",
 			"folder": "1_E-S",
-			"posX": 1209,
-			"posY": 429,
+			"posX": 1208,
+			"posY": 427,
 			"label": "out"
 		},
 		{
@@ -550,585 +554,578 @@
 	],
 	"wire": [
 		{
-			"startID": 124,
+			"startID": 126,
 			"endID": 0,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
-		},
-		{
-			"startID": 125,
-			"endID": 1,
-			"width": 8,
-			"endX": 0,
-			"endY": 0
-		},
-		{
-			"startID": 126,
-			"endID": 2,
-			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 349.84375,
+			"endY": 232
 		},
 		{
 			"startID": 127,
+			"endID": 1,
+			"width": 8,
+			"endX": 347.84375,
+			"endY": 249
+		},
+		{
+			"startID": 128,
+			"endID": 2,
+			"width": 8,
+			"endX": 347.84375,
+			"endY": 263
+		},
+		{
+			"startID": 129,
 			"endID": 3,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 347.84375,
+			"endY": 276
 		},
 		{
 			"startID": 26,
 			"endID": 4,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 345.84375,
+			"endY": 303
 		},
 		{
 			"startID": 27,
 			"endID": 5,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 349.84375,
+			"endY": 322
 		},
 		{
 			"startID": 28,
 			"endID": 6,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 344.84375,
+			"endY": 334
 		},
 		{
 			"startID": 29,
 			"endID": 7,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 346.84375,
+			"endY": 347
 		},
 		{
 			"startID": 30,
 			"endID": 8,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 347.84375,
+			"endY": 365
 		},
 		{
 			"startID": 31,
 			"endID": 9,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
-		},
-		{
-			"startID": 119,
-			"endID": 123,
-			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 351.84375,
+			"endY": 377
 		},
 		{
 			"startID": 43,
 			"endID": 24,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 188.84375,
+			"endY": 355
 		},
 		{
-			"startID": 131,
+			"startID": 133,
 			"endID": 25,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
-		},
-		{
-			"startID": 44,
-			"endID": 41,
-			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 189.84375,
+			"endY": 370
 		},
 		{
 			"startID": 94,
 			"endID": 42,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 95.84375,
+			"endY": 349
 		},
 		{
-			"startID": 198,
-			"endID": 192,
+			"startID": 44,
+			"endID": 41,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 92.84375,
+			"endY": 332
 		},
 		{
-			"startID": 200,
-			"endID": 194,
+			"startID": 121,
+			"endID": 125,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 235.84375,
+			"endY": 215
 		},
 		{
-			"startID": 195,
-			"endID": 196,
-			"width": 8,
-			"endX": 0,
-			"endY": 0
-		},
-		{
-			"startID": 159,
-			"endID": 69,
-			"width": 8,
-			"endX": 0,
-			"endY": 0
-		},
-		{
-			"startID": 135,
-			"endID": 70,
-			"width": 8,
-			"endX": 0,
-			"endY": 0
-		},
-		{
-			"startID": 92,
-			"endID": 71,
-			"width": 8,
-			"endX": 0,
-			"endY": 0
-		},
-		{
-			"startID": 79,
-			"endID": 72,
-			"width": 8,
-			"endX": 0,
-			"endY": 0
-		},
-		{
-			"startID": 81,
-			"endID": 73,
-			"width": 8,
-			"endX": 0,
-			"endY": 0
-		},
-		{
-			"startID": 129,
+			"startID": 131,
 			"endID": 32,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 101.84375,
+			"endY": 27
 		},
 		{
 			"startID": 51,
 			"endID": 33,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 101.84375,
+			"endY": 39
 		},
 		{
 			"startID": 46,
 			"endID": 34,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 102.84375,
+			"endY": 57
 		},
 		{
 			"startID": 53,
 			"endID": 35,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 98.84375,
+			"endY": 70
 		},
 		{
-			"startID": 206,
+			"startID": 208,
 			"endID": 36,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 103.84375,
+			"endY": 84
 		},
 		{
-			"startID": 38,
-			"endID": 49,
+			"startID": 145,
+			"endID": 37,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 98.84375,
+			"endY": 98
 		},
 		{
-			"startID": 99,
-			"endID": 104,
+			"startID": 200,
+			"endID": 194,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 152.84375,
+			"endY": 526
 		},
 		{
-			"startID": 39,
-			"endID": 97,
+			"startID": 143,
+			"endID": 195,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 155.84375,
+			"endY": 535
 		},
 		{
-			"startID": 133,
-			"endID": 58,
+			"startID": 202,
+			"endID": 196,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 152.84375,
+			"endY": 550
 		},
 		{
-			"startID": 68,
-			"endID": 59,
+			"startID": 161,
+			"endID": 69,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 1043.84375,
+			"endY": 91
 		},
 		{
-			"startID": 64,
-			"endID": 60,
+			"startID": 137,
+			"endID": 70,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 1044.84375,
+			"endY": 108
+		},
+		{
+			"startID": 92,
+			"endID": 71,
+			"width": 8,
+			"endX": 1043.84375,
+			"endY": 126
+		},
+		{
+			"startID": 79,
+			"endID": 72,
+			"width": 8,
+			"endX": 1041.84375,
+			"endY": 139
+		},
+		{
+			"startID": 81,
+			"endID": 73,
+			"width": 8,
+			"endX": 1042.84375,
+			"endY": 158
+		},
+		{
+			"startID": 104,
+			"endID": 190,
+			"width": 8,
+			"endX": 966.84375,
+			"endY": 196
+		},
+		{
+			"startID": 165,
+			"endID": 109,
+			"width": 8,
+			"endX": 1013.84375,
+			"endY": 360
+		},
+		{
+			"startID": 163,
+			"endID": 110,
+			"width": 8,
+			"endX": 1013.84375,
+			"endY": 374
+		},
+		{
+			"startID": 139,
+			"endID": 111,
+			"width": 8,
+			"endX": 1013.84375,
+			"endY": 391
+		},
+		{
+			"startID": 172,
+			"endID": 112,
+			"width": 8,
+			"endX": 1009.84375,
+			"endY": 404
+		},
+		{
+			"startID": 169,
+			"endID": 170,
+			"width": 8,
+			"endX": 915.84375,
+			"endY": 434
+		},
+		{
+			"startID": 152,
+			"endID": 171,
+			"width": 8,
+			"endX": 911.84375,
+			"endY": 447
+		},
+		{
+			"startID": 167,
+			"endID": 115,
+			"width": 8,
+			"endX": 1013.84375,
+			"endY": 487
+		},
+		{
+			"startID": 141,
+			"endID": 116,
+			"width": 8,
+			"endX": 1012.84375,
+			"endY": 501
+		},
+		{
+			"startID": 174,
+			"endID": 117,
+			"width": 8,
+			"endX": 1016.84375,
+			"endY": 520
+		},
+		{
+			"startID": 157,
+			"endID": 148,
+			"width": 8,
+			"endX": 562.84375,
+			"endY": 489
+		},
+		{
+			"startID": 159,
+			"endID": 149,
+			"width": 8,
+			"endX": 559.84375,
+			"endY": 503
+		},
+		{
+			"startID": 155,
+			"endID": 150,
+			"width": 8,
+			"endX": 556.84375,
+			"endY": 517
+		},
+		{
+			"startID": 178,
+			"endID": 151,
+			"width": 8,
+			"endX": 559.84375,
+			"endY": 532
+		},
+		{
+			"startID": 197,
+			"endID": 198,
+			"width": 8,
+			"endX": 311.84375,
+			"endY": 485
 		},
 		{
 			"startID": 99,
 			"endID": 57,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 470.84375,
+			"endY": 110
 		},
 		{
-			"startID": 155,
-			"endID": 146,
+			"startID": 147,
+			"endID": 98,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 310.84375,
+			"endY": 84
 		},
 		{
-			"startID": 157,
-			"endID": 147,
+			"startID": 39,
+			"endID": 97,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 310.84375,
+			"endY": 67
 		},
 		{
-			"startID": 153,
-			"endID": 148,
+			"startID": 38,
+			"endID": 49,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 275.84375,
+			"endY": 14
 		},
 		{
-			"startID": 176,
-			"endID": 149,
+			"startID": 99,
+			"endID": 106,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
-		},
-		{
-			"startID": 150,
-			"endID": 187,
-			"width": 8,
-			"endX": 0,
-			"endY": 0
-		},
-		{
-			"startID": 87,
-			"endID": 101,
-			"width": 8,
-			"endX": 0,
-			"endY": 0
-		},
-		{
-			"startID": 61,
-			"endID": 100,
-			"width": 8,
-			"endX": 0,
-			"endY": 0
-		},
-		{
-			"startID": 163,
-			"endID": 107,
-			"width": 8,
-			"endX": 0,
-			"endY": 0
-		},
-		{
-			"startID": 161,
-			"endID": 108,
-			"width": 8,
-			"endX": 0,
-			"endY": 0
-		},
-		{
-			"startID": 137,
-			"endID": 109,
-			"width": 8,
-			"endX": 0,
-			"endY": 0
-		},
-		{
-			"startID": 170,
-			"endID": 110,
-			"width": 8,
-			"endX": 0,
-			"endY": 0
-		},
-		{
-			"startID": 167,
-			"endID": 168,
-			"width": 8,
-			"endX": 0,
-			"endY": 0
-		},
-		{
-			"startID": 165,
-			"endID": 113,
-			"width": 8,
-			"endX": 0,
-			"endY": 0
-		},
-		{
-			"startID": 139,
-			"endID": 114,
-			"width": 8,
-			"endX": 0,
-			"endY": 0
-		},
-		{
-			"startID": 172,
-			"endID": 115,
-			"width": 8,
-			"endX": 0,
-			"endY": 0
-		},
-		{
-			"startID": 102,
-			"endID": 122,
-			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 451.84375,
+			"endY": 26
 		},
 		{
 			"startID": 61,
 			"endID": 62,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 621.84375,
+			"endY": 24
 		},
 		{
-			"startID": 74,
-			"endID": 77,
+			"startID": 61,
+			"endID": 100,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 635.84375,
+			"endY": 175
 		},
 		{
-			"startID": 76,
-			"endID": 54,
+			"startID": 87,
+			"endID": 101,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 596.84375,
+			"endY": 230
 		},
 		{
-			"startID": 111,
-			"endID": 90,
+			"startID": 152,
+			"endID": 189,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
-		},
-		{
-			"startID": 112,
-			"endID": 103,
-			"width": 8,
-			"endX": 0,
-			"endY": 0
-		},
-		{
-			"startID": 116,
-			"endID": 117,
-			"width": 8,
-			"endX": 0,
-			"endY": 0
-		},
-		{
-			"startID": 43,
-			"endID": 105,
-			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 768.84375,
+			"endY": 517
 		},
 		{
 			"startID": 10,
 			"endID": 47,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 455.84375,
+			"endY": 212
 		},
 		{
 			"startID": 11,
 			"endID": 55,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 453.84375,
+			"endY": 222
 		},
 		{
 			"startID": 12,
-			"endID": 207,
+			"endID": 209,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 450.84375,
+			"endY": 243
 		},
 		{
 			"startID": 13,
 			"endID": 65,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 453.84375,
+			"endY": 256
 		},
 		{
 			"startID": 14,
 			"endID": 88,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 450.84375,
+			"endY": 271
 		},
 		{
 			"startID": 15,
 			"endID": 82,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 451.84375,
+			"endY": 285
 		},
 		{
 			"startID": 16,
 			"endID": 84,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 450.84375,
+			"endY": 301
 		},
 		{
 			"startID": 17,
-			"endID": 177,
+			"endID": 179,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 445.84375,
+			"endY": 317
 		},
 		{
 			"startID": 18,
-			"endID": 179,
+			"endID": 181,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 450.84375,
+			"endY": 332
 		},
 		{
 			"startID": 19,
-			"endID": 181,
+			"endID": 183,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 450.84375,
+			"endY": 346
 		},
 		{
 			"startID": 20,
-			"endID": 183,
+			"endID": 185,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 450.84375,
+			"endY": 362
 		},
 		{
 			"startID": 21,
-			"endID": 185,
+			"endID": 187,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 450.84375,
+			"endY": 373
 		},
 		{
 			"startID": 22,
-			"endID": 203,
+			"endID": 205,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 450.84375,
+			"endY": 389
 		},
 		{
 			"startID": 23,
 			"endID": 95,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 450.84375,
+			"endY": 405
 		},
 		{
-			"startID": 111,
-			"endID": 190,
+			"startID": 104,
+			"endID": 124,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 909.84375,
+			"endY": 264
 		},
 		{
-			"startID": 116,
-			"endID": 173,
+			"startID": 74,
+			"endID": 77,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 1198.84375,
+			"endY": 80
 		},
 		{
 			"startID": 75,
-			"endID": 120,
+			"endID": 122,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
-		},
-		{
-			"startID": 150,
-			"endID": 169,
-			"width": 8,
-			"endX": 0,
-			"endY": 0
-		},
-		{
-			"startID": 102,
-			"endID": 188,
-			"width": 8,
-			"endX": 0,
-			"endY": 0
-		},
-		{
-			"startID": 143,
-			"endID": 37,
-			"width": 8,
-			"endX": 0,
-			"endY": 0
-		},
-		{
-			"startID": 145,
-			"endID": 98,
-			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 1220.84375,
+			"endY": 137
 		},
 		{
 			"startID": 76,
-			"endID": 209,
+			"endID": 211,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 1223.84375,
+			"endY": 173
 		},
 		{
-			"startID": 141,
-			"endID": 193,
+			"startID": 76,
+			"endID": 54,
 			"width": 8,
-			"endX": 108.84375,
-			"endY": 535
+			"endX": 1199.84375,
+			"endY": 213
+		},
+		{
+			"startID": 113,
+			"endID": 90,
+			"width": 8,
+			"endX": 1172.84375,
+			"endY": 325
+		},
+		{
+			"startID": 113,
+			"endID": 192,
+			"width": 8,
+			"endX": 1175.84375,
+			"endY": 362
+		},
+		{
+			"startID": 114,
+			"endID": 105,
+			"width": 8,
+			"endX": 1171.84375,
+			"endY": 389
+		},
+		{
+			"startID": 114,
+			"endID": 203,
+			"width": 8,
+			"endX": 1177.84375,
+			"endY": 433
+		},
+		{
+			"startID": 118,
+			"endID": 119,
+			"width": 8,
+			"endX": 1175.84375,
+			"endY": 482
+		},
+		{
+			"startID": 118,
+			"endID": 175,
+			"width": 8,
+			"endX": 1192.84375,
+			"endY": 514
 		},
 		{
 			"startID": 40,
-			"endID": 211,
+			"endID": 213,
 			"width": 8,
 			"endX": 864.84375,
-			"endY": 41
+			"endY": 43
 		},
 		{
-			"startID": 112,
-			"endID": 201,
+			"startID": 135,
+			"endID": 58,
 			"width": 8,
-			"endX": 1185.84375,
-			"endY": 431
+			"endX": 469.84375,
+			"endY": 125
+		},
+		{
+			"startID": 68,
+			"endID": 59,
+			"width": 8,
+			"endX": 474.84375,
+			"endY": 136
+		},
+		{
+			"startID": 64,
+			"endID": 60,
+			"width": 8,
+			"endX": 468.84375,
+			"endY": 157
 		}
 	]
 }

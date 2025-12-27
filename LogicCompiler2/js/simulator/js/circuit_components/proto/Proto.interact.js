@@ -31,31 +31,6 @@ LogicProto.prototype.isMouseOver = function () {
 
 
 
-
- LogicProto.prototype.onDblClickROM = function () {
-
-  const size = this.mem.length;
-
-  const txt = prompt(
-    `Programme HEXA (${size} octets)`,
-    this.mem.map(v => v.toString(16).padStart(2, "0")).join(" ")
-  );
-
-  if (!txt) return true;
-
-  const bytes = txt
-    .replace(/[^0-9A-Fa-f]/g, " ")
-    .trim()
-    .split(/\s+/)
-    .map(v => parseInt(v, 16));
-
-  for (let i = 0; i < size; i++) {
-    this.mem[i] = bytes[i] ?? 0;
-  }
-
-  return true;
-}
-
 LogicProto.prototype.onDblClickVAL = function () {
  
  this.value = 0;
@@ -87,9 +62,12 @@ LogicProto.prototype.onDblClickLBL = function () {
 }
 
 LogicProto.prototype.getDoubleClickHandler = function () {
+
+  //if (this.type.startsWith("ROM"))  return this.onDblClickROM;
   switch (this.type) {
+    case "ROMT": return this.onDblClickROMT;
+    case "ROM": return this.onDblClickROM;
     case "LBL":  return this.onDblClickLBL;
-    case "ROM":  return this.onDblClickROM;
     case "VAL":  return this.onDblClickVAL;
     case "OCST":  return this.onDblClickOCST;
     case "NOTE":  return this.onDblClickNOTE;

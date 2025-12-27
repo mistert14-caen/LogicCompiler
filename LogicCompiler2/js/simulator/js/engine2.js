@@ -5,6 +5,7 @@
 import { LogicProto } from "./circuit_components/proto/index.js";
 import { Node as LogicNode } from "./circuit_components/Node.js";
 import { INPUT_STATE } from "./circuit_components/Enums.js";
+import { logicProto } from "./simulator.js";
 
 
 class LogicPrototype {
@@ -330,6 +331,28 @@ importPrototype(text) {
   set(name, v) { this.signals[name] = Number(v); }
   get(name) { return this.signals[name] ?? 0; }
 
+updateMem() {
+
+  //return false;
+  // ===== ÉCRITURE RAM / ROM (STA) =====
+  for (const p of logicProto) {
+
+    if (p.type !== "ROM") continue;
+
+    const sigA  = p.name + '_A';
+    const sigCE = p.name + '_CE';
+    const sigWE = p.name + '_WE';
+    const sigWD = p.name + '_WD';
+
+    if (engine.get(sigCE) !== 0) continue;
+    if (sigWE && engine.get(sigWE) === 1) {
+      const addr = engine.get(sigA) & 0xF;
+      const data = engine.get(sigWD) & 0xFF;
+      p.mem[addr] = data;
+    }
+  }
+}
+
 tickSequential() {
   const prev = structuredClone(this.signals);
   const next = structuredClone(this.signals);
@@ -341,6 +364,7 @@ tickSequential() {
 
   this.last = prev;
   this.signals = next;
+  this.updateMem();
 }
 
   

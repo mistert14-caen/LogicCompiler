@@ -1,0 +1,150 @@
+{
+	"logicProto": [
+		{
+			"type": "SAP1",
+			"folder": "9_SAP1",
+			"posX": 168,
+			"posY": 280
+		},
+		{
+			"type": "BTN",
+			"folder": "1_E-S",
+			"posX": 43,
+			"posY": 289
+		},
+		{
+			"type": "CLK",
+			"folder": "1_E-S",
+			"posX": 41,
+			"posY": 214
+		},
+		{
+			"type": "DEC",
+			"folder": "1_E-S",
+			"posX": 319,
+			"posY": 164
+		},
+		{
+			"type": "ROM",
+			"folder": "8_MEMOIRE",
+			"posX": 581,
+			"posY": 262,
+			"rom": {
+				"0": 15,
+				"1": 224,
+				"2": 14,
+				"3": 224,
+				"4": 13,
+				"5": 224,
+				"6": 12,
+				"7": 224,
+				"8": 11,
+				"9": 224,
+				"10": 240,
+				"11": 79,
+				"12": 76,
+				"13": 76,
+				"14": 69,
+				"15": 72
+			}
+		},
+		{
+			"type": "LBL",
+			"folder": "1_E-S",
+			"posX": 43,
+			"posY": 342,
+			"label": "BUS"
+		},
+		{
+			"type": "LBL",
+			"folder": "1_E-S",
+			"posX": 796,
+			"posY": 185,
+			"label": "BUS"
+		},
+		{
+			"type": "NOTE",
+			"folder": "11_OUTILS",
+			"posX": 604,
+			"posY": 82,
+			"note": "0F E0 0E E0 0D E0 0C E0 0B E0 F0 4F 4C 4C 45 48\n"
+		},
+		{
+			"type": "SEG14A",
+			"folder": "3_AFFICHEURS",
+			"posX": 367,
+			"posY": 358
+		},
+		{
+			"type": "H",
+			"folder": "1_E-S",
+			"posX": 269,
+			"posY": 297
+		}
+	],
+	"wire": [
+		{
+			"startID": 15,
+			"endID": 1,
+			"width": 8,
+			"endX": 0,
+			"endY": 0
+		},
+		{
+			"startID": 16,
+			"endID": 0,
+			"width": 8,
+			"endX": 0,
+			"endY": 0
+		},
+		{
+			"startID": 3,
+			"endID": 17,
+			"width": 8,
+			"endX": 0,
+			"endY": 0
+		},
+		{
+			"startID": 24,
+			"endID": 2,
+			"width": 8,
+			"endX": 0,
+			"endY": 0
+		},
+		{
+			"startID": 22,
+			"endID": 25,
+			"width": 8,
+			"endX": 0,
+			"endY": 0
+		},
+		{
+			"startID": 30,
+			"endID": 27,
+			"width": 8,
+			"endX": 0,
+			"endY": 0
+		},
+		{
+			"startID": 13,
+			"endID": 28,
+			"width": 8,
+			"endX": 0,
+			"endY": 0
+		},
+		{
+			"startID": 6,
+			"endID": 18,
+			"width": 8,
+			"endX": 0,
+			"endY": 0
+		},
+		{
+			"startID": 7,
+			"endID": 19,
+			"width": 8,
+			"endX": 0,
+			"endY": 0
+		}
+	]
+}

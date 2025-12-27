@@ -1,0 +1,167 @@
+{
+	"logicProto": [
+		{
+			"type": "SAP1",
+			"folder": "9_SAP1",
+			"posX": 412,
+			"posY": 280
+		},
+		{
+			"type": "BTN",
+			"folder": "1_E-S",
+			"posX": 266,
+			"posY": 315
+		},
+		{
+			"type": "CLK",
+			"folder": "1_E-S",
+			"posX": 260,
+			"posY": 241
+		},
+		{
+			"type": "DEC",
+			"folder": "1_E-S",
+			"posX": 536,
+			"posY": 111
+		},
+		{
+			"type": "ROM",
+			"folder": "8_MEMOIRE",
+			"posX": 761,
+			"posY": 295,
+			"rom": {
+				"0": 15,
+				"1": 30,
+				"2": 224,
+				"3": 113,
+				"4": 240,
+				"14": 1
+			}
+		},
+		{
+			"type": "LBL",
+			"folder": "1_E-S",
+			"posX": 280,
+			"posY": 361,
+			"label": "BUS"
+		},
+		{
+			"type": "LBL",
+			"folder": "1_E-S",
+			"posX": 901,
+			"posY": 294,
+			"label": "BUS"
+		},
+		{
+			"type": "DEC",
+			"folder": "1_E-S",
+			"posX": 565,
+			"posY": 409
+		},
+		{
+			"type": "NOTE",
+			"folder": "11_OUTILS",
+			"posX": 766,
+			"posY": 138,
+			"note": "0F 1E E0 71 F0 00 00 00 00 00 00 00 00 00 01 00"
+		},
+		{
+			"type": "ROMT",
+			"folder": "8_MEMOIRE",
+			"posX": 569,
+			"posY": 515,
+			"romt": " SALUTLEMONDE"
+		},
+		{
+			"type": "SEG14A",
+			"folder": "3_AFFICHEURS",
+			"posX": 708,
+			"posY": 517
+		},
+		{
+			"type": "H",
+			"folder": "1_E-S",
+			"posX": 612,
+			"posY": 473
+		}
+	],
+	"wire": [
+		{
+			"startID": 15,
+			"endID": 1,
+			"width": 8,
+			"endX": 0,
+			"endY": 0
+		},
+		{
+			"startID": 16,
+			"endID": 0,
+			"width": 8,
+			"endX": 0,
+			"endY": 0
+		},
+		{
+			"startID": 3,
+			"endID": 17,
+			"width": 8,
+			"endX": 0,
+			"endY": 0
+		},
+		{
+			"startID": 6,
+			"endID": 18,
+			"width": 8,
+			"endX": 0,
+			"endY": 0
+		},
+		{
+			"startID": 7,
+			"endID": 19,
+			"width": 8,
+			"endX": 0,
+			"endY": 0
+		},
+		{
+			"startID": 22,
+			"endID": 25,
+			"width": 8,
+			"endX": 0,
+			"endY": 0
+		},
+		{
+			"startID": 24,
+			"endID": 2,
+			"width": 8,
+			"endX": 0,
+			"endY": 0
+		},
+		{
+			"startID": 13,
+			"endID": 27,
+			"width": 8,
+			"endX": 0,
+			"endY": 0
+		},
+		{
+			"startID": 29,
+			"endID": 31,
+			"width": 8,
+			"endX": 664.84375,
+			"endY": 515
+		},
+		{
+			"startID": 33,
+			"endID": 30,
+			"width": 8,
+			"endX": 665.84375,
+			"endY": 499
+		},
+		{
+			"startID": 13,
+			"endID": 28,
+			"width": 8,
+			"endX": 545.84375,
+			"endY": 514
+		}
+	]
+}

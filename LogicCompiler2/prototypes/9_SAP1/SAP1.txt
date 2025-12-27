@@ -1,0 +1,152 @@
+[BLOCK SAP1#]
+TYPE=BLOCK
+SYMBOL=SAP1
+CATEGORY=SAP
+DESCRIPTION=SAP-1 aplati
+WIDTH=100
+HEIGHT=200
+
+# =====================================================
+# Entrées externes (BTN, CLK, RST…)
+# =====================================================
+INPUTS=CLK;RSTe;BUS
+OUTPUTS=PC4VAL;T1;T2;MAR;CE;OPCODE;IMM;IR;ACCr;ZERO;OUT;WE
+
+EQUATIONS=RRS  = /RSTe & (HLT |  @RRS) 
+EQUATIONS=RST = RSTe | RRS
+# =====================================================
+# ================== ÉQUATIONS ========================
+# =====================================================
+
+# ===== SEQ6 =====
+EQUATIONS=SEQ6NQ1 = @SEQ6Q6
+EQUATIONS=SEQ6NQ2 = @SEQ6Q1
+EQUATIONS=SEQ6NQ3 = @SEQ6Q2
+EQUATIONS=SEQ6NQ4 = @SEQ6Q3
+EQUATIONS=SEQ6NQ5 = @SEQ6Q4
+EQUATIONS=SEQ6NQ6 = @SEQ6Q5
+
+EQUATIONS=SEQ6Q1 = RST | (/RST & ((CLK & @SEQ6NQ1) | (/CLK & @SEQ6Q1)))
+EQUATIONS=SEQ6Q2 = /RST & ((CLK & @SEQ6NQ2) | (/CLK & @SEQ6Q2))
+EQUATIONS=SEQ6Q3 = /RST & ((CLK & @SEQ6NQ3) | (/CLK & @SEQ6Q3))
+EQUATIONS=SEQ6Q4 = /RST & ((CLK & @SEQ6NQ4) | (/CLK & @SEQ6Q4))
+EQUATIONS=SEQ6Q5 = /RST & ((CLK & @SEQ6NQ5) | (/CLK & @SEQ6Q5))
+EQUATIONS=SEQ6Q6 = /RST & ((CLK & @SEQ6NQ6) | (/CLK & @SEQ6Q6))
+
+EQUATIONS=T1 = SEQ6Q1
+EQUATIONS=T2 = SEQ6Q2
+EQUATIONS=T3 = SEQ6Q3
+EQUATIONS=T4 = SEQ6Q4
+EQUATIONS=T5 = SEQ6Q5
+EQUATIONS=T6 = SEQ6Q6
+
+
+# ===== PC4 =====
+# ===== CTRLs : décodage =====
+# ===== Q2B =====
+EQUATIONS=H0 = OPCODE & 1
+EQUATIONS=H1 = (OPCODE >> 1) & 1
+EQUATIONS=H2 = (OPCODE >> 2) & 1
+EQUATIONS=H3 = (OPCODE >> 3) & 1
+
+EQUATIONS=I0 = /H3 & /H2 & /H1 & /H0
+EQUATIONS=I1 = /H3 & /H2 & /H1 &  H0
+EQUATIONS=I2 = /H3 & /H2 &  H1 & /H0
+EQUATIONS=I3 =  H3 &  H2 &  H1 & /H0
+EQUATIONS=I4 =  H3 &  H2 &  H1 &  H0
+EQUATIONS=IJ = /H3 & H2 & H1 & H0
+EQUATIONS=ISTA = /H3 & /H2 & H1 & H0
+EQUATIONS=IJZ= ZERO & (/H3 &  H2 &  H1 &  /H0)
+
+
+# ===== FETCH =====
+EQUATIONS=EP = T1
+EQUATIONS=LM = /( T1 | (T4 & (I0 | I1 | I2 | IJ | IJZ | ISTA)) )
+EQUATIONS=CP = T2
+EQUATIONS=CE = /( T3 | (T5 & (I0 | I1 | I2 | IJ | IJZ | ISTA)) )
+EQUATIONS=LI = /T3
+
+# ===== EXEC =====
+EQUATIONS=EI = /(T4 & (I0 | I1 | I2 | IJ | IJZ | ISTA))
+EQUATIONS=LA = /((T5 & I0) | (T6 & (I1 | I2)))
+EQUATIONS=LB = /(T5 & (I1 | I2))
+EQUATIONS=SU = T6 & I2
+EQUATIONS=EU = /(T6 & (I1 | I2))
+EQUATIONS=EA = T4 & I3
+EQUATIONS=LO = /(T4 & I3)
+EQUATIONS=PCL = (IJ & T4) |  (IJZ & T4)
+EQUATIONS=HLT = H3 & H2 & H1 & H0
+EQUATIONS=WE = (T5 & ISTA)
+
+EQUATIONS=PC4RST=RST
+EQUATIONS=PC4CP=CP
+EQUATIONS=PC4PCL=PCL
+EQUATIONS=PC4EN=EP
+
+EQUATIONS=PC4NQ0 = (PC4CP & /@PC4Q0) | (/PC4CP & @PC4Q0)
+EQUATIONS=PC4NQ1 = (PC4CP & ((@PC4Q1 & /@PC4Q0) | (/@PC4Q1 & @PC4Q0))) | (/PC4CP & @PC4Q1)
+EQUATIONS=PC4NQ2 = (PC4CP & ((@PC4Q2 & /(@PC4Q1 & @PC4Q0)) | (/@PC4Q2 & (@PC4Q1 & @PC4Q0)))) | (/PC4CP & @PC4Q2)
+EQUATIONS=PC4NQ3 = (PC4CP & ((@PC4Q3 & /(@PC4Q2 & @PC4Q1 & @PC4Q0)) | (/@PC4Q3 & (@PC4Q2 & @PC4Q1 & @PC4Q0)))) | (/PC4CP & @PC4Q3)
+
+EQUATIONS=PC4DQ0 = (PC4PCL & ((PC4BUS >> 0) & 1)) | (/PC4PCL & PC4NQ0)
+EQUATIONS=PC4DQ1 = (PC4PCL & ((PC4BUS >> 1) & 1)) | (/PC4PCL & PC4NQ1)
+EQUATIONS=PC4DQ2 = (PC4PCL & ((PC4BUS >> 2) & 1)) | (/PC4PCL & PC4NQ2)
+EQUATIONS=PC4DQ3 = (PC4PCL & ((PC4BUS >> 3) & 1)) | (/PC4PCL & PC4NQ3)
+
+EQUATIONS=PC4Q0 = /PC4RST & ((CLK & @PC4DQ0) | (/CLK & @PC4Q0))
+EQUATIONS=PC4Q1 = /PC4RST & ((CLK & @PC4DQ1) | (/CLK & @PC4Q1))
+EQUATIONS=PC4Q2 = /PC4RST & ((CLK & @PC4DQ2) | (/CLK & @PC4Q2))
+EQUATIONS=PC4Q3 = /PC4RST & ((CLK & @PC4DQ3) | (/CLK & @PC4Q3))
+
+EQUATIONS=PC4VAL = (PC4Q0*1) + (PC4Q1*2) + (PC4Q2*4) + (PC4Q3*8)
+EQUATIONS=PC4PC  = PC4EN * PC4VAL
+
+EQUATIONS=PC4BUS=IMM
+EQUATIONS=MAR4sA = PC4PC + IMM
+EQUATIONS=MAR4sCLR = RST
+
+# ===== MAR4s =====
+EQUATIONS=N   = (/LM * MAR4sA) + (LM * @MAR)
+EQUATIONS=MAR = /MAR4sCLR * ((CLK * N) + (/CLK * @MAR))
+
+# ----- IRNext state (chargement depuis BUS si L_I=1) -----
+EQUATIONS=IRN = (/LI * BUS) + ((LI) * @IR)
+
+# ----- Flip-Flop d’enregistrement -----
+EQUATIONS=IR = /RST * ( (CLK * @IRN) + (/CLK * @IR) )
+
+# ----- Extraction OPCODE (bits 7..4) -----
+EQUATIONS=OPCODE = (IR >> 4) & 15
+
+# ----- Extraction IMM (bits 3..0) -----
+EQUATIONS=IMMr = IR & 15
+
+# ----- IMM vers BUS (activé uniquement si EN_IMM = 1) -----
+EQUATIONS=IMM = /EI * IMMr
+
+# ===== ACCs =====
+EQUATIONS=ACCi = ( EU * BUS ) + ( /EU * RES )
+EQUATIONS=ACCn   = (/LA * ACCi) + (LA * @ACCr)
+EQUATIONS=ACCr = (CLK * @ACCn) + (/CLK * @ACCr)
+EQUATIONS=ACC   = EA * ACCr
+#EQUATIONS=WDATA = ACCr
+
+# ===== RBs =====
+EQUATIONS=RBn  = (/LB * BUS) + (LB * @RB)
+EQUATIONS=RB = (CLK * @RBn) + (/CLK * @RB)
+
+# ===== ALU8s =====
+EQUATIONS=ADD = ACCr + RB
+EQUATIONS=SUB = ACCr - RB
+
+EQUATIONS=RES = (/SU * ADD) + (SU * SUB)
+EQUATIONS=ZERO = (RES == 0)
+EQUATIONS=ALU = /EU * RES
+
+
+# ===== OUTs =====
+EQUATIONS=OUTn   = (/LO * ACC) + (LO * @OUTq)
+EQUATIONS=OUTq   = (CLK * @OUTn) + (/CLK * @OUTq)
+EQUATIONS=OUT = OUTq
+
+

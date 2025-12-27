@@ -29,6 +29,8 @@ function loadProtoIcon(type, cb) {
   );
 }
 
+
+
 export class LogicProto {
 
   constructor(x, y, type = "UNDEFINED", name = "PROTO") {
@@ -54,8 +56,11 @@ export class LogicProto {
     this.offsetMouseX = 0;
     this.offsetMouseY = 0;
 
-    if (this.type === "ROM") {
-       this.mem = new Uint8Array(16); // 16 mots de 8 bits
+    if (this.type.startsWith("ROM")) {
+        if (this.type == "ROM") this.mem = new Uint8Array(16); // 16 mots de 8 bits
+        if (this.type == "ROMT") this.mem = new Uint8Array(256); // 256 mots de 8 bits
+        if (this.type == "ROM16") this.mem = new Uint16Array(64); // 16 mots de 8 bits
+
     }
 
     loadProtoIcon(this.type, img => {

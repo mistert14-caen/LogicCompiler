@@ -1,0 +1,109 @@
+{
+	"logicProto": [
+		{
+			"type": "ROM",
+			"folder": "8_MEMOIRE",
+			"posX": 533,
+			"posY": 238,
+			"rom": {
+				"0": 15,
+				"1": 46,
+				"2": 100,
+				"3": 113,
+				"13": 240,
+				"14": 1,
+				"15": 2
+			}
+		},
+		{
+			"type": "SAP2",
+			"folder": "10_SAP2",
+			"posX": 314,
+			"posY": 273
+		},
+		{
+			"type": "CLK",
+			"folder": "1_E-S",
+			"posX": 187,
+			"posY": 241
+		},
+		{
+			"type": "BTN",
+			"folder": "1_E-S",
+			"posX": 178,
+			"posY": 283
+		},
+		{
+			"type": "LBL",
+			"folder": "1_E-S",
+			"posX": 184,
+			"posY": 316,
+			"label": "BUS"
+		},
+		{
+			"type": "LBL",
+			"folder": "1_E-S",
+			"posX": 769,
+			"posY": 262,
+			"label": "BUS"
+		}
+	],
+	"wire": [
+		{
+			"startID": 23,
+			"endID": 5,
+			"width": 8,
+			"endX": 262.5,
+			"endY": 258
+		},
+		{
+			"startID": 24,
+			"endID": 6,
+			"width": 8,
+			"endX": 261.5,
+			"endY": 270
+		},
+		{
+			"startID": 26,
+			"endID": 7,
+			"width": 8,
+			"endX": 260.5,
+			"endY": 285
+		},
+		{
+			"startID": 4,
+			"endID": 27,
+			"width": 8,
+			"endX": 744.5,
+			"endY": 262
+		},
+		{
+			"startID": 11,
+			"endID": 0,
+			"width": 8,
+			"endX": 437.5,
+			"endY": 219
+		},
+		{
+			"startID": 12,
+			"endID": 1,
+			"width": 8,
+			"endX": 436.5,
+			"endY": 232
+		},
+		{
+			"startID": 13,
+			"endID": 2,
+			"width": 8,
+			"endX": 430.5,
+			"endY": 247
+		},
+		{
+			"startID": 17,
+			"endID": 3,
+			"width": 8,
+			"endX": 435.5,
+			"endY": 261
+		}
+	]
+}

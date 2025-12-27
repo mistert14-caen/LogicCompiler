@@ -1,6 +1,6 @@
-[BLOCK ROM#]
+[BLOCK MEM#]
 TYPE=ROM
-SYMBOL=ROM
+SYMBOL=MEM
 CATEGORY=SAP
 ORDER=1
 DESCRIPTION=SAP-1 Memory (RAM préchargée, lecture/écriture)
