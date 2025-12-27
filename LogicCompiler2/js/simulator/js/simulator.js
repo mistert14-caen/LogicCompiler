@@ -60,6 +60,24 @@ function preloadUserPrototypes() {
   }
 }
 
+let currentHz = 5;
+
+function sliderToHz(v) {
+  // mapping logarithmique : ~0.5 Hz → ~50 Hz
+  const minHz = 0.5;
+  const maxHz = 50;
+  const t = v / 100;
+  return minHz * Math.pow(maxHz / minHz, t);
+}
+
+function setClockHz(hz) {
+  currentHz = hz;
+  startLogicClock(hz);
+  document.getElementById("clockHzLabel").textContent =
+    hz.toFixed(hz < 10 ? 2 : 1) + " Hz";
+}
+
+
 function engineTick() {
   engine.pushInputsToEngine(logicProto);
   engine.tickSequential();
@@ -191,12 +209,29 @@ async function setup() {
   
   preloadUserPrototypes();
 
-  startLogicClock(5);
+ 
   
   const id = params.get("id");
   if (id) {
     fileManager.loadFromServer(id);
   }
+  
+  const slider = document.getElementById("clockSlider");
+  const label  = document.getElementById("clockHzLabel");
+
+  startLogicClock(5);  
+
+  if (slider) {
+    slider.addEventListener("input", () => {
+      const hz = sliderToHz(+slider.value);
+      setClockHz(hz);
+  });
+
+  // init cohérente
+  setClockHz(sliderToHz(slider.value));
+}
+
+  
 }
 
 /**
