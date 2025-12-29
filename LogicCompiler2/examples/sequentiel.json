@@ -1,680 +1,170 @@
 {
 	"logicProto": [
 		{
-			"posX": 238,
-			"posY": 166,
 			"type": "RS",
-			"name": "RS1",
-			"label": "LBL",
-			"width": 80,
-			"height": 80,
-			"nodes": [
-				{
-					"diameter": 10,
-					"value": 0,
-					"posX": 198,
-					"posY": 150,
-					"isOutput": false,
-					"hitRange": 20,
-					"signal": "RS1_S",
-					"inputState": 1,
-					"isAlive": true,
-					"brotherNode": null,
-					"id": 0,
-					"localX": -40,
-					"localY": -16
-				},
-				{
-					"diameter": 10,
-					"value": 0,
-					"posX": 198,
-					"posY": 182,
-					"isOutput": false,
-					"hitRange": 20,
-					"signal": "RS1_R",
-					"inputState": 1,
-					"isAlive": true,
-					"brotherNode": null,
-					"id": 1,
-					"localX": -40,
-					"localY": 16
-				},
-				{
-					"diameter": 10,
-					"value": 1,
-					"posX": 278,
-					"posY": 150,
-					"isOutput": true,
-					"hitRange": 20,
-					"signal": "RS1_Q",
-					"inputState": 0,
-					"isAlive": true,
-					"brotherNode": null,
-					"id": 2,
-					"localX": 40,
-					"localY": -16
-				},
-				{
-					"diameter": 10,
-					"value": 0,
-					"posX": 278,
-					"posY": 182,
-					"isOutput": true,
-					"hitRange": 20,
-					"signal": "RS1_nQ",
-					"inputState": 0,
-					"isAlive": true,
-					"brotherNode": null,
-					"id": 3,
-					"localX": 40,
-					"localY": 16
-				}
-			],
-			"nodeStartID": null,
-			"isSpawned": true,
-			"isMoving": false,
-			"offsetMouseX": 0,
-			"offsetMouseY": 0,
-			"dy": 32
+			"folder": "4_BASCULES",
+			"posX": 108,
+			"posY": 165
 		},
 		{
-			"posX": 466,
-			"posY": 164,
 			"type": "D",
-			"name": "D1",
-			"label": "LBL",
-			"width": 80,
-			"height": 80,
-			"nodes": [
-				{
-					"diameter": 10,
-					"value": 0,
-					"posX": 426,
-					"posY": 148,
-					"isOutput": false,
-					"hitRange": 20,
-					"signal": "D1_D",
-					"inputState": 1,
-					"isAlive": true,
-					"brotherNode": null,
-					"id": 4,
-					"localX": -40,
-					"localY": -16
-				},
-				{
-					"diameter": 10,
-					"value": 0,
-					"posX": 426,
-					"posY": 180,
-					"isOutput": false,
-					"hitRange": 20,
-					"signal": "D1_CLK",
-					"inputState": 1,
-					"isAlive": true,
-					"brotherNode": null,
-					"id": 5,
-					"localX": -40,
-					"localY": 16
-				},
-				{
-					"diameter": 10,
-					"value": 0,
-					"posX": 506,
-					"posY": 148,
-					"isOutput": true,
-					"hitRange": 20,
-					"signal": "D1_Q",
-					"inputState": 0,
-					"isAlive": true,
-					"brotherNode": null,
-					"id": 6,
-					"localX": 40,
-					"localY": -16
-				},
-				{
-					"diameter": 10,
-					"value": 1,
-					"posX": 506,
-					"posY": 180,
-					"isOutput": true,
-					"hitRange": 20,
-					"signal": "D1_nQ",
-					"inputState": 0,
-					"isAlive": true,
-					"brotherNode": null,
-					"id": 7,
-					"localX": 40,
-					"localY": 16
-				}
-			],
-			"nodeStartID": null,
-			"isSpawned": true,
-			"isMoving": false,
-			"offsetMouseX": 43.63067626953125,
-			"offsetMouseY": -17.017051696777344,
-			"dy": 32
+			"folder": "4_BASCULES",
+			"posX": 344,
+			"posY": 152
 		},
 		{
-			"posX": 237,
-			"posY": 296,
 			"type": "JK",
-			"name": "JK1",
-			"label": "LBL",
-			"width": 80,
-			"height": 80,
-			"nodes": [
-				{
-					"diameter": 10,
-					"value": 0,
-					"posX": 197,
-					"posY": 281,
-					"isOutput": false,
-					"hitRange": 20,
-					"signal": "JK1_J",
-					"inputState": 1,
-					"isAlive": true,
-					"brotherNode": null,
-					"id": 8,
-					"localX": -40,
-					"localY": -15
-				},
-				{
-					"diameter": 10,
-					"value": 1,
-					"posX": 197,
-					"posY": 296,
-					"isOutput": false,
-					"hitRange": 20,
-					"signal": "JK1_CLK",
-					"inputState": 1,
-					"isAlive": true,
-					"brotherNode": null,
-					"id": 9,
-					"localX": -40,
-					"localY": 0
-				},
-				{
-					"diameter": 10,
-					"value": 0,
-					"posX": 197,
-					"posY": 311,
-					"isOutput": false,
-					"hitRange": 20,
-					"signal": "JK1_K",
-					"inputState": 1,
-					"isAlive": true,
-					"brotherNode": null,
-					"id": 10,
-					"localX": -40,
-					"localY": 15
-				},
-				{
-					"diameter": 10,
-					"value": 0,
-					"posX": 277,
-					"posY": 281,
-					"isOutput": true,
-					"hitRange": 20,
-					"signal": "JK1_Q",
-					"inputState": 0,
-					"isAlive": true,
-					"brotherNode": null,
-					"id": 11,
-					"localX": 40,
-					"localY": -15
-				},
-				{
-					"diameter": 10,
-					"value": 1,
-					"posX": 277,
-					"posY": 311,
-					"isOutput": true,
-					"hitRange": 20,
-					"signal": "JK1_nQ",
-					"inputState": 0,
-					"isAlive": true,
-					"brotherNode": null,
-					"id": 12,
-					"localX": 40,
-					"localY": 15
-				}
-			],
-			"nodeStartID": null,
-			"isSpawned": true,
-			"isMoving": false,
-			"offsetMouseX": 39.63067626953125,
-			"offsetMouseY": 1.9829483032226562,
-			"dy": 15
+			"folder": "4_BASCULES",
+			"posX": 119,
+			"posY": 283
 		},
 		{
-			"posX": 510,
-			"posY": 292,
 			"type": "T",
-			"name": "T1",
-			"label": "LBL",
-			"width": 80,
-			"height": 80,
-			"nodes": [
-				{
-					"diameter": 10,
-					"value": 0,
-					"posX": 470,
-					"posY": 276,
-					"isOutput": false,
-					"hitRange": 20,
-					"signal": "T1_T",
-					"inputState": 1,
-					"isAlive": true,
-					"brotherNode": null,
-					"id": 13,
-					"localX": -40,
-					"localY": -16
-				},
-				{
-					"diameter": 10,
-					"value": 1,
-					"posX": 470,
-					"posY": 308,
-					"isOutput": false,
-					"hitRange": 20,
-					"signal": "T1_CLK",
-					"inputState": 1,
-					"isAlive": true,
-					"brotherNode": null,
-					"id": 14,
-					"localX": -40,
-					"localY": 16
-				},
-				{
-					"diameter": 10,
-					"value": 1,
-					"posX": 550,
-					"posY": 276,
-					"isOutput": true,
-					"hitRange": 20,
-					"signal": "T1_Q",
-					"inputState": 0,
-					"isAlive": true,
-					"brotherNode": null,
-					"id": 15,
-					"localX": 40,
-					"localY": -16
-				},
-				{
-					"diameter": 10,
-					"value": 0,
-					"posX": 550,
-					"posY": 308,
-					"isOutput": true,
-					"hitRange": 20,
-					"signal": "T1_nQ",
-					"inputState": 0,
-					"isAlive": true,
-					"brotherNode": null,
-					"id": 16,
-					"localX": 40,
-					"localY": 16
-				}
-			],
-			"nodeStartID": null,
-			"isSpawned": true,
-			"isMoving": false,
-			"offsetMouseX": 41.63067626953125,
-			"offsetMouseY": -14.017051696777344,
-			"dy": 32
+			"folder": "4_BASCULES",
+			"posX": 340,
+			"posY": 267
 		},
 		{
-			"posX": 139,
-			"posY": 138,
 			"type": "BTN",
-			"name": "BTN1",
-			"label": "LBL",
-			"width": 50,
-			"height": 20,
-			"nodes": [
-				{
-					"diameter": 10,
-					"value": 0,
-					"posX": 164,
-					"posY": 138,
-					"isOutput": true,
-					"hitRange": 20,
-					"signal": "BTN1_S",
-					"inputState": 1,
-					"isAlive": true,
-					"brotherNode": null,
-					"id": 17,
-					"localX": 25,
-					"localY": 0
-				}
-			],
-			"nodeStartID": null,
-			"isSpawned": true,
-			"isMoving": false,
-			"offsetMouseX": -0.36932373046875,
-			"offsetMouseY": -0.01705169677734375,
-			"dy": 15
+			"folder": "1_E-S",
+			"posX": 25,
+			"posY": 144
 		},
 		{
-			"posX": 141,
-			"posY": 185,
 			"type": "BTN",
-			"name": "BTN2",
-			"label": "LBL",
-			"width": 50,
-			"height": 20,
-			"nodes": [
-				{
-					"diameter": 10,
-					"value": 0,
-					"posX": 166,
-					"posY": 185,
-					"isOutput": true,
-					"hitRange": 20,
-					"signal": "BTN2_S",
-					"inputState": 1,
-					"isAlive": true,
-					"brotherNode": null,
-					"id": 18,
-					"localX": 25,
-					"localY": 0
-				}
-			],
-			"nodeStartID": null,
-			"isSpawned": true,
-			"isMoving": false,
-			"offsetMouseX": -3.36932373046875,
-			"offsetMouseY": 2.9829483032226562,
-			"dy": 15
+			"folder": "1_E-S",
+			"posX": 24,
+			"posY": 182
 		},
 		{
-			"posX": 367,
-			"posY": 140,
 			"type": "BTN",
-			"name": "BTN3",
-			"label": "LBL",
-			"width": 50,
-			"height": 20,
-			"nodes": [
-				{
-					"diameter": 10,
-					"value": 0,
-					"posX": 392,
-					"posY": 140,
-					"isOutput": true,
-					"hitRange": 20,
-					"signal": "BTN3_S",
-					"inputState": 1,
-					"isAlive": true,
-					"brotherNode": null,
-					"id": 19,
-					"localX": 25,
-					"localY": 0
-				}
-			],
-			"nodeStartID": null,
-			"isSpawned": true,
-			"isMoving": false,
-			"offsetMouseX": 4.63067626953125,
-			"offsetMouseY": 2.9829483032226562,
-			"dy": 15
+			"folder": "1_E-S",
+			"posX": 253,
+			"posY": 136
 		},
 		{
-			"posX": 132,
-			"posY": 249,
 			"type": "BTN",
-			"name": "BTN4",
-			"label": "LBL",
-			"width": 50,
-			"height": 20,
-			"nodes": [
-				{
-					"diameter": 10,
-					"value": 0,
-					"posX": 157,
-					"posY": 249,
-					"isOutput": true,
-					"hitRange": 20,
-					"signal": "BTN4_S",
-					"inputState": 1,
-					"isAlive": true,
-					"brotherNode": null,
-					"id": 20,
-					"localX": 25,
-					"localY": 0
-				}
-			],
-			"nodeStartID": null,
-			"isSpawned": true,
-			"isMoving": false,
-			"offsetMouseX": -1.36932373046875,
-			"offsetMouseY": -1.0170516967773438,
-			"dy": 15
+			"folder": "1_E-S",
+			"posX": 249,
+			"posY": 251
 		},
 		{
-			"posX": 134,
-			"posY": 329,
 			"type": "BTN",
-			"name": "BTN5",
-			"label": "LBL",
-			"width": 50,
-			"height": 20,
-			"nodes": [
-				{
-					"diameter": 10,
-					"value": 0,
-					"posX": 159,
-					"posY": 329,
-					"isOutput": true,
-					"hitRange": 20,
-					"signal": "BTN5_S",
-					"inputState": 1,
-					"isAlive": true,
-					"brotherNode": null,
-					"id": 21,
-					"localX": 25,
-					"localY": 0
-				}
-			],
-			"nodeStartID": null,
-			"isSpawned": true,
-			"isMoving": false,
-			"offsetMouseX": 0.63067626953125,
-			"offsetMouseY": 3.9829483032226562,
-			"dy": 15
+			"folder": "1_E-S",
+			"posX": 23,
+			"posY": 256
 		},
 		{
-			"posX": 397,
-			"posY": 260,
 			"type": "BTN",
-			"name": "BTN6",
-			"label": "LBL",
-			"width": 50,
-			"height": 20,
-			"nodes": [
-				{
-					"diameter": 10,
-					"value": 0,
-					"posX": 422,
-					"posY": 260,
-					"isOutput": true,
-					"hitRange": 20,
-					"signal": "BTN6_S",
-					"inputState": 1,
-					"isAlive": true,
-					"brotherNode": null,
-					"id": 22,
-					"localX": 25,
-					"localY": 0
-				}
-			],
-			"nodeStartID": null,
-			"isSpawned": true,
-			"isMoving": false,
-			"offsetMouseX": -1.36932373046875,
-			"offsetMouseY": -1.0170516967773438,
-			"dy": 15
+			"folder": "1_E-S",
+			"posX": 28,
+			"posY": 323
 		},
 		{
-			"posX": 372,
-			"posY": 189,
+			"type": "LBL",
+			"folder": "1_E-S",
+			"posX": 256,
+			"posY": 167,
+			"label": "CK"
+		},
+		{
+			"type": "LBL",
+			"folder": "1_E-S",
+			"posX": 249,
+			"posY": 286,
+			"label": "CK"
+		},
+		{
+			"type": "LBL",
+			"folder": "1_E-S",
+			"posX": 29,
+			"posY": 283,
+			"label": "CK"
+		},
+		{
 			"type": "CLK",
-			"name": "CLK1",
-			"label": "LBL",
-			"width": 40,
-			"height": 40,
-			"nodes": [
-				{
-					"diameter": 10,
-					"value": 0,
-					"posX": 392,
-					"posY": 189,
-					"isOutput": true,
-					"hitRange": 20,
-					"signal": "CLK1_S",
-					"inputState": 1,
-					"isAlive": true,
-					"brotherNode": null,
-					"id": 23,
-					"localX": 20,
-					"localY": 0
-				}
-			],
-			"nodeStartID": null,
-			"isSpawned": true,
-			"isMoving": false,
-			"offsetMouseX": 6.63067626953125,
-			"offsetMouseY": -6.017051696777344,
-			"dy": 15
+			"folder": "1_E-S",
+			"posX": 113,
+			"posY": 400
 		},
 		{
-			"posX": 122,
-			"posY": 291,
-			"type": "CLK",
-			"name": "CLK2",
-			"label": "LBL",
-			"width": 40,
-			"height": 40,
-			"nodes": [
-				{
-					"diameter": 10,
-					"value": 1,
-					"posX": 142,
-					"posY": 291,
-					"isOutput": true,
-					"hitRange": 20,
-					"signal": "CLK2_S",
-					"inputState": 1,
-					"isAlive": true,
-					"brotherNode": null,
-					"id": 24,
-					"localX": 20,
-					"localY": 0
-				}
-			],
-			"nodeStartID": null,
-			"isSpawned": true,
-			"isMoving": false,
-			"offsetMouseX": -18.36932373046875,
-			"offsetMouseY": 0.9829483032226562,
-			"dy": 15
-		},
-		{
-			"posX": 414,
-			"posY": 310,
-			"type": "CLK",
-			"name": "CLK3",
-			"label": "LBL",
-			"width": 40,
-			"height": 40,
-			"nodes": [
-				{
-					"diameter": 10,
-					"value": 1,
-					"posX": 434,
-					"posY": 310,
-					"isOutput": true,
-					"hitRange": 20,
-					"signal": "CLK3_S",
-					"inputState": 0,
-					"isAlive": true,
-					"brotherNode": null,
-					"id": 25,
-					"localX": 20,
-					"localY": 0
-				}
-			],
-			"nodeStartID": null,
-			"isSpawned": true,
-			"isMoving": false,
-			"offsetMouseX": -16.36932373046875,
-			"offsetMouseY": 2.9829483032226562,
-			"dy": 15
+			"type": "LBL",
+			"folder": "1_E-S",
+			"posX": 198,
+			"posY": 400,
+			"label": "CK"
 		}
 	],
 	"wire": [
 		{
-			"startID": 20,
-			"endID": 8,
-			"width": 8,
-			"endX": 0,
-			"endY": 0
-		},
-		{
-			"startID": 21,
-			"endID": 10,
-			"width": 8,
-			"endX": 0,
-			"endY": 0
-		},
-		{
-			"startID": 22,
-			"endID": 13,
-			"width": 8,
-			"endX": 0,
-			"endY": 0
-		},
-		{
 			"startID": 17,
 			"endID": 0,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 68.84375,
+			"endY": 146
 		},
 		{
 			"startID": 18,
 			"endID": 1,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
+			"endX": 67.84375,
+			"endY": 179
 		},
 		{
 			"startID": 19,
 			"endID": 4,
 			"width": 8,
-			"endX": 0,
-			"endY": 0
-		},
-		{
-			"startID": 23,
-			"endID": 5,
-			"width": 8,
-			"endX": 392.36932373046875,
-			"endY": 179.01705169677734
+			"endX": 302.84375,
+			"endY": 135
 		},
 		{
 			"startID": 24,
-			"endID": 9,
+			"endID": 5,
 			"width": 8,
-			"endX": 140.36932373046875,
-			"endY": 290.01705169677734
+			"endX": 300.84375,
+			"endY": 164
 		},
 		{
-			"startID": 25,
+			"startID": 20,
+			"endID": 13,
+			"width": 8,
+			"endX": 295.84375,
+			"endY": 254
+		},
+		{
+			"startID": 26,
 			"endID": 14,
 			"width": 8,
-			"endX": 468.36932373046875,
-			"endY": 306.01705169677734
+			"endX": 294.84375,
+			"endY": 279
+		},
+		{
+			"startID": 21,
+			"endID": 8,
+			"width": 8,
+			"endX": 78.84375,
+			"endY": 268
+		},
+		{
+			"startID": 28,
+			"endID": 9,
+			"width": 8,
+			"endX": 77.84375,
+			"endY": 286
+		},
+		{
+			"startID": 22,
+			"endID": 10,
+			"width": 8,
+			"endX": 76.84375,
+			"endY": 297
+		},
+		{
+			"startID": 29,
+			"endID": 30,
+			"width": 8,
+			"endX": 174.84375,
+			"endY": 399
 		}
 	]
 }
