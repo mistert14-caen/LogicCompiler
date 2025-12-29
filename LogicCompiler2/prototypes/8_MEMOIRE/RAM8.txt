@@ -1,0 +1,19 @@
+[BLOCK RAM8#]
+TYPE=BLOCK
+SYMBOL=RAM8
+CATEGORY=MEM
+DESCRIPTION=RAM 256 octets (lecture combinatoire, écriture moteur)
+WIDTH=320
+HEIGHT=320
+
+# =========================
+# Entrées / Sorties
+# =========================
+
+INPUTS=A;CE;WE;WD
+OUTPUTS=D
+
+# =========================
+# Lecture mémoire
+# =========================
+

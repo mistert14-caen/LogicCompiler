@@ -20,7 +20,6 @@ LogicProto.prototype.onDblClickROM = function () {
   const wordBytes = getWordBytes(mem);
   const size = mem.length;
 
-  // 🔹 texte initial cohérent avec l’affichage
   const initTxt = Array.from(mem).map(v => {
     let out = [];
     for (let i = wordBytes - 1; i >= 0; i--) {
@@ -36,14 +35,12 @@ LogicProto.prototype.onDblClickROM = function () {
 
   if (!txt) return true;
 
-  // 🔹 lecture octets
   const bytes = txt
     .replace(/[^0-9A-Fa-f]/g, " ")
     .trim()
     .split(/\s+/)
     .map(v => parseInt(v, 16));
 
-  // 🔹 reconstruction des mots
   for (let i = 0; i < size; i++) {
     let value = 0;
     for (let b = 0; b < wordBytes; b++) {
@@ -56,7 +53,6 @@ LogicProto.prototype.onDblClickROM = function () {
 };
 
 
-
 LogicProto.prototype.updateROM = function () {
 
   if (!window.engine) return;
@@ -67,11 +63,21 @@ LogicProto.prototype.updateROM = function () {
     return;
   }
 
-  const addr = engine.get(`${this.name}_A`) & 0xFF;
+  const addr = engine.get(`${this.name}_A`) & (this.mem.length - 1);
   const value = this.mem[addr];
   engine.set(`${this.name}_D`, value);
   this.activeAddr = addr;
 }
+         
+function formatByte4x4(v) {
+  const hi = (v >> 4) & 0xF;
+  const lo = v & 0xF;
+  return (
+    hi.toString(16).toUpperCase() +
+    lo.toString(16).toUpperCase()
+  ).replace(/(..)/, "$1");
+}
+
 
 function formatWord(value, nbBits) {
   const nbBytes = nbBits / 8;
@@ -86,33 +92,18 @@ function formatWord(value, nbBits) {
 }
 
 
-LogicProto.prototype.drawROM = function () {
+LogicProto.prototype.drawRAM = function () {
 
-  //if (this.type === "ROMT") {
-  //  return;
-  //}
-
-  if (!this.mem || !ArrayBuffer.isView(this.mem)) return;
+  if (!this.mem || !(this.mem instanceof Uint8Array)) return;
 
   const mem = this.mem;
-  const nbWords = mem.length;
-
-  // largeur mot
-  let nbBits = 8;
-  if (mem instanceof Uint16Array) nbBits = 16;
-  if (mem instanceof Uint32Array) nbBits = 32;
 
   // -----------------------------
-  // Colonnes / lignes
+  // Grille demandée
   // -----------------------------
-  let nbCols;
-  if (nbBits === 16) {
-    nbCols = 4;               // 🔒 règle demandée
-  } else {
-    nbCols = 4;               // ROM8 reste aussi à 4 (SAP-1)
-  }
-
-  const nbRows = Math.ceil(nbWords / nbCols);
+  const nbCols = 6;
+  const nbRows = 10;
+  const maxWords = nbCols * nbRows;
 
   // -----------------------------
   // Géométrie
@@ -122,53 +113,59 @@ LogicProto.prototype.drawROM = function () {
   const w = this.width;
   const h = this.height;
 
-  const headerH = 18;
-  const verticalCompress = 0.85;   // 🔧 resserrement vertical
+  const headerH = 14;
+  const margin = 6;
 
-  const cellW = w / nbCols;
-  const cellH = ((h - headerH) / nbRows) * verticalCompress;
+  const cellW = (w - margin * 2) / nbCols;
+  const cellH = (h - headerH - margin * 2) / nbRows;
 
-  // boîte
+  // rayon sûr (anti-crash canvas)
+  const r = Math.min(2, cellW / 2, cellH / 2);
+
+  // -----------------------------
+  // Boîte
+  // -----------------------------
   stroke(0);
   strokeWeight(2);
   fill(0);
   rectMode(CENTER);
-  rect(x, y, w, h, 8);
+  rect(x, y, w, h, Math.min(6, w / 2, h / 2));
 
   textAlign(CENTER, CENTER);
-  textSize(11);
+  textSize(18);
 
   // -----------------------------
   // Cellules
   // -----------------------------
-  for (let i = 0; i < nbWords; i++) {
+  for (let i = 0; i < maxWords; i++) {
+
+    if (i >= mem.length) break;
 
     const col = i % nbCols;
     const row = Math.floor(i / nbCols);
 
-    const cx = x - w / 2 + cellW / 2 + col * cellW;
-    const cy = y - h / 2 + headerH + cellH / 2 + row * cellH;
+    const cx = x - w / 2 + margin + cellW / 2 + col * cellW;
+    const cy = y - h / 2 + headerH + margin + cellH / 2 + row * cellH;
 
     if (this.activeAddr === i) {
-      fill(255, 240, 180);
-      rect(cx, cy, cellW - 6, cellH - 2, 4);
-      fill(255);
+      fill(255, 230, 160);
+      rect(cx, cy, cellW - 4, cellH - 4, r);
+      fill(0);
     } else {
       fill(255);
     }
 
-    text(
-      formatWord(mem[i], nbBits),   // "00" ou "00 00"
-      cx,
-      cy
-    );
+    text(formatByte4x4(mem[i]), cx, cy);
   }
 
-  // label
+  // -----------------------------
+  // Label
+  // -----------------------------
   textAlign(CENTER, TOP);
   fill(250);
-  text(this.name, x, y + h / 2 + 4);
+  text(this.name + " (RAM8 code)", x, y + h / 2 + 4);
 };
+
 
 LogicProto.prototype.onDblClickROMT = function () {
 
@@ -176,7 +173,7 @@ LogicProto.prototype.onDblClickROMT = function () {
 
   const size = this.mem.length; // 256
 
-  // �� texte initial depuis la ROM
+  // texte initial depuis la ROM
   let initTxt = "";
   for (let i = 0; i < size; i++) {
     const v = this.mem[i];
@@ -191,7 +188,7 @@ LogicProto.prototype.onDblClickROMT = function () {
 
   if (txt === null) return true;
 
-  // 🔹 écriture ASCII + padding 0
+  // écriture ASCII + padding 0
   for (let i = 0; i < size; i++) {
     if (i < txt.length) {
       this.mem[i] = txt.charCodeAt(i) & 0xFF;
@@ -203,3 +200,70 @@ LogicProto.prototype.onDblClickROMT = function () {
   return true;
 };
 
+
+LogicProto.prototype.drawROM = function () {
+
+  if (!this.mem || !ArrayBuffer.isView(this.mem)) return;
+
+  const mem = this.mem;
+  let nbWords = mem.length;
+
+  const MAX_VISIBLE = 66;
+  nbWords = Math.min(nbWords, MAX_VISIBLE);
+
+  let nbBits = 8;
+  if (mem instanceof Uint16Array) nbBits = 16;
+  if (mem instanceof Uint32Array) nbBits = 32;
+
+  let nbCols;
+  if (nbBits === 16) {
+    nbCols = 6;
+  } else {
+    nbCols = 4;
+  }
+
+  const nbRows = Math.ceil(nbWords / nbCols);
+
+  const x = this.posX;
+  const y = this.posY;
+  const w = this.width;
+  const h = this.height;
+
+  const headerH = 18;
+  const verticalCompress = 0.85;
+
+  const cellW = w / nbCols;
+  const cellH = ((h - headerH) / nbRows) * verticalCompress;
+
+  stroke(0);
+  strokeWeight(2);
+  fill(0);
+  rectMode(CENTER);
+  rect(x, y, w, h, 8);
+
+  textAlign(CENTER, CENTER);
+  textSize(11);
+
+  for (let i = 0; i < nbWords; i++) {
+
+    const col = i % nbCols;
+    const row = Math.floor(i / nbCols);
+
+    const cx = x - w / 2 + cellW / 2 + col * cellW;
+    const cy = y - h / 2 + headerH + cellH / 2 + row * cellH;
+
+    if (this.activeAddr === i) {
+      fill(255, 240, 180);
+      rect(cx, cy, Math.max(1, cellW - 6), Math.max(1, cellH - 2), 4);
+      fill(255);
+    } else {
+      fill(255);
+    }
+
+    text(formatWord(mem[i], nbBits), cx, cy);
+  }
+
+  textAlign(CENTER, TOP);
+  fill(250);
+  text(this.name, x, y + h / 2 + 4);
+};

@@ -67,6 +67,8 @@ LogicProto.prototype.getDoubleClickHandler = function () {
   switch (this.type) {
     case "ROMT": return this.onDblClickROMT;
     case "ROM": return this.onDblClickROM;
+    case "RAM8": return this.onDblClickROM;
+    case "RAM16": return this.onDblClickROM;
     case "LBL":  return this.onDblClickLBL;
     case "VAL":  return this.onDblClickVAL;
     case "OCST":  return this.onDblClickOCST;

@@ -1,0 +1,193 @@
+{
+	"logicProto": [
+		{
+			"type": "SAP1c",
+			"folder": "9_SAP1",
+			"posX": 194,
+			"posY": 181
+		},
+		{
+			"type": "RAM16",
+			"folder": "8_MEMOIRE",
+			"posX": 697,
+			"posY": 192,
+			"rom": {
+				"0": 261,
+				"1": 1281,
+				"2": 1029,
+				"3": 512,
+				"4": 2304,
+				"5": 28
+			}
+		},
+		{
+			"type": "CLK",
+			"folder": "1_E-S",
+			"posX": 30,
+			"posY": 153
+		},
+		{
+			"type": "BTN",
+			"folder": "1_E-S",
+			"posX": 28,
+			"posY": 200
+		},
+		{
+			"type": "LBL",
+			"folder": "1_E-S",
+			"posX": 33,
+			"posY": 234,
+			"label": "BUS"
+		},
+		{
+			"type": "LBL",
+			"folder": "1_E-S",
+			"posX": 924,
+			"posY": 193,
+			"label": "BUS"
+		},
+		{
+			"type": "DEC",
+			"folder": "1_E-S",
+			"posX": 475,
+			"posY": 107
+		},
+		{
+			"type": "DEC",
+			"folder": "1_E-S",
+			"posX": 374,
+			"posY": 121
+		},
+		{
+			"type": "DEC",
+			"folder": "1_E-S",
+			"posX": 478,
+			"posY": 144
+		},
+		{
+			"type": "DEC",
+			"folder": "1_E-S",
+			"posX": 379,
+			"posY": 162
+		},
+		{
+			"type": "DEC",
+			"folder": "1_E-S",
+			"posX": 394,
+			"posY": 291
+		},
+		{
+			"type": "DEC",
+			"folder": "1_E-S",
+			"posX": 394,
+			"posY": 333
+		},
+		{
+			"type": "NOTE",
+			"folder": "11_OUTILS",
+			"posX": 269,
+			"posY": 476,
+			"note": "# IRH = opcode\n\n1  LDA   : ACC ← [MEM]            \n2  OUTI  : OUT ← ACC\n3  HLT   : CPU ← STOP\n4  STA   : [MEM] ← ACC\n5  ADD   : ACC ← ACC + IMM\n6  SUB   : ACC ← ACC - IMM\n7  AND   : ACC ← ACC & IMM\n8  OR    : ACC ← ACC | IMM\n9  JMP   : PC  ← ADR\n10 JZ    : PC  ← ADR si ZERO\n"
+		}
+	],
+	"wire": [
+		{
+			"startID": 7,
+			"endID": 14,
+			"width": 8,
+			"endX": 0,
+			"endY": 0
+		},
+		{
+			"startID": 8,
+			"endID": 15,
+			"width": 8,
+			"endX": 0,
+			"endY": 0
+		},
+		{
+			"startID": 9,
+			"endID": 16,
+			"width": 8,
+			"endX": 0,
+			"endY": 0
+		},
+		{
+			"startID": 10,
+			"endID": 17,
+			"width": 8,
+			"endX": 0,
+			"endY": 0
+		},
+		{
+			"startID": 19,
+			"endID": 0,
+			"width": 8,
+			"endX": 0,
+			"endY": 0
+		},
+		{
+			"startID": 20,
+			"endID": 1,
+			"width": 8,
+			"endX": 0,
+			"endY": 0
+		},
+		{
+			"startID": 22,
+			"endID": 2,
+			"width": 8,
+			"endX": 0,
+			"endY": 0
+		},
+		{
+			"startID": 18,
+			"endID": 23,
+			"width": 8,
+			"endX": 0,
+			"endY": 0
+		},
+		{
+			"startID": 3,
+			"endID": 25,
+			"width": 8,
+			"endX": 0,
+			"endY": 0
+		},
+		{
+			"startID": 4,
+			"endID": 26,
+			"width": 8,
+			"endX": 0,
+			"endY": 0
+		},
+		{
+			"startID": 5,
+			"endID": 27,
+			"width": 8,
+			"endX": 0,
+			"endY": 0
+		},
+		{
+			"startID": 6,
+			"endID": 28,
+			"width": 8,
+			"endX": 0,
+			"endY": 0
+		},
+		{
+			"startID": 11,
+			"endID": 29,
+			"width": 8,
+			"endX": 0,
+			"endY": 0
+		},
+		{
+			"startID": 12,
+			"endID": 30,
+			"width": 8,
+			"endX": 0,
+			"endY": 0
+		}
+	]
+}

@@ -1,0 +1,19 @@
+[BLOCK RAM16#]
+TYPE=BLOCK
+SYMBOL=RAM16
+CATEGORY=MEM
+DESCRIPTION=RAM 65535 octets (lecture combinatoire, écriture moteur)
+WIDTH=320
+HEIGHT=320
+
+# =========================
+# Entrées / Sorties
+# =========================
+
+INPUTS=A;CE;WE;WD
+OUTPUTS=D
+
+# =========================
+# Lecture mémoire
+# =========================
+

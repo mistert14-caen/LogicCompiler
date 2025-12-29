@@ -6,6 +6,8 @@ import "./Proto.interact.js";
 import "./Proto.note.js";
 
 export { LogicProto } from "./Proto.core.js";
+export { autoResize } from "./Proto.note.js";
+
 
 export const PROTO_PATH = "/LogicCompiler2";
 

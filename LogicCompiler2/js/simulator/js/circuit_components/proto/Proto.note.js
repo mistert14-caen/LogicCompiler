@@ -93,7 +93,7 @@ function parseTitle(line) {
 }
 
 
-function autoResize(proto) {
+export function autoResize(proto) {
   const text = proto.note ?? "";
   const lines = text.split("\n");
 

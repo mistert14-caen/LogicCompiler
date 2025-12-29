@@ -275,7 +275,7 @@ test("A & B", { A: 1, B: 1 });
 test("A & B");
 test("A | B");
 test("A ^ B");
-*/
+
 test("A - B #test", { A: 5, B: 3 }); // 2
 test("A - B - C //et oui", { A: 10, B: 3, C: 2 }); // 5
 test("A + B - C", { A: 1, B: 2, C: 1 }); // 2
@@ -285,3 +285,4 @@ test("// commentaire");
 test("# commentaire");
 test("(OP==12) & T4",{ OP: 5, T4: 0 });
 test("(OP==12) & T4",{ OP: 12, T4: 1 });
+*/

@@ -337,18 +337,19 @@ updateMem() {
   // ===== ÉCRITURE RAM / ROM (STA) =====
   for (const p of logicProto) {
 
-    if (p.type !== "ROM") continue;
+    if (p.type == "ROM" || p.type == "RAM8" || p.type == "RAM16") { 
+      const mask = p.mem.length - 1;
+      const sigA  = p.name + '_A';
+      const sigCE = p.name + '_CE';
+      const sigWE = p.name + '_WE';
+      const sigWD = p.name + '_WD';
 
-    const sigA  = p.name + '_A';
-    const sigCE = p.name + '_CE';
-    const sigWE = p.name + '_WE';
-    const sigWD = p.name + '_WD';
-
-    if (engine.get(sigCE) !== 0) continue;
-    if (sigWE && engine.get(sigWE) === 1) {
-      const addr = engine.get(sigA) & 0xF;
-      const data = engine.get(sigWD) & 0xFF;
-      p.mem[addr] = data;
+      if (engine.get(sigCE) !== 0) continue;
+      if (sigWE && engine.get(sigWE) === 1) {
+        const addr = engine.get(sigA) & mask;
+        const data = engine.get(sigWD);
+        p.mem[addr] = data;
+      }
     }
   }
 }
@@ -446,6 +447,19 @@ loadPrototype(text, compName) {
      this.equations = this.proto.equations;
   }
 
+
+reset = function () {
+    this.protos = [];        // prototypes instanciés (V2)
+    this.protoCache = {};
+    this.proto = null;      // proto VIRTUEL exposé à l’UI
+    this.signals = {};
+    this.last = {};
+    this.equations = [];
+    this.seqEqs = [];
+    this.combEqs = [];
+    this.isUserImporting = false;
+    this._instanceCounter = {}; // ?? clé = baseName, valeur = compteur
+};
 
 parseEquation(line) {
   const idx = line.indexOf("=");

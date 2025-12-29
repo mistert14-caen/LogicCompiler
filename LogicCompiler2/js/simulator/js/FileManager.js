@@ -1,5 +1,5 @@
 import { logicProto, wireMng } from "./simulator.js"
-import { PROTO_PATH, SVGS, LogicProto } from "./circuit_components/proto/index.js";
+import { PROTO_PATH, SVGS, LogicProto, autoResize } from "./circuit_components/proto/index.js";
 import { IC_type } from "./circuit_components/Enums.js";
 import { currentID, nodeList, resetNodeIDs } from "./circuit_components/Node.js";
 import { Wire } from "./circuit_components/Wire.js";
@@ -68,25 +68,35 @@ async function loadProtosOnly(p) {
 
   // 🔹 Import logique (identique)
   const proto = engine.importPrototype(text);
+  
   proto.folder = p.folder;
 
-  
   // 🔹 Reconstruction UI
   engine.buildProtoNodes(p.posX, p.posY, proto, logicProto);
 
   // 🔹 Instance UI réellement créée
   const ui = logicProto[logicProto.length - 1];
 
+    
 
 
-    if (p.note) ui.note = p.note;
-    if ((p.type === "ROMT" || p.type === "ROM")) {
-      ui.mem = new Uint8Array(
-        p.type === "ROMT" ? 256 : 16
-      );
-      
+    if (p.note) { ui.note = p.note; autoResize(ui);}
+    if (p.type === "ROMT") {
+      ui.mem = new Uint8Array(256);
     }
-    if (p.type === "ROM" && p.rom) {
+
+    if (p.type === "ROM") {
+      ui.mem = new Uint8Array(16);
+    }
+
+    if (p.type === "RAM8") {
+      ui.mem = new Uint8Array(256);
+    }
+    if (p.type === "RAM16") {
+      ui.mem = new Uint16Array(65536);
+    }
+
+    if ((p.type === "ROM" || p.type === "RAM8" || p.type === "RAM16") && p.rom) {
        Object.entries(p.rom).forEach(([i, v]) => {
          ui.mem[+i] = v;
        });
@@ -142,7 +152,7 @@ export class FileManager {
      * @todo TODO
      */
     async loadWorkspace(ws) {
-
+    engine.reset();
     this.isLoadingState = true;
 
     wireMng.wire.length = 0;
@@ -179,7 +189,7 @@ export class FileManager {
 
 
 async loadFile(e) {
-
+  engine.reset();
   const file = e.target.files.item(0);
   if (!file) return;
 
@@ -195,7 +205,7 @@ async loadFile(e) {
  
      
 async loadFromServer(id) {
-
+  engine.reset();
   if (!id) return;
 
   const url = `https://mistert.freeboxos.fr/${PROTO_PATH}/examples/${id}.json`;
@@ -247,11 +257,11 @@ static getJSON_Workspace() {
     };
 
     // ---------- ROM classique ----------
-    if (p.type === "ROM" && p.mem instanceof Uint8Array) {
-      o.rom = {};
-      p.mem.forEach((v, i) => {
-        if (v !== 0) o.rom[i] = v;
-      });
+     if ((p.type === "ROM" || p.type === "RAM8" || p.type === "RAM16")) {
+       o.rom = {};
+       p.mem.forEach((v, i) => {
+         if (v !== 0) o.rom[i] = v;
+       });
     }
 
     // ---------- ROM TEXTE ----------

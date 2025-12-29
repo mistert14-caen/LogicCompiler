@@ -67,8 +67,15 @@ LogicProto.prototype.draw = function () {
         this.updateROM();
         this.drawROM();
     }
-   
-
+    else if (this.type === "RAM8") {
+        this.updateROM();
+        this.drawRAM();
+    }
+    else if (this.type === "RAM16") {
+        this.updateROM();
+        this.drawROM();
+    }
+    
     
     else {
       this.drawDefaultProto();
